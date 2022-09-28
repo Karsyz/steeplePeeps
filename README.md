@@ -13,13 +13,19 @@ Steeple Peeps is an church directory to share your picture, mailing address, ema
   - User Profile Admin
   - Directory
   - 'Create a Church' w/ Admin Controls
+  - Join a Church w/ or w/o Admin Approval
 
 ---
 # Upcoming Features
 
 - Oauth login options
 - 2FA
-- 
+- Light/Dark Mode
+- Customize Church Directory Pages
+  - Background
+  - Color Schemes
+  - Quote's
+  - Seasonal Themes, etc
 
 ---
 
