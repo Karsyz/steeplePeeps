@@ -1,11 +1,19 @@
 <%- include('partials/header') -%>
-
-<main class="container">
-    <div class="row justify-content-around mt-5">
-        <a href="/login" class="col-3 btn btn-primary"> Login</a>
-        <a href="/signup" class="col-3 btn btn-primary"> Signup</a>
-    </div>
-</main>
-    
+    <main class="d-flex flex-row-reverse align-items-center justify-content-center ">
+      <div class="d-flex flex-row align-items-center justify-content-center col-4">
+        <i class="fa-solid fa-church fa-10x"></i>
+      </div>
+      <div class="row justify-content-center">
+        <section class="col-12">
+            <h1 class="ts">Steeple Peeps</h1>
+            <h2 class="ts">Church Directory</h2>
+            <div class="d-inline-block mt-2">
+                <a href="/login" class=" btn btn-primary mr-5"> Login</a>
+                <a href="/buildAChurch" class="btn btn-primary"> Build A Church</a>
+            </div>
+        </section>        
+        </div>
+    </main>
 
 <%- include('partials/footer') -%>
+

@@ -1,0 +1,59 @@
+<%- include('partials/header') -%>
+<%- include('partials/btmLeftTxt') -%>
+    <main class="d-flex flex-row-reverse align-items-center justify-content-center ">
+      <div class="d-flex flex-row align-items-center justify-content-center col-4">
+        <i class="fa-solid fa-church fa-10x"></i>
+      </div>
+      <div class="row justify-content-center">
+        <section class="col-12">
+              <h1 class="ts">Build A Church</h1>
+                <% if (locals.messages.errors) { %>
+                    <% messages.errors.forEach( el => { %>
+                        <div class="alert alert-danger"><%= el.msg %></div>
+                    <% }) %>    
+                <% } %>
+                <% if (locals.messages.info) { %>
+                    <% messages.info.forEach( el => { %>
+                        <div class="alert alert-info"><%= el.msg %></div>
+                    <% }) %>    
+                <% } %>
+                <form action="/signup" method="POST">
+                    <!-- Church Name -->
+                    <div class="mb-3">
+                        <label for="churchName" class="form-label">Church Name</label>
+                        <input type="text" class="form-control" id="churchName" name="churchName">
+                    </div>
+                    <!-- Email -->
+                    <div class="row align-items-center">
+                      <div class="col mb-3">
+                        <label for="churchEmail" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="churchEmail" aria-describedby="emailHelp" name="email">
+                        <div id="emailHelp" class="form-text"></div>
+                      </div>
+                    <!-- Confirm Email -->
+                      <div class="col mb-3">
+                        <label for="confirmChurchEmail" class="form-label">Confirm Email</label>
+                        <input type="email" class="form-control col-4" id="confirmChurchEmail" aria-describedby="emailHelp" name="email">
+                        <div id="emailHelp" class="form-text"></div>
+                      </div>
+                    </div>
+                    <!-- Password -->
+                    <div class="row align-items-center">
+                      <div class="col mb-3">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="password" name="password">
+                      </div>
+                      <!-- Confirm Password -->
+                      <div class="col mb-3">
+                        <label for="confirmPassword" class="form-label">Confirm Password</label>
+                        <input type="password" class="form-control" id="confirmPassword" name="confirmPassword">
+                      </div>
+                    </div>
+                    <button type="submit" class="btn col-3 mt-2 btn-primary">Submit</button>
+                  </form>
+                </section>
+              </div>
+    </main>
+
+<%- include('partials/footer') -%>
+
