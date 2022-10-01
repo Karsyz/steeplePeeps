@@ -2,16 +2,19 @@ const passport = require("passport");
 const validator = require("validator");
 const User = require("../models/User");
 
+// Go To Login Page
 exports.getLogin = (req, res) => {
   if (req.user) {
-    return res.redirect("/profile");
+    return res.redirect("/userProfile");
   }
   res.render("login", {
     title: "Login",
   });
 };
 
+// Login to Server
 exports.postLogin = (req, res, next) => {
+
   const validationErrors = [];
   
   if (!validator.isEmail(req.body.email))
@@ -29,7 +32,6 @@ exports.postLogin = (req, res, next) => {
     gmail_remove_dots: false,
   });
 
-
   passport.authenticate("local", (err, user, info) => {
     if (err) {
       return next(err);
@@ -42,12 +44,22 @@ exports.postLogin = (req, res, next) => {
       if (err) {
         return next(err);
       }
+      console.log(req.user)
+      
+      // redirect to admin dashboard or user directory
       req.flash("success", { msg: "Success! You are logged in." });
-      res.redirect(req.session.returnTo || "/profile");
+      if (req.user.isAdmin) {
+        res.redirect(req.session.returnTo || "/dashboard");
+      }else {
+        res.redirect(req.session.returnTo || "/directory");
+      }
     });
   })(req, res, next);
+
 };
 
+
+// Logout of Server
 exports.logout = (req, res) => {
   req.logout(() => {
     console.log('User has logged out.')
@@ -60,6 +72,7 @@ exports.logout = (req, res) => {
   });
 };
 
+// Build A Church Signup Page
 exports.getSignup = (req, res) => {
   if (req.user) {
     return res.redirect("/churchProfile");
@@ -69,42 +82,51 @@ exports.getSignup = (req, res) => {
   });
 };
 
+// Build A Church Signup Form Submission
 exports.postSignup = (req, res, next) => {
+
   const validationErrors = [];
-  if (!validator.isEmail(req.body.email))
+
+  if (!validator.isEmail(req.body.churchEmail))
     validationErrors.push({ msg: "Please enter a valid email address." });
+
   if (!validator.isLength(req.body.password, { min: 8 }))
     validationErrors.push({
       msg: "Password must be at least 8 characters long",
     });
+    
   if (req.body.password !== req.body.confirmPassword)
+    validationErrors.push({ msg: "Passwords do not match" });
+
+    if (req.body.churchEmail !== req.body.confirmChurchEmail)
     validationErrors.push({ msg: "Passwords do not match" });
 
   if (validationErrors.length) {
     req.flash("errors", validationErrors);
     return res.redirect("../signup");
   }
-  req.body.email = validator.normalizeEmail(req.body.email, {
+  req.body.email = validator.normalizeEmail(req.body.churchEmail, {
     gmail_remove_dots: false,
   });
 
   const user = new User({
-    userName: req.body.userName,
-    email: req.body.email,
+    name: req.body.churchName,
+    email: req.body.churchEmail,
     password: req.body.password,
+    isAdmin: true,
   });
 
   User.findOne(
-    { $or: [{ email: req.body.email }, { userName: req.body.userName }] },
+    { $or: [{ email: req.body.churchEmail }, { name: req.body.churchName }] },
     (err, existingUser) => {
       if (err) {
         return next(err);
       }
       if (existingUser) {
         req.flash("errors", {
-          msg: "Account with that email address or username already exists.",
+          msg: "Account with that email address or name already exists.",
         });
-        return res.redirect("../signup");
+        return res.redirect("../buildAChurch");
       }
       user.save((err) => {
         if (err) {
@@ -114,7 +136,7 @@ exports.postSignup = (req, res, next) => {
           if (err) {
             return next(err);
           }
-          res.redirect("/profile");
+          res.redirect("/churchProfile");
         });
       });
     }

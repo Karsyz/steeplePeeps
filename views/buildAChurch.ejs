@@ -17,7 +17,7 @@
                         <div class="alert alert-info"><%= el.msg %></div>
                     <% }) %>    
                 <% } %>
-                <form action="/signup" method="POST">
+                <form action="/buildAChurch" method="POST">
                     <!-- Church Name -->
                     <div class="mb-3">
                         <label for="churchName" class="form-label">Church Name</label>
@@ -27,13 +27,13 @@
                     <div class="row align-items-center">
                       <div class="col mb-3">
                         <label for="churchEmail" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="churchEmail" aria-describedby="emailHelp" name="email">
+                        <input type="email" class="form-control" id="churchEmail" aria-describedby="emailHelp" name="churchEmail">
                         <div id="emailHelp" class="form-text"></div>
                       </div>
                     <!-- Confirm Email -->
                       <div class="col mb-3">
                         <label for="confirmChurchEmail" class="form-label">Confirm Email</label>
-                        <input type="email" class="form-control col-4" id="confirmChurchEmail" aria-describedby="emailHelp" name="email">
+                        <input type="email" class="form-control col-4" id="confirmChurchEmail" aria-describedby="emailHelp" name="confirmChurchEmail">
                         <div id="emailHelp" class="form-text"></div>
                       </div>
                     </div>

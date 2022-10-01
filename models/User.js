@@ -2,7 +2,7 @@ const bcrypt = require("bcrypt");
 const mongoose = require("mongoose");
 
 const UserSchema = new mongoose.Schema({
-  userName: { 
+  name: { 
     type: String, 
     unique: true
   },
@@ -10,11 +10,36 @@ const UserSchema = new mongoose.Schema({
     type: String, 
     unique: true 
   },
-  password: String,
+
+  phone: String,
+  txtOk: Boolean,
+
+  address1: String,
+  city: String,
+  province: String,
+  postCode: String,
+  country: String,
+
+  cloudinaryId: String,
+
+  isAdmin: { 
+    type: Boolean, 
+    required: true 
+  },
+
+  password: {
+    type: String,
+    require: true
+  },
+
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },
+  
 });
 
 // Password hash middleware.
-
 UserSchema.pre("save", function save(next) {
   const user = this;
   if (!user.isModified("password")) {
@@ -34,12 +59,9 @@ UserSchema.pre("save", function save(next) {
   });
 });
 
-// Helper method for validating user's password.
 
-UserSchema.methods.comparePassword = function comparePassword(
-  candidatePassword,
-  cb
-) {
+// Helper method for validating user's password.
+UserSchema.methods.comparePassword = function comparePassword( candidatePassword, cb) {
   bcrypt.compare(candidatePassword, this.password, (err, isMatch) => {
     cb(err, isMatch);
   });
