@@ -4,11 +4,31 @@ const mongoose = require("mongoose");
 const UserSchema = new mongoose.Schema({
   name: { 
     type: String, 
-    unique: true
+    unique: true,
+    required: true,
   },
   email: { 
     type: String, 
-    unique: true 
+    unique: true,
+    required: true, 
+  },
+  church: { 
+    type: Array, 
+    required: true, 
+  },
+  isAdmin: { 
+    type: Boolean, 
+    required: true, 
+  },
+
+  password: {
+    type: String,
+    required: true,
+  },
+
+  createdAt: {
+    type: Date,
+    default: Date.now,
   },
 
   phone: String,
@@ -21,22 +41,6 @@ const UserSchema = new mongoose.Schema({
   country: String,
 
   cloudinaryId: String,
-
-  isAdmin: { 
-    type: Boolean, 
-    required: true 
-  },
-
-  password: {
-    type: String,
-    require: true
-  },
-
-  createdAt: {
-    type: Date,
-    default: Date.now,
-  },
-  
 });
 
 // Password hash middleware.

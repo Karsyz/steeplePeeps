@@ -5,7 +5,7 @@ const User = require("../models/User");
 // Go To Login Page
 exports.getLogin = (req, res) => {
   if (req.user) {
-    return res.redirect("/userProfile");
+    return res.redirect("/dashboard");
   }
   res.render("login", {
     title: "Login",
@@ -141,4 +141,55 @@ exports.postSignup = (req, res, next) => {
       });
     }
   );
+
 };
+
+// Go To Password Update Page
+exports.getUpdatePassword = (req, res) => {
+  res.render("updatePassword.ejs", {user: req.user });
+};
+
+  // Update User Password
+exports.putUpdatePassword = (req, res, next) => {
+
+  const validationErrors = [];
+
+  if (!validator.isLength(req.body.newPassword, { min: 8 }))
+    validationErrors.push({
+      msg: "Password must be at least 8 characters long",
+    });
+    
+  if (req.body.newPassword !== req.body.confirmNewPassword)
+    validationErrors.push({ msg: "Passwords do not match" });
+
+  if (validationErrors.length) {
+    req.flash("errors", validationErrors);
+    return res.redirect("/updatePassword");
+  };
+
+  const user = new User({
+    password: req.body.password,
+  });
+
+  // user.findOneAndUpdate(
+  //       { _id: req.params.id },
+  //       {
+  //         $set: { password: req.body.password },
+  //       }
+  //     );
+  //     console.log("Password Updated");
+  //     res.redirect(`/userProfile/${req.params.id}`);
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // },
+  
+  user.findOneAndUpdate(
+    { _id: req.params.id },
+    { $set: { password: req.body.password }, }
+    );
+    console.log("Password Updated");
+    res.redirect(`/userProfile/${req.params.id}`);
+
+  
+}

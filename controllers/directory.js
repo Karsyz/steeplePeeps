@@ -1,6 +1,6 @@
 module.exports = {
     getDirectory: (req, res) => {
-      res.render("directory.ejs");
+      res.render("directory.ejs", {user: req.user });
     },
   };
   

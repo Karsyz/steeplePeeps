@@ -1,6 +1,5 @@
 const cloudinary = require("../middleware/cloudinary");
 const Post = require("../models/Post");
-const Comments = require("../models/Comment");
 
 module.exports = {
   getChurchProfile: async (req, res) => {

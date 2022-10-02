@@ -7,3 +7,26 @@
 main {
     height: 100vh;
 }
+
+.cB-custom {
+  /* Double-sized Checkboxes */
+  -ms-transform: scale(1.5); /* IE */
+  -moz-transform: scale(1.5); /* FF */
+  -webkit-transform: scale(1.5); /* Safari and Chrome */
+  -o-transform: scale(1.5); /* Opera */
+  padding: 10px;
+
+  margin-left: 0;
+  margin-right: 20px;
+  margin-bottom: 20px;
+  box-sizing: border-box;
+
+}
+
+.bioForm {
+    height: 135px;
+}
+
+.cmt-1 {
+    margin-top: 93px;
+}
