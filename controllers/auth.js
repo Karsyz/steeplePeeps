@@ -5,9 +5,9 @@ const User = require("../models/User");
 // Go To Login Page
 exports.getLogin = (req, res) => {
   if (req.user) {
-    return res.redirect("/dashboard");
+    res.redirect("/dashboard");
   }
-  res.render("login", {
+    res.render("login", {
     title: "Login",
   });
 };
@@ -44,7 +44,7 @@ exports.postLogin = (req, res, next) => {
       if (err) {
         return next(err);
       }
-      console.log(req.user)
+      console.log(req.user.password)
       
       // redirect to admin dashboard or user directory
       req.flash("success", { msg: "Success! You are logged in." });
@@ -103,7 +103,7 @@ exports.postSignup = (req, res, next) => {
 
   if (validationErrors.length) {
     req.flash("errors", validationErrors);
-    return res.redirect("../signup");
+    return res.redirect("../buildAChurch");
   }
   req.body.email = validator.normalizeEmail(req.body.churchEmail, {
     gmail_remove_dots: false,
@@ -114,6 +114,7 @@ exports.postSignup = (req, res, next) => {
     email: req.body.churchEmail,
     password: req.body.password,
     isAdmin: true,
+    church: [req.body.churchName,]
   });
 
   User.findOne(
@@ -128,6 +129,7 @@ exports.postSignup = (req, res, next) => {
         });
         return res.redirect("../buildAChurch");
       }
+
       user.save((err) => {
         if (err) {
           return next(err);
@@ -136,60 +138,16 @@ exports.postSignup = (req, res, next) => {
           if (err) {
             return next(err);
           }
-          res.redirect("/churchProfile");
+
+        if (req.user.isAdmin) {
+          res.redirect("/dashboard");
+        }else {
+          res.redirect("/directory");
+        }
+
         });
       });
     }
   );
 
 };
-
-// Go To Password Update Page
-exports.getUpdatePassword = (req, res) => {
-  res.render("updatePassword.ejs", {user: req.user });
-};
-
-  // Update User Password
-exports.putUpdatePassword = (req, res, next) => {
-
-  const validationErrors = [];
-
-  if (!validator.isLength(req.body.newPassword, { min: 8 }))
-    validationErrors.push({
-      msg: "Password must be at least 8 characters long",
-    });
-    
-  if (req.body.newPassword !== req.body.confirmNewPassword)
-    validationErrors.push({ msg: "Passwords do not match" });
-
-  if (validationErrors.length) {
-    req.flash("errors", validationErrors);
-    return res.redirect("/updatePassword");
-  };
-
-  const user = new User({
-    password: req.body.password,
-  });
-
-  // user.findOneAndUpdate(
-  //       { _id: req.params.id },
-  //       {
-  //         $set: { password: req.body.password },
-  //       }
-  //     );
-  //     console.log("Password Updated");
-  //     res.redirect(`/userProfile/${req.params.id}`);
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // },
-  
-  user.findOneAndUpdate(
-    { _id: req.params.id },
-    { $set: { password: req.body.password }, }
-    );
-    console.log("Password Updated");
-    res.redirect(`/userProfile/${req.params.id}`);
-
-  
-}

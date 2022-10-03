@@ -22,12 +22,6 @@ router.get("/dashboard", ensureAuth, dashboardController.getDashboard);
 // Get Directory
 router.get("/directory", ensureAuth, directoryController.getDirectory);
 
-// Get Update Password Page
-router.get("/updatePassword/:id", ensureAuth, authController.getUpdatePassword);
-
-// Update Password
-router.put("/updatePassword/:id", ensureAuth, authController.putUpdatePassword);
-
 // Login
 router.get("/login", authController.getLogin);
 
