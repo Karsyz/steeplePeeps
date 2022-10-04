@@ -44,7 +44,6 @@ exports.postLogin = (req, res, next) => {
       if (err) {
         return next(err);
       }
-      console.log(req.user.password)
       
       // redirect to admin dashboard or user directory
       req.flash("success", { msg: "Success! You are logged in." });

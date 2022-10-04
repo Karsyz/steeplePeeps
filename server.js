@@ -50,8 +50,7 @@ app.use(logger("dev"));
 app.use(methodOverride("_method"));
 
 // Setup Sessions - stored in MongoDB
-app.use(
-  session({
+app.use(session({
     secret: "keyboard cat",
     resave: false,
     saveUninitialized: false,
@@ -72,5 +71,5 @@ app.use("/update", updateRoutes);
 
 //Server Running
 app.listen(process.env.PORT, () => {
-  console.log("Server is runninguh");
+  console.log("Server is running");
 });
