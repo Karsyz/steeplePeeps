@@ -30,3 +30,13 @@ main {
 .cmt-1 {
     margin-top: 93px;
 }
+
+.dashboardTable {
+    /* position: sticky; */
+    height: 60vh;
+    /* overflow: hidden; */
+}
+
+.stuff {
+    height: 50vh;
+}

@@ -1,6 +1,6 @@
 const bcrypt = require("bcrypt");
 const mongoose = require("mongoose");
-const passportLocalMongoose = require('passport-local-mongoose');
+// const passportLocalMongoose = require('passport-local-mongoose');
 
 const UserSchema = new mongoose.Schema({
   name: { 
@@ -13,33 +13,34 @@ const UserSchema = new mongoose.Schema({
     unique: true,
     required: true, 
   },
-  church: { 
-    type: Array, 
-    required: true, 
-  },
-  isAdmin: { 
-    type: Boolean, 
-    required: true, 
-  },
   password: {
     type: String,
     required: true,
+  },
+  church: { 
+    type: Array, 
+    required: true, 
   },
   createdAt: {
     type: Date,
     default: Date.now,
   },
-
-  phone: String,
+  isAdmin: {
+    type: Boolean,
+    require: true,
+  },
+  phoneNumber: String,
   txtOk: Boolean,
-
   address1: String,
+  address2: String,
   city: String,
   province: String,
-  postCode: String,
   country: String,
-
+  postCode: String,
   cloudinaryId: String,
+  bio: String,
+  iCanHelpWith: String,
+  members: Array, 
 });
 
 // Password hash middleware.
@@ -64,6 +65,6 @@ UserSchema.methods.comparePassword = function comparePassword( candidatePassword
 };
 
 
-UserSchema.plugin(passportLocalMongoose);
+// UserSchema.plugin(passportLocalMongoose);
 
 module.exports = mongoose.model("User", UserSchema);
