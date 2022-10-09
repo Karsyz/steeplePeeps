@@ -9,5 +9,7 @@ router.get("/", ensureAuth, updateController.updatePage);
 // Update Password
 router.put("/password/", ensureAuth, updateController.updatePassword);
 
+// Update User Profile
+router.put("/userProfile/:id", ensureAuth, updateController.putUpdateUserProfile);
 
 module.exports = router;

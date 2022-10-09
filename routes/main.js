@@ -14,7 +14,7 @@ router.get("/", homeController.getIndex);
 router.get("/churchProfile", ensureAuth, profilesController.getChurchProfile);
 
 // Get User Profile
-router.get("/userProfile", ensureAuth, profilesController.getUserProfile);
+router.get("/userProfile/:id", ensureAuth, profilesController.getUserProfile);
 
 // Get Admin Dashboard
 router.get("/dashboard", ensureAuth, dashboardController.getDashboard);

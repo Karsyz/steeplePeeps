@@ -29,18 +29,58 @@ const UserSchema = new mongoose.Schema({
     type: Boolean,
     require: true,
   },
-  phoneNumber: String,
-  txtOk: Boolean,
-  address1: String,
-  address2: String,
-  city: String,
-  province: String,
-  country: String,
-  postCode: String,
-  cloudinaryId: String,
-  bio: String,
-  iCanHelpWith: String,
-  members: Array, 
+  phoneNumber: {
+    type: String,
+    require: true,
+  },
+  txtOk: {
+    type: Boolean,
+    require: true,
+  },
+  address1: {
+    type: String,
+    require: true,
+  },
+  address2: {
+    type: String,
+    require: true,
+  },
+  city: {
+    type: String,
+    require: true,
+  },
+  province: {
+    type: String,
+    require: true,
+  },
+  country: {
+    type: String,
+    require: true,
+  },
+  postCode: {
+    type: String,
+    require: true,
+  },
+  image: {
+    type: String,
+    require: true,
+  },
+  cloudinaryId: {
+    type: String,
+    require: true,
+  },
+  bio: {
+    type: String,
+    require: true,
+  },
+  iCanHelpWith: {
+    type: String,
+    require: true,
+  },
+  members: {
+    type: Array,
+    require: true,
+  },
 });
 
 // Password hash middleware.

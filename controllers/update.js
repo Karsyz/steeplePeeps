@@ -79,3 +79,37 @@ exports.updatePassword = async (req, res, next) => {
 
     }, 3000)
 }
+
+// Update User Information
+exports.putUpdateUserProfile = async (req, res, next) => {
+  
+  //covert txtOk string to boolean
+  let txtOk = false
+  if(req.body.txtOk === 'on') {
+    txtOk = true
+  }
+  
+  try {
+      await User.findOneAndUpdate(
+      { _id: req.params.id },
+      {
+        $set: { 
+          phoneNumber:  req.body.phoneNumber,
+          txtOk:        txtOk,
+          address1:     req.body.address1,
+          address2:     req.body.address2,
+          city:         req.body.city,
+          province:     req.body.province,
+          country:      req.body.country,
+          postCode:     req.body.postCode,
+          bio:          req.body.bioForm,
+          iCanHelpWith: req.body.iCanHelpWith,
+         },
+        }
+    );
+    console.log("Updated User Info");
+    res.redirect(`/userProfile/${req.params.id}`);
+  } catch (err) {
+    console.log(err);
+  }
+}

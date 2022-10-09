@@ -113,7 +113,21 @@ exports.postSignup = (req, res, next) => {
     email: req.body.churchEmail,
     password: req.body.password,
     isAdmin: true,
-    church: [req.body.churchName,]
+    church: [req.body.churchName,],
+    // Placeholder Values
+    phoneNumber: "555 515 2212",
+    txtOk: true,
+    address1: "Address 1",
+    address2: "Address 2",
+    city: "City",
+    province: "Province",
+    country: "Country",
+    postCode: "Post Code",
+    image: "https://res.cloudinary.com/dcvxuwjri/image/upload/v1665276814/steeplePeeps/placeholder_x5v4uu.png",
+    cloudinaryId: "",
+    bio: "Retired Teacher, love to golf, and I'm here to help where and when I can.",
+    iCanHelpWith: "I can help with yard work, bible study, cooking",
+    members: []
   });
 
   User.findOne(
