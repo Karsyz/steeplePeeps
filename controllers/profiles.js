@@ -1,21 +1,30 @@
 const cloudinary = require("../middleware/cloudinary");
-const Post = require("../models/Post");
+const User = require("../models/User");
+
 
 module.exports = {
-  getChurchProfile: async (req, res) => {
+  // getChurchProfile: async (req, res) => {
+  //   try {
+  //     const posts = await Post.find({ user: req.user.id });
+  //     res.render("churchProfile.ejs", { posts: posts, user: req.user });
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // },
+  getUserProfileId: async (req, res) => {
     try {
-      const posts = await Post.find({ user: req.user.id });
-      res.render("churchProfile.ejs", { posts: posts, user: req.user });
+      const user = await User.findById(req.params.id);
+      res.render("userProfile.ejs", { user: user });
     } catch (err) {
-      console.log(err);
+      console.log(err)
     }
   },
+
   getUserProfile: async (req, res) => {
     try {
-      const posts = await Post.find({ user: req.user.id });
-      res.render("userProfile.ejs", { posts: posts, user: req.user });
+      res.render("userProfile.ejs", { user: req.user });
     } catch (err) {
-      console.log(err);
+      console.log(err)
     }
   },
   // getFeed: async (req, res) => {

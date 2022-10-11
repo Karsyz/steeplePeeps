@@ -11,10 +11,11 @@ const { ensureAuth, ensureGuest } = require("../middleware/auth");
 router.get("/", homeController.getIndex);
 
 // Get Church Profile
-router.get("/churchProfile", ensureAuth, profilesController.getChurchProfile);
+// router.get("/churchProfile", ensureAuth, profilesController.getChurchProfile);
 
 // Get User Profile
-router.get("/userProfile/:id", ensureAuth, profilesController.getUserProfile);
+router.get("/userProfile", ensureAuth, profilesController.getUserProfile);
+router.get("/userProfile/:id", ensureAuth, profilesController.getUserProfileId);
 
 // Get Admin Dashboard
 router.get("/dashboard", ensureAuth, dashboardController.getDashboard);
