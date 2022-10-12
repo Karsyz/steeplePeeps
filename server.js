@@ -10,6 +10,7 @@ const logger = require("morgan");
 const connectDB = require("./config/database");
 const mainRoutes = require("./routes/main");
 const updateRoutes = require("./routes/update");
+const profileRoutes = require("./routes/profile");
 
 var livereload = require("livereload");
 var connectLiveReload = require("connect-livereload");
@@ -67,6 +68,7 @@ app.use(flash());
 
 //Setup Routes For Which The Server Is Listening
 app.use("/", mainRoutes);
+app.use("/profile", profileRoutes);
 app.use("/update", updateRoutes);
 
 //Server Running

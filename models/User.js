@@ -81,6 +81,14 @@ const UserSchema = new mongoose.Schema({
     type: Array,
     require: true,
   },
+  numOfSessions: {
+    type: Number,
+    require: true,
+  },
+  numOfEmailsSent: {
+    type: Number,
+    require: true,
+  },
 });
 
 // Password hash middleware.

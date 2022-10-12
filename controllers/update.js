@@ -108,7 +108,7 @@ exports.putUpdateUserProfile = async (req, res, next) => {
         }
     );
     console.log("Updated User Info");
-    res.redirect(`/userProfile/${req.params.id}`);
+    res.redirect(`/profile/user/${req.params.id}`);
   } catch (err) {
     console.log(err);
   }

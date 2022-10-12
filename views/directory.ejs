@@ -3,7 +3,13 @@
 <%- include('partials/darkMode') -%>
 <%- include('partials/navBar') -%>
 
-<h1 class="ts ms-2 mt-2"><%= user.church[0] %></h1>
+<h1 class="ts ms-2 mt-2"><%=church.name%></h1>
+
+<section class="container-fluid d-flex flex-row justify-content-center align-items-center flex-wrap sectionC">
+  <% if (directory) { directory.forEach( el => { %>                
+  <img src="<%=el.image%>" alt="Picture of <%=el.name%>" class="img-fluid img-thumbnail rounded-3 shadow-sm m-2 imgC ">
+  <% })} %>
+</section>
 
  
   <%- include('partials/footer') -%>

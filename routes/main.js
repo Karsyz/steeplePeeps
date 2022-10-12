@@ -2,20 +2,13 @@ const express = require("express");
 const router = express.Router();
 const authController = require("../controllers/auth");
 const homeController = require("../controllers/home");
-const profilesController = require("../controllers/profiles");
 const dashboardController = require("../controllers/dashboard");
 const directoryController = require("../controllers/directory");
+const emailController = require("../controllers/email");
 const { ensureAuth, ensureGuest } = require("../middleware/auth");
 
 // Index
 router.get("/", homeController.getIndex);
-
-// Get Church Profile
-// router.get("/churchProfile", ensureAuth, profilesController.getChurchProfile);
-
-// Get User Profile
-router.get("/userProfile", ensureAuth, profilesController.getUserProfile);
-router.get("/userProfile/:id", ensureAuth, profilesController.getUserProfileId);
 
 // Get Admin Dashboard
 router.get("/dashboard", ensureAuth, dashboardController.getDashboard);
@@ -32,10 +25,13 @@ router.post("/login", authController.postLogin);
 // Logout
 router.get("/logout", authController.logout);
 
-// Build a Church
-router.get("/buildAChurch", authController.getSignup);
+// Build a Church Page
+router.get("/buildAChurch", authController.buildAChurch);
 
-// Build a Church Submit
-router.post("/buildAChurch", authController.postSignup);
+// Create User / Build a Church Submit Form
+router.post("/createUser", authController.createUser);
+
+// Send email to new user
+router.post("/sendEmail/:id", emailController.sendEmail);
 
 module.exports = router;

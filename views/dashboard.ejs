@@ -6,21 +6,32 @@
 <h1 class="ts ms-2 mt-2"><%= user.name %></h1>
 
 <section class="col-8 mt-3 ms-5">
+    <% if (locals.messages.errors) { %>
+        <% messages.errors.forEach( el => { %>
+            <div class="alert alert-danger"><%= el.msg %></div>
+        <% }) %>    
+    <% } %>
+    <% if (locals.messages.info) { %>
+        <% messages.info.forEach( el => { %>
+            <div class="alert alert-info"><%= el.msg %></div>
+        <% }) %>    
+    <% } %>
     <h3 class="ts">Add A User</h3>
-    <form action="/addUser" method="POST">
+    <form action="/createUser" method="POST">
         <!-- User Name -->
         <div class="d-flex flex-row align-items-baseline">
             <div class="col-4 me-2">
-                <input type="text" class="form-control" placeholder="Name" id="churchName" name="churchName">
+                <input type="text" class="form-control" placeholder="Name" id="name" name="name">
             </div>
             <!-- Email -->
               <div class="col-4 me-2">
-                <input type="email" class="form-control" placeholder="Email" id="churchEmail" aria-describedby="emailHelp"name="churchEmail">
+                <input type="email" class="form-control" placeholder="Email" id="email" aria-describedby="emailHelp" name="email">
                 <div id="emailHelp" class="form-text"></div>
             </div>
+            <input type="hidden" value="false" id="isAdmin" name="isAdmin">
             <button type="submit" class="btn btn-primary col-2 me-2">Add</button>
     </form>
-            <form action="/importUser" method="GET"></form>
+            <form action="#" method="GET"></form>
                 <button type="GET" class="btn btn-primary col-2">Import</button>
             </form>
         </div>
@@ -50,10 +61,30 @@
                     <td class="text-center"><% if (el.txtOk) { %><i class="fa fa-check"></i><% } %></td>  <!--Email Sent?-->
                     <td class="">
                         <ul class="list-group list-group-horizontal">
-                            <li class="list-group-item border-0 bg-transparent py-0"><a href="/sendEmail"><i class="fa-solid fa-paper-plane"></a></i></li>
-                            <li class="list-group-item border-0 bg-transparent py-0"><a href="/deleteUser"><i class="fa fa-trash-can"></a></i></li>
-                            <li class="list-group-item border-0 bg-transparent py-0"><a href="/userProfileCard"><i class="fa fa-id-card"></a></i></li>
-                            <li class="list-group-item border-0 bg-transparent py-0"><a href="/userProfile/<%= el._id %>"><i class="fa fa-gear"></a></i></li>
+                            <li class="list-group-item border-0 bg-transparent py-0">
+                                <form action="/sendEmail/<%= el._id %>" method="POST">
+                                    <button type="submit" class="border-0 bg-transparent text-primary">
+                                        <i class="fa-solid fa-paper-plane"></i>
+                                    </button>
+                                </form>
+                            </li>
+                            <li class="list-group-item border-0 bg-transparent py-0">
+                                <form action="/profile/deleteProfile/<%= el._id %>?_method=DELETE" method="POST">
+                                    <button type="submit" class="border-0 bg-transparent text-primary">
+                                        <i class="fa fa-trash-can"></i>
+                                    </button>
+                                </form>
+                            </li>
+                            <li class="list-group-item border-0 bg-transparent py-0">
+                                <a href="/profile/profileCard/<%= el._id %>">
+                                    <i class="fa fa-id-card"></i>
+                                </a>
+                            </li>
+                            <li class="list-group-item border-0 bg-transparent py-0">
+                                <a href="/profile/user/<%= el._id %>">
+                                    <i class="fa fa-gear"></i>
+                                </a>
+                            </li>
                         </ul>
                     </td>
                 </tr>

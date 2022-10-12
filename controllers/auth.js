@@ -1,6 +1,7 @@
 const passport = require("passport");
 const validator = require("validator");
 const User = require("../models/User");
+const generator = require('generate-password')
 
 // Go To Login Page
 exports.getLogin = (req, res) => {
@@ -72,7 +73,7 @@ exports.logout = (req, res) => {
 };
 
 // Build A Church Signup Page
-exports.getSignup = (req, res) => {
+exports.buildAChurch = (req, res) => {
   if (req.user) {
     return res.redirect("/churchProfile");
   }
@@ -81,39 +82,39 @@ exports.getSignup = (req, res) => {
   });
 };
 
-// Build A Church Signup Form Submission
-exports.postSignup = (req, res, next) => {
+// Create User / Build A Church Signup Form Submission
+exports.createUser = (req, res, next) => {
 
   const validationErrors = [];
+  const isAdmin = req.body.isAdmin == "true" ? true : false
+  const genPass = generator.generate({length: 12, numbers: true, symbols: true})
+  const password = isAdmin ? req.body.password : genPass
 
-  if (!validator.isEmail(req.body.churchEmail))
+  if (!validator.isEmail(req.body.email))
     validationErrors.push({ msg: "Please enter a valid email address." });
 
-  if (!validator.isLength(req.body.password, { min: 8 }))
+  if (isAdmin && !validator.isLength(req.body.password, { min: 8 }))
     validationErrors.push({
       msg: "Password must be at least 8 characters long",
     });
     
-  if (req.body.password !== req.body.confirmPassword)
-    validationErrors.push({ msg: "Passwords do not match" });
-
-    if (req.body.churchEmail !== req.body.confirmChurchEmail)
+  if (isAdmin && req.body.password !== req.body.confirmPassword)
     validationErrors.push({ msg: "Passwords do not match" });
 
   if (validationErrors.length) {
     req.flash("errors", validationErrors);
     return res.redirect("../buildAChurch");
   }
-  req.body.email = validator.normalizeEmail(req.body.churchEmail, {
+  req.body.email = validator.normalizeEmail(req.body.email, {
     gmail_remove_dots: false,
   });
 
   const user = new User({
-    name: req.body.churchName,
-    email: req.body.churchEmail,
-    password: req.body.password,
-    isAdmin: true,
-    church: [req.body.churchName,],
+    name: req.body.name,
+    email: req.body.email,
+    password: password,
+    isAdmin: isAdmin,
+    church: [req.user.id,],
     // Placeholder Values
     phoneNumber: "555 515 2212",
     txtOk: true,
@@ -131,7 +132,7 @@ exports.postSignup = (req, res, next) => {
   });
 
   User.findOne(
-    { $or: [{ email: req.body.churchEmail }, { name: req.body.churchName }] },
+    { $or: [{ email: req.body.email }, { name: req.body.name }] },
     (err, existingUser) => {
       if (err) {
         return next(err);
@@ -140,27 +141,28 @@ exports.postSignup = (req, res, next) => {
         req.flash("errors", {
           msg: "Account with that email address or name already exists.",
         });
-        return res.redirect("../buildAChurch");
+        return isAdmin ? res.redirect("../buildAChurch") : res.redirect("../dashboard")
       }
 
       user.save((err) => {
         if (err) {
           return next(err);
         }
-        req.logIn(user, (err) => {
-          if (err) {
-            return next(err);
-          }
-
-        if (req.user.isAdmin) {
-          res.redirect("/dashboard");
+        if (isAdmin) {
+          req.logIn(user, (err) => {
+            if (err) {
+              return next(err);
+            }
+            res.redirect("/dashboard");
+          });
         }else {
-          res.redirect("/directory");
+            res.redirect("/dashboard");
         }
-
-        });
       });
     }
   );
+
+
+
 
 };

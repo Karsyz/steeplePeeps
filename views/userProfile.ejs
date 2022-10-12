@@ -12,11 +12,11 @@
       
       <div class="col-3">
           <h1 class="ts">Edit Profile</h1>
-          <p><strong>Name:</strong> <%= user.name %></p>
-          <p><strong>Email:</strong> <%= user.email %></p>
+          <p><strong>Name:</strong> <%= displayedUser.name %></p>
+          <p><strong>Email:</strong> <%= displayedUser.email %></p>
           <div class="position-relative">
-            <a href="/userProfile/updatePicture/<%= user._id %>" class="position-absolute bottom-0 end-0 me-2 mb-2"><i class="fa fa-cog fa-2x"></i></a>    
-            <img class="img-fluid rounded-3" src="<%= user.image %>" alt="Picture Of User">
+            <a href="/userProfile/updatePicture/<%= displayedUser._id %>" class="position-absolute bottom-0 end-0 me-2 mb-2"><i class="fa fa-cog fa-2x"></i></a>    
+            <img class="img-fluid rounded-3" src="<%= displayedUser.image %>" alt="Picture Of User">
           </div>
           <h3 class="mt-5"><a class="text-decoration-none text-dark" href="/update">Update Password</a></h3>
           <h3 class="mt-3"><a class="text-decoration-none text-dark" href="#">Setup 2FA</a></h3>
@@ -24,9 +24,9 @@
       <div class="col-3 mx-5 cmt-1">
         <h3 class="">Phone Number</h3>
 
-        <form action="/update/userProfile/<%= user._id %>?_method=PUT" method="POST"> <!-- enctype="multipart/form-data" -->
+        <form action="/update/userProfile/<%= displayedUser._id %>?_method=PUT" method="POST"> <!-- enctype="multipart/form-data" -->
           <div class="mb-3">
-            <input type="text" class="form-control" value="<%= user.phoneNumber %>" id="phoneNumber" name="phoneNumber">
+            <input type="text" class="form-control" value="<%= displayedUser.phoneNumber %>" id="phoneNumber" name="phoneNumber">
           </div>
           <div class="mb-3 form-check form-switch">
             <label for="txtOk" class="form-label">Text Message Ok?</label>
@@ -35,26 +35,26 @@
               type="checkbox" 
               id="txtOk" 
               name="txtOk" 
-              <% if(user.txtOk == true) {%>checked<%}%>>
+              <% if(displayedUser.txtOk == true) {%>checked<%}%>>
           </div>
           <div class="mb-3">
             <h3>Bio</h3>
-            <textarea class="form-control bioForm" id="bioForm" name="bioForm"><%= user.bio %></textarea>
+            <textarea class="form-control bioForm" id="bioForm" name="bioForm"><%= displayedUser.bio %></textarea>
           </div>
           <div class="mb-3">
             <h3>I can Help with</h3>
-            <textarea class="form-control bioForm" id="iCanHelpWith" name="iCanHelpWith"><%= user.iCanHelpWith %></textarea>
+            <textarea class="form-control bioForm" id="iCanHelpWith" name="iCanHelpWith"><%= displayedUser.iCanHelpWith %></textarea>
           </div>
       </div>
       <div class="col-3 cmt-1 position-relative">
         <h3 class="">Mailing Address</h3>
           <div class="mb-3">
-              <input type="text" class="form-control"       value="<%= user.address1 %>"  id="address1" name="address1">
-              <input type="text" class="form-control mt-2"  value="<%= user.address2 %>"  id="address2" name="address2">
-              <input type="text" class="form-control mt-2"  value="<%= user.city %>"      id="City"     name="city">
-              <input type="text" class="form-control mt-2"  value="<%= user.province %>"  id="province" name="province">
-              <input type="text" class="form-control mt-2"  value="<%= user.country %>"   id="country"  name="country">
-              <input type="text" class="form-control mt-2"  value="<%= user.postCode %>"  id="postCode" name="postCode">
+              <input type="text" class="form-control"       value="<%= displayedUser.address1 %>"  id="address1" name="address1">
+              <input type="text" class="form-control mt-2"  value="<%= displayedUser.address2 %>"  id="address2" name="address2">
+              <input type="text" class="form-control mt-2"  value="<%= displayedUser.city %>"      id="City"     name="city">
+              <input type="text" class="form-control mt-2"  value="<%= displayedUser.province %>"  id="province" name="province">
+              <input type="text" class="form-control mt-2"  value="<%= displayedUser.country %>"   id="country"  name="country">
+              <input type="text" class="form-control mt-2"  value="<%= displayedUser.postCode %>"  id="postCode" name="postCode">
           </div>
           <button type="submit" class="position-absolute btn btn-primary col-4 bottom-0 end-0 me-2 mb-2">Update</button>
         </form>

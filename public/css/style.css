@@ -59,3 +59,20 @@ main {
 .zedIndex {
     z-index: 10;
 }
+
+.imgC {
+    max-width: 250px;
+}
+
+.imgC:hover {
+    border: 2px solid #0d6efd;
+}
+
+.sectionC {
+    position: absolute;
+    height: calc(100vh - 150px);
+    width: calc(100vw - 150px);
+    margin-left: 50px;
+    margin-right: 80px;
+
+}
