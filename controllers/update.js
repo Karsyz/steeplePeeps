@@ -2,6 +2,7 @@ const passport = require("passport");
 const validator = require("validator");
 const bcrypt = require("bcrypt");
 const User = require("../models/User");
+const cloudinary = require("../middleware/cloudinary");
 const mongoose = require('mongoose');
 const { restart } = require("nodemon");
 
@@ -71,7 +72,7 @@ exports.updatePassword = async (req, res, next) => {
       console.log(dbCheck)
       if (await bcrypt.compare(req.body.newPassword, dbCheck.password)) {
         console.log('Password has been updated')
-        res.redirect('/userProfile')
+        res.redirect('/profile/user')
       } else {
         console.log(`Password didn't update in the db`)
         res.redirect('/update')
@@ -109,6 +110,30 @@ exports.putUpdateUserProfile = async (req, res, next) => {
     );
     console.log("Updated User Info");
     res.redirect(`/profile/user/${req.params.id}`);
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+// Update User Profile Picture
+exports.putUpdateProfilePicture = async (req, res, next) => {
+  try {
+    // Upload image to cloudinary
+    const result = await cloudinary.uploader.upload(req.file.path, 
+      { folder: home/steeplePeeps
+      });
+
+    // Update Db
+    await User.findOneAndUpdate(
+      { _id: req.params.id },
+      {
+        $set: { image: result.secure_url }, 
+        $set: { cloudinaryId: result.public_id },
+      }
+    );
+
+    console.log("Picture Added");
+    res.redirect("/profile/user");
   } catch (err) {
     console.log(err);
   }

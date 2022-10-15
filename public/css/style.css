@@ -76,3 +76,29 @@ main {
     margin-right: 80px;
 
 }
+
+.imageUploadContainer {
+    width: 100vw;
+    height: 100vh;
+    background: rgba(44, 44, 44, 0.9);
+    position: absolute;
+    top: 0;
+    right: 0;
+    -webkit-animation: fadein 0.5s; /* Safari, Chrome and Opera > 12.1 */
+       -moz-animation: fadein 0.5s; /* Firefox < 16 */
+        -ms-animation: fadein 0.5s; /* Internet Explorer */
+         -o-animation: fadein 0.5s; /* Opera < 12.1 */
+            animation: fadein 0.5s;
+}
+
+/* Safari, Chrome and Opera > 12.1 */
+@-webkit-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+.imageUploadContainerInner {
+    background: white;
+    padding: 50px;
+    border-radius: 8px;
+}

@@ -15,8 +15,8 @@
           <p><strong>Name:</strong> <%= displayedUser.name %></p>
           <p><strong>Email:</strong> <%= displayedUser.email %></p>
           <div class="position-relative">
-            <a href="/userProfile/updatePicture/<%= displayedUser._id %>" class="position-absolute bottom-0 end-0 me-2 mb-2"><i class="fa fa-cog fa-2x"></i></a>    
-            <img class="img-fluid rounded-3" src="<%= displayedUser.image %>" alt="Picture Of User">
+            <i class="position-absolute bottom-0 start-0 ms-2 mt-2 fa fa-cog fa-2x text-primary" id="imgCog"></i>
+            <img class="img-fluid" src="<%= displayedUser.image %>" alt="Picture Of <%= displayedUser.name %>">
           </div>
           <h3 class="mt-5"><a class="text-decoration-none text-dark" href="/update">Update Password</a></h3>
           <h3 class="mt-3"><a class="text-decoration-none text-dark" href="#">Setup 2FA</a></h3>
@@ -62,5 +62,6 @@
       </div>
     </div>
   </section>
+<%- include('partials/imageUpload') -%>
 </main>
 <%- include('partials/footer') -%>
