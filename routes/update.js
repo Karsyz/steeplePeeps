@@ -14,6 +14,6 @@ router.put("/password/", ensureAuth, updateController.updatePassword);
 router.put("/userProfile/:id", ensureAuth, updateController.putUpdateUserProfile);
 
 // Update User Profile Picture
-router.post("/profilePicture/:id",  upload.single("file"), updateController.putUpdateProfilePicture);
+router.post("/profilePicture/:id",  upload.single("file"), updateController.updateProfilePicture);
 
 module.exports = router;

@@ -2,9 +2,9 @@
   <div class="imageUploadContainerInner">
     <div class="mt-2 d-flex flex-column align-items-center">
       <h1>Upload Your Picture</h1>
-      <img class="img-fluid border radius-3 mt-3" src="<%= displayedUser.image %>" alt="Picture Of <%= displayedUser.name %>">
+      <img class="img-fluid border radius-3 mt-3" id="uploadImagePreview" src="<%= displayedUser._id %>" alt="Picture Of <%= displayedUser.name %>">
       <form action="/update/profilePicture/<%= displayedUser._id %>" enctype="multipart/form-data" class="d-flex flex-column align-items-center mt-3" method="POST">
-        <input type="file" class="form-control" id="imageUpload" name="file">
+        <input type="file" class="form-control" id="imageUpload" name="file" accept="image/*" onchange="loadFile(event)">
         <button type="submit" class="btn btn-primary mt-3" value="Upload">Submit</button>
       </form>
     </div>

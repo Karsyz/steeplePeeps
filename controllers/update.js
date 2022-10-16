@@ -116,19 +116,25 @@ exports.putUpdateUserProfile = async (req, res, next) => {
 }
 
 // Update User Profile Picture
-exports.putUpdateProfilePicture = async (req, res, next) => {
+exports.updateProfilePicture = async (req, res, next) => {
   try {
-    // Upload image to cloudinary
-    const result = await cloudinary.uploader.upload(req.file.path, 
-      { folder: home/steeplePeeps
-      });
-
+    
+    // Get existing cloudinary Id from db
+    const existingCloudinaryId = req.user.cloudinaryId
+    if (existingCloudinaryId !== "") {
+      // Delete existing image from cloudinary
+      await cloudinary.uploader.destroy(existingCloudinaryId);
+    }
+    
+    // Upload new image to cloudinary
+    const result = await cloudinary.uploader.upload(req.file.path)
+    
     // Update Db
     await User.findOneAndUpdate(
       { _id: req.params.id },
       {
-        $set: { image: result.secure_url }, 
-        $set: { cloudinaryId: result.public_id },
+        image: result.secure_url, 
+        cloudinaryId: result.public_id,
       }
     );
 
