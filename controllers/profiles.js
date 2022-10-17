@@ -22,6 +22,15 @@ module.exports = {
     }
   },
 
+  sendUserProfile: async (req, res) => {
+    try {
+      let user = await User.findById({ _id: req.params.id });
+      res.send(user);
+    } catch (err) {
+      console.log(err)
+    }
+  },
+
   deleteProfile: async (req, res) => {
     try {
       // Find user by id

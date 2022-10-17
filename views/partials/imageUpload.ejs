@@ -1,12 +1,18 @@
 <section class="imageUploadContainer d-none d-flex flex-row align-items-center justify-content-center" id="imageUploadContainer">
   <div class="imageUploadContainerInner">
+
     <div class="mt-2 d-flex flex-column align-items-center">
-      <h1>Upload Your Picture</h1>
-      <img class="img-fluid border radius-3 mt-3" id="uploadImagePreview" src="<%= displayedUser._id %>" alt="Picture Of <%= displayedUser.name %>">
+      <div class="imageWrapper">
+        <div class="imgPlaceholder">
+          <h1>Upload Your Profile Picture</h1>
+        </div>
+        <img class="" id="uploadImagePreview" src="" alt="">
+      </div>
       <form action="/update/profilePicture/<%= displayedUser._id %>" enctype="multipart/form-data" class="d-flex flex-column align-items-center mt-3" method="POST">
-        <input type="file" class="form-control" id="imageUpload" name="file" accept="image/*" onchange="loadFile(event)">
+        <input type="file" class="form-control" id="imageUpload" name="file" accept="image/*" onchange="loadFile(event)" required>
         <button type="submit" class="btn btn-primary mt-3" value="Upload">Submit</button>
       </form>
     </div>
   </div>
 </section>
+<script type="text/javascript" src="/js/imageUpload.js"></script>

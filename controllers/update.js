@@ -118,16 +118,16 @@ exports.putUpdateUserProfile = async (req, res, next) => {
 // Update User Profile Picture
 exports.updateProfilePicture = async (req, res, next) => {
   try {
-    
     // Get existing cloudinary Id from db
     const existingCloudinaryId = req.user.cloudinaryId
+
+    // Delete existing image from cloudinary if not default image
     if (existingCloudinaryId !== "") {
-      // Delete existing image from cloudinary
       await cloudinary.uploader.destroy(existingCloudinaryId);
     }
-    
+
     // Upload new image to cloudinary
-    const result = await cloudinary.uploader.upload(req.file.path)
+    const result = await cloudinary.uploader.upload(req.file.path, {width: 500, height: 500, crop: "fill"})
     
     // Update Db
     await User.findOneAndUpdate(

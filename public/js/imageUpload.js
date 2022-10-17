@@ -20,4 +20,5 @@ const loadFile = (evt) => {
   const output = document.getElementById('uploadImagePreview');
   output.src = URL.createObjectURL(evt.target.files[0]);
   output.onload = () => URL.revokeObjectURL(output.src) // free memory
+  document.querySelector('.imgPlaceholder').classList.add('d-none')
 };
