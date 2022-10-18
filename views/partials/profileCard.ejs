@@ -1,22 +1,21 @@
 <section class="profileCardContainer d-none d-flex flex-row align-items-center justify-content-center" id="profileCardContainer">
   <div class="profileCardContainerInner">
-    <div class="mt-2 d-flex flex-column align-items-center">
-      <img src="" alt="">
-      <div>
-        <h1 id="cardName">Name</h1>
-        <p>Email: </p>
-        <p>Phone: </p>
+    <div class="mt-0 d-flex flex-row">
+      <img src="" alt="" id="cardImage" class="img-fluid me-5 rounded-3">
+      <div class="d-flex flex-column justify-content-between">
+        <h1><span id="cardName"></span></h1>
+        <p><span class="fw-bold">Email: </span><span id="cardEmail"></span> </p>
+        <p><span id="cardTxtOk" class="fw-bold"></span><span id="cardPhone"></span></p>
         <p>
-          Address1<br>
-          Address2<br>
-          City<br>
-          Country<br>
-          Postal Code
+          <span class="d-block fw-bold">Mailing Address:</span>
+          <span id="cardAddress1" class="d-block"></span>
+          <span id="cardAddress2" class="d-block"></span>
+          <span id="cardCity" class="d-block"></span>
+          <span id="cardCountry" class="d-block"></span>
+          <span id="cardPostalCode" class="d-block"></span>
          </p>
-         <p>Bio:</p>
-         <p>I Can Help With: </p>
-         
-       
+         <p><span class="fw-bold">Bio: </span><span id="cardBio"></span></p>
+         <p class="mb-0"><span class="fw-bold">I Can Help With: </span><span id="cardICanHelpWith"></span></p>
       </div>
     </div>
   </div>

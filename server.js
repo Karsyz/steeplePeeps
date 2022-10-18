@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+var cors = require('cors')
 const mongoose = require("mongoose");
 const passport = require("passport");
 const session = require("express-session");
@@ -23,6 +24,11 @@ liveReloadServer.server.once("connection", () => {
 });
 
 app.use(connectLiveReload());
+
+app.use(cors({
+  // origin: process.env.HOSTNAME,
+  // methods: ['GET'],
+}))
 
 
 //Use .env file in config folder
@@ -73,5 +79,5 @@ app.use("/update", updateRoutes);
 
 //Server Running
 app.listen(process.env.PORT, () => {
-  console.log("Server is running");
+  console.log(`CORS-Enabled web Server is listening on port ${process.env.PORT}`);
 });

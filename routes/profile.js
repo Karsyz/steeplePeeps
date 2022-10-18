@@ -11,7 +11,7 @@ router.get("/user", ensureAuth, profileController.getUserProfile);
 router.get("/user/:id", ensureAuth, profileController.getUserProfileId);
 
 // Send user profile object to front end for profile cards
-router.get("/profile/userProfile/:id", ensureAuth, profileController.sendUserProfile);
+router.get("/userProfile/:id", ensureAuth, profileController.sendUserProfile);
 
 // Delete Profile
 router.delete("/deleteProfile/:id", profileController.deleteProfile);

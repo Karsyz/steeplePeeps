@@ -3,95 +3,97 @@
 <%- include('partials/darkMode') -%>
 <%- include('partials/navBar') -%>
 
-<h1 class="ts ms-2 mt-2"><%= user.name %></h1>
 
-<section class="col-8 mt-3 ms-5">
-    <% if (locals.messages.errors) { %>
-        <% messages.errors.forEach( el => { %>
-            <div class="alert alert-danger"><%= el.msg %></div>
-        <% }) %>    
-    <% } %>
-    <% if (locals.messages.info) { %>
-        <% messages.info.forEach( el => { %>
-            <div class="alert alert-info"><%= el.msg %></div>
-        <% }) %>    
-    <% } %>
-    <h3 class="ts">Add A User</h3>
-    <form action="/createUser" method="POST">
-        <!-- User Name -->
-        <div class="d-flex flex-row align-items-baseline">
-            <div class="col-4 me-2">
-                <input type="text" class="form-control" placeholder="Name" id="name" name="name">
-            </div>
-            <!-- Email -->
-              <div class="col-4 me-2">
-                <input type="email" class="form-control" placeholder="Email" id="email" aria-describedby="emailHelp" name="email">
-                <div id="emailHelp" class="form-text"></div>
-            </div>
-            <input type="hidden" value="false" id="isAdmin" name="isAdmin">
-            <button type="submit" class="btn btn-primary col-2 me-2">Add</button>
-    </form>
-            <form action="#" method="GET"></form>
-                <button type="GET" class="btn btn-primary col-2">Import</button>
+<h1 class="ts ms-2 pt-2"><%= user.name %></h1>
+<section class="d-flex justify-content-center">
+    <div class="tableWrapper">
+        <section class="col-8 mt-3">
+            <% if (locals.messages.errors) { %>
+                <% messages.errors.forEach( el => { %>
+                    <div class="alert alert-danger"><%= el.msg %></div>
+                <% }) %>    
+            <% } %>
+            <% if (locals.messages.info) { %>
+                <% messages.info.forEach( el => { %>
+                    <div class="alert alert-info"><%= el.msg %></div>
+                <% }) %>    
+            <% } %>
+            <h3 class="ts">Add A User</h3>
+            <form action="/createUser" method="POST">
+                <!-- User Name -->
+                <div class="d-flex flex-row align-items-baseline">
+                    <div class="col-4 me-2">
+                        <input type="text" class="form-control" placeholder="Name" id="name" name="name">
+                    </div>
+                    <!-- Email -->
+                      <div class="col-4 me-2">
+                        <input type="email" class="form-control" placeholder="Email" id="email" aria-describedby="emailHelp" name="email">
+                        <div id="emailHelp" class="form-text"></div>
+                    </div>
+                    <input type="hidden" value="false" id="isAdmin" name="isAdmin">
+                    <button type="submit" class="btn btn-primary col-2 me-2">Add</button>
             </form>
-        </div>
-</section>
-<section class="col-10 mt-3 ms-5 position-relative rounded-top">
-    <div class="table-responsive dashboardTable overflow-y: hidden pe-5 rounded-top">
-        <table class="table table-striped rounded-top">
-            <thead class="table-dark position-sticky top-0 rounded-top zedIndex">
-                <tr>
-                    <th class="col-3" scope="col">Name</th>
-                    <th class="col-3" scope="col">Email</th>
-                    <th class="col-2" scope="col">Phone #</th>
-                    <th class="col-1 text-center" scope="col">Txt Ok?</th>
-                    <th class="col-1 text-center" scope="col">Updated?</th>
-                    <th class="col-1 text-center" scope="col">Sent?</th>
-                    <th class="col-2" scope="col"></th>
-                </tr>
-            </thead>
-            <tbody class="">
-               <% if (allUsers) { allUsers.forEach( el => { %>                
-                <tr class="">
-                    <td><%=el.name%></td>
-                    <td><%=el.email%></td>
-                    <td class=""><%=el.phoneNumber%></td>
-                    <td class="text-center"><% if (el.txtOk) { %><i class="fa fa-check"></i><% } %></td>  <!--txtOk?-->
-                    <td class="text-center"><% if (el.txtOk) { %><i class="fa fa-check"></i><% } %></td>  <!--Updated?-->
-                    <td class="text-center"><% if (el.txtOk) { %><i class="fa fa-check"></i><% } %></td>  <!--Email Sent?-->
-                    <td class="">
-                        <ul class="list-group list-group-horizontal">
-                            <li class="list-group-item border-0 bg-transparent py-0">
-                                <form action="/sendEmail/<%= el._id %>" method="POST">
-                                    <button type="submit" class="border-0 bg-transparent text-primary">
-                                        <i class="fa-solid fa-paper-plane"></i>
-                                    </button>
-                                </form>
-                            </li>
-                            <li class="list-group-item border-0 bg-transparent py-0">
-                                <form action="/profile/deleteProfile/<%= el._id %>?_method=DELETE" method="POST">
-                                    <button type="submit" class="border-0 bg-transparent text-primary">
-                                        <i class="fa fa-trash-can"></i>
-                                    </button>
-                                </form>
-                            </li>
-                            <li class="list-group-item border-0 bg-transparent py-0">
-                                <a href="/profile/profileCard/<%= el._id %>">
-                                    <i class="fa fa-id-card"></i>
-                                </a>
-                            </li>
-                            <li class="list-group-item border-0 bg-transparent py-0">
-                                <a href="/profile/user/<%= el._id %>">
-                                    <i class="fa fa-gear"></i>
-                                </a>
-                            </li>
-                        </ul>
-                    </td>
-                </tr>
-                <% })} %>
-             </tbody>
-        </table>
+                    <form action="#" method="GET"></form>
+                        <button type="GET" class="btn btn-primary col-2">Import</button>
+                    </form>
+                </div>
+        </section>
+        <section class="mt-3 position-relative rounded-top">
+            <div class="table-responsive dashboardTable overflow-y: hidden pe-5 rounded-top">
+                <table class="table table-striped rounded-top">
+                    <thead class="table-dark position-sticky top-0 rounded-top zindex-2">
+                        <tr>
+                            <th class="col-3" scope="col">Name</th>
+                            <th class="col-3" scope="col">Email</th>
+                            <th class="col-2" scope="col">Phone #</th>
+                            <th class="col-1 text-center" scope="col">Txt Ok?</th>
+                            <th class="col-1 text-center" scope="col">Updated?</th>
+                            <th class="col-1 text-center" scope="col">Sent?</th>
+                            <th class="col-2" scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody class="">
+                       <% if (allUsers) { allUsers.forEach( el => { %>                
+                        <tr class="">
+                            <td><%=el.name%></td>
+                            <td><%=el.email%></td>
+                            <td class=""><%=el.phoneNumber%></td>
+                            <td class="text-center"><% if (el.txtOk) { %><i class="fa fa-check"></i><% } %></td>  <!--txtOk?-->
+                            <td class="text-center"><% if (el.txtOk) { %><i class="fa fa-check"></i><% } %></td>  <!--Updated?-->
+                            <td class="text-center"><% if (el.txtOk) { %><i class="fa fa-check"></i><% } %></td>  <!--Email Sent?-->
+                            <td class="">
+                                <ul class="list-group list-group-horizontal">
+                                    <li class="list-group-item border-0 bg-transparent py-0">
+                                        <form action="/sendEmail/<%= el._id %>" method="POST">
+                                            <button type="submit" class="border-0 bg-transparent text-primary">
+                                                <i class="fa-solid fa-paper-plane"></i>
+                                            </button>
+                                        </form>
+                                    </li>
+                                    <li class="list-group-item border-0 bg-transparent py-0">
+                                        <form action="/profile/deleteProfile/<%= el._id %>?_method=DELETE" method="POST">
+                                            <button type="submit" class="border-0 bg-transparent text-primary">
+                                                <i class="fa fa-trash-can"></i>
+                                            </button>
+                                        </form>
+                                    </li>
+                                    <li class="list-group-item border-0 bg-transparent py-0 text-primary mouseOver">
+                                        <i class="fa fa-id-card" id="<%= el._id %>"></i>
+                                    </li>
+                                    <li class="list-group-item border-0 bg-transparent py-0">
+                                        <a href="/profile/user/<%= el._id %>">
+                                            <i class="fa fa-gear"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <% })} %>
+                     </tbody>
+                </table>
+            </div>
+        </section>
     </div>
 </section>
-
+<%- include('partials/profileCard') -%>
 <%- include('partials/footer') -%>
