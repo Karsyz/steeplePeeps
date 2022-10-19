@@ -127,7 +127,7 @@ exports.updateProfilePicture = async (req, res, next) => {
     }
 
     // Upload new image to cloudinary
-    const result = await cloudinary.uploader.upload(req.file.path, {width: 500, height: 500, crop: "fill"})
+    const result = await cloudinary.uploader.upload(req.file.path, {width: 500, height: 500, crop: "fill", folder: "steeplePeeps"})
     
     // Update Db
     await User.findOneAndUpdate(

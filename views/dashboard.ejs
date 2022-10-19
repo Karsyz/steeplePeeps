@@ -43,13 +43,13 @@
                 <table class="table table-striped rounded-top">
                     <thead class="table-dark position-sticky top-0 rounded-top zindex-2">
                         <tr>
-                            <th class="col-3" scope="col">Name</th>
-                            <th class="col-3" scope="col">Email</th>
-                            <th class="col-2" scope="col">Phone #</th>
-                            <th class="col-1 text-center" scope="col">Txt Ok?</th>
-                            <th class="col-1 text-center" scope="col">Updated?</th>
-                            <th class="col-1 text-center" scope="col">Sent?</th>
-                            <th class="col-2" scope="col"></th>
+                            <th class="col-3 wsNoWrap" scope="col">Name</th>
+                            <th class="col-3 wsNoWrap" scope="col">Email</th>
+                            <th class="col-2 wsNoWrap" scope="col">Phone #</th>
+                            <th class="col-1 text-center wsNoWrap" scope="col">Txt Ok?</th>
+                            <th class="col-1 text-center wsNoWrap" scope="col">Updated?</th>
+                            <th class="col-1 text-center wsNoWrap" scope="col">Sent?</th>
+                            <th class="col-2 wsNoWrap" scope="col"></th>
                         </tr>
                     </thead>
                     <tbody class="">
@@ -57,30 +57,30 @@
                         <tr class="">
                             <td><%=el.name%></td>
                             <td><%=el.email%></td>
-                            <td class=""><%=el.phoneNumber%></td>
+                            <td class="wsNoWrap"><%=el.phoneNumber%></td>
                             <td class="text-center"><% if (el.txtOk) { %><i class="fa fa-check"></i><% } %></td>  <!--txtOk?-->
                             <td class="text-center"><% if (el.txtOk) { %><i class="fa fa-check"></i><% } %></td>  <!--Updated?-->
                             <td class="text-center"><% if (el.txtOk) { %><i class="fa fa-check"></i><% } %></td>  <!--Email Sent?-->
                             <td class="">
                                 <ul class="list-group list-group-horizontal">
-                                    <li class="list-group-item border-0 bg-transparent py-0">
+                                    <li class="listGroupItem border-0 bg-transparent py-0">
                                         <form action="/sendEmail/<%= el._id %>" method="POST">
                                             <button type="submit" class="border-0 bg-transparent text-primary">
                                                 <i class="fa-solid fa-paper-plane"></i>
                                             </button>
                                         </form>
                                     </li>
-                                    <li class="list-group-item border-0 bg-transparent py-0">
+                                    <li class="listGroupItem border-0 bg-transparent py-0">
                                         <form action="/profile/deleteProfile/<%= el._id %>?_method=DELETE" method="POST">
                                             <button type="submit" class="border-0 bg-transparent text-primary">
                                                 <i class="fa fa-trash-can"></i>
                                             </button>
                                         </form>
                                     </li>
-                                    <li class="list-group-item border-0 bg-transparent py-0 text-primary mouseOver">
+                                    <li class="listGroupItem border-0 bg-transparent py-0 text-primary mouseOver">
                                         <i class="fa fa-id-card" id="<%= el._id %>"></i>
                                     </li>
-                                    <li class="list-group-item border-0 bg-transparent py-0">
+                                    <li class="listGroupItem border-0 bg-transparent py-0">
                                         <a href="/profile/user/<%= el._id %>">
                                             <i class="fa fa-gear"></i>
                                         </a>

@@ -2,11 +2,16 @@ const passport = require("passport");
 const validator = require("validator");
 const User = require("../models/User");
 const generator = require('generate-password')
+const sendEmail = require('./email')
 
 // Go To Login Page
 exports.getLogin = (req, res) => {
   if (req.user) {
-    res.redirect("/dashboard");
+    if (req.user.isAdmin) {
+      res.redirect("/dashboard");
+    }else {
+      res.redirect("/profile/user");
+    }
   }
     res.render("login", {
     title: "Login",
@@ -126,8 +131,8 @@ exports.createUser = (req, res, next) => {
     postCode: "Post Code",
     image: "https://res.cloudinary.com/dcvxuwjri/image/upload/v1665276814/steeplePeeps/placeholder_x5v4uu.png",
     cloudinaryId: "",
-    bio: "Retired Teacher, love to golf, and I'm here to help where and when I can.",
-    iCanHelpWith: "I can help with yard work, bible study, cooking",
+    bio: "Example: Retired Teacher, love to golf, and I'm here to help where and when I can.",
+    iCanHelpWith: "Example:I can help with yard work, bible study, cooking",
     members: []
   });
 

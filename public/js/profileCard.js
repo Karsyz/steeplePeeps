@@ -10,6 +10,7 @@ cards.forEach(el => {el.addEventListener('click', activateCard)} )
 document.querySelector('.profileCardContainer').addEventListener('click', deactivateCard)
 
 document.addEventListener('keydown', function(evt){
+  console.log(evt.key)
   if(evt.key === "Escape"){
     deactivateCard(evt)
   }
@@ -23,8 +24,21 @@ function activateCard(evt) {
 }
 
 function deactivateCard(evt) {
-  if (evt.target !== this) return // this ensures child elements do not toggle  
+  // if (evt.target !== this) return // this ensures child elements do not toggle  
   document.getElementById('profileCardContainer').classList.add('d-none')
+  // remove data from dom
+  document.getElementById('cardImage').src = ""
+  document.getElementById('cardImage').alt = ""
+  document.getElementById('cardName').innerHTML = ""
+  document.getElementById('cardEmail').innerHTML = ""
+  document.getElementById('cardPhone').innerHTML = ""
+  document.getElementById('cardAddress1').innerHTML = ""
+  document.getElementById('cardAddress2').innerHTML = ""
+  document.getElementById('cardCity').innerHTML = ""
+  document.getElementById('cardCountry').innerHTML = ""
+  document.getElementById('cardPostalCode').innerHTML = ""
+  document.getElementById('cardBio').innerHTML = ""
+  document.getElementById('cardICanHelpWith').innerHTML = ""
 }
 
 
