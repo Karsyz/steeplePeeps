@@ -102,7 +102,7 @@ UserSchema.pre("save", function save(next) {
     user.password = hash;
     next();
   });
-  });
+});
 
 
 // Helper method for validating user's password.

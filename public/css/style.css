@@ -176,3 +176,7 @@ main {
 .wsNoWrap {
     white-space: nowrap;
 }
+
+.hidden {
+    visibility: hidden;
+}

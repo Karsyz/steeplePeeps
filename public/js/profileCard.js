@@ -10,9 +10,8 @@ cards.forEach(el => {el.addEventListener('click', activateCard)} )
 document.querySelector('.profileCardContainer').addEventListener('click', deactivateCard)
 
 document.addEventListener('keydown', function(evt){
-  console.log(evt.key)
+  deactivateCard(evt)
   if(evt.key === "Escape"){
-    deactivateCard(evt)
   }
 });
 
@@ -48,7 +47,6 @@ async function getCardInfo(userId) {
   fetch(`${url}/${userId}`)
           .then(res => res.json() )
           .then(data =>{
-              console.log(data)
               document.getElementById('cardImage').src = data.image
               document.getElementById('cardImage').alt = `Picture of ${data.name}`
               document.getElementById('cardName').innerHTML = data.name

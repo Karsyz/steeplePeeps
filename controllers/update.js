@@ -139,7 +139,11 @@ exports.updateProfilePicture = async (req, res, next) => {
     );
 
     console.log("Picture Added");
-    res.redirect("/profile/user");
+    if (req.user.isAdmin) {
+      res.redirect(`/profile/user/${req.params.id}`);
+    }else {
+      res.redirect("/profile/user/");
+    }
   } catch (err) {
     console.log(err);
   }

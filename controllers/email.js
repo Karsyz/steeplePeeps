@@ -6,7 +6,7 @@ module.exports = {
     try {
     // get user from db from id in params
     const userTo = await User.findById(req.params.id);
-    console.log(userTo)
+    // console.log(userTo)
     
     // create reusable transporter object using the default SMTP transport
     let transporter = nodemailer.createTransport({
