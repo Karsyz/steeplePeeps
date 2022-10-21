@@ -22,6 +22,7 @@
     "express-flash": "^0.0.2",
     "express-session": "^1.17.1",
     "generate-password": "^1.7.0",
+    "jsonwebtoken": "^8.5.1",
     "livereload": "^0.9.3",
     "method-override": "^3.0.0",
     "mongodb": "^3.6.5",
@@ -33,6 +34,7 @@
     "passport": "^0.6.0",
     "passport-local": "^1.0.0",
     "passport-local-mongoose": "^7.1.2",
+    "uuid": "^9.0.0",
     "validator": "^13.6.0"
   }
 }

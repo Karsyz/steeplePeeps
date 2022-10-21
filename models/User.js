@@ -89,6 +89,16 @@ const UserSchema = new mongoose.Schema({
     type: Number,
     require: true,
   },
+  magicLink: {
+    type: String,
+    required: false,
+    unique: false,
+    default: uuidv4,
+  },
+  magicLinkExpired: {
+    type: Boolean,
+    default: false,
+  }
 });
 
 // Password hash middleware.
