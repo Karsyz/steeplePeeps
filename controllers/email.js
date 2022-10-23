@@ -22,8 +22,15 @@ module.exports = {
       from: '"Karsy" <steeplepeeps100@gmail.com>', // sender address
       to: userTo.email, // list of receivers
       subject: `Welcome To the ${req.user.name} Member Directory`, // Subject line
-      text: "Steeple Peeps", // plain text body
-      html: `<h1>${req.user.name} Member Directory</h1><p>Make an account to access the directory at <a href="http://localhost:3000/">Steeple Peeps</a></p>`, // html body
+      text: `Welcome To the ${req.user.name} Member Directory`, // plain text body
+      html: `<h1>
+              Welcome to the ${req.user.name} Member Directory
+            </h1>
+            <p>Access your account and change your password at 
+              <a href="http://localhost:3000/">
+                Steeple Peeps
+              </a>
+            </p>`, // html body
     });
     console.log("Message sent: %s", info.messageId);
     // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>

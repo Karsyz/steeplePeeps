@@ -26,9 +26,12 @@ router.post("/login", authController.postLogin);
 router.get("/logout", authController.logout);
 
 // Build a Church Page
-router.get("/buildAChurch", authController.buildAChurch);
+router.get("/buildAChurch", authController.buildAChurchForm);
 
-// Create User / Build a Church Submit Form
+// Build a Church Submit Form
+router.post("/buildAChurch/createUser", authController.buildAChurch);
+
+// Create User
 router.post("/createUser", authController.createUser);
 
 // Send email to new user
