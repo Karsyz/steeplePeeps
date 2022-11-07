@@ -1,5 +1,8 @@
 // Image Upload
 
+// declare card container
+const cardCont = document.querySelector('.profileCardContainer')
+
 // activate profile card
 const imgC = document.querySelectorAll('.imgC')
 const cards = document.querySelectorAll('.fa-id-card')
@@ -7,25 +10,29 @@ imgC.forEach(el => {el.addEventListener('click', activateCard)} )
 cards.forEach(el => {el.addEventListener('click', activateCard)} )
 
 // deactivate profile card
-document.querySelector('.profileCardContainer').addEventListener('click', deactivateCard)
+cardCont.addEventListener('click', deactivateCard)
+
 
 document.addEventListener('keydown', function(evt){
-  deactivateCard(evt)
-  if(evt.key === "Escape"){
-  }
+	if(evt.key === "Escape" && !cardCont.classList.contains('d-none')){
+    dNoneAndClerData()
+	}
 });
 
 function activateCard(evt) {
   if (evt.target !== this) return // this ensures child elements do not toggle  
-  document.getElementById('profileCardContainer').classList.remove('d-none')
+  cardCont.classList.remove('d-none')
   const userId = evt.target.id
   getCardInfo(userId)
 }
 
 function deactivateCard(evt) {
-  // if (evt.target !== this) return // this ensures child elements do not toggle  
-  document.getElementById('profileCardContainer').classList.add('d-none')
-  // remove data from dom
+  if (evt.target !== this) return // this ensures child elements do not toggle  
+  dNoneAndClerData()
+}
+
+function dNoneAndClerData() {
+  cardCont.classList.add('d-none')
   document.getElementById('cardImage').src = ""
   document.getElementById('cardImage').alt = ""
   document.getElementById('cardName').innerHTML = ""

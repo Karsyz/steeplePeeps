@@ -6,7 +6,7 @@
 
 <h1 class="ts ms-2 pt-2"><%= user.name %></h1>
 <section class="d-flex justify-content-center">
-    <div class="tableWrapper">
+    <div class="tableWrapper px-5">
         <section class="col-8 mt-3">
             <% if (locals.messages.errors) { %>
                 <% messages.errors.forEach( el => { %>
@@ -38,10 +38,10 @@
                     </form> -->
                 </div>
         </section>
-        <section class="mt-3 position-relative rounded-top">
-            <div class="table-responsive dashboardTable pe-5 rounded-top">
-                <table class="table table-striped rounded-top">
-                    <thead class="table-dark position-sticky top-0 rounded-top zindex-2">
+        <section class="mt-3 position-relative">
+            <div class="table-responsive dashboardTable pe-1 shadow-sm">
+                <table class="table table-striped">
+                    <thead class="table-dark position-sticky top-0 zindex-2">
                         <tr>
                             <th class="col-3 wsNoWrap" scope="col">Name</th>
                             <th class="col-3 wsNoWrap" scope="col">Email</th>
