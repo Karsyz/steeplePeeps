@@ -90,7 +90,7 @@ main {
 .dashboardTable::-webkit-scrollbar-thumb,
 .directoryContainer::-webkit-scrollbar-thumb {
     border-radius: 1rem;
-    background-color: #0d6dfc;
+    background-color: var(--background-color-primary);
     /* background-image: linear-gradient(to top, #00d2ff 0%, #3a7bd5 100%); */
 }
 
@@ -106,13 +106,13 @@ main {
 }
 
 .imgC {
-    max-width: 250px;
+    max-width: 18%;
     padding: 0;
     background: var(--bg-color);
 }
 
 .imgC:hover {
-    border: 2px solid #0d6efd;
+    border: 2px solid var(--background-color-primary);
 }
 
 .sectionC {
@@ -244,4 +244,52 @@ table tr:last-child td:last-child {
 
 .rounded-5 {
     border-radius: 10px;
+}
+
+
+
+@media only screen and (max-width: 420px) {
+    .imgC {
+        max-width: 80%;
+    }
+
+    .directoryContainer::-webkit-scrollbar {
+        display: none;
+    }
+    
+    .directoryContainer {
+        width: 100%;
+        padding: 0 50px 0 0;
+        margin: 0 ;
+        
+    }
+
+}
+
+
+
+@media only screen and (min-width: 421px) and (max-width: 768px) {
+    .imgC {
+        max-width: 40%;
+    }
+
+    .directoryContainer::-webkit-scrollbar {
+        display: none;
+        
+    }
+
+}
+
+@media only screen and (min-width: 769px) and (max-width: 1200px) {
+    .imgC {
+        max-width: 30%;
+    }
+
+    .directoryContainer::-webkit-scrollbar {
+        display: none;
+        
+    }
+
+
+
 }
