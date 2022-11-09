@@ -1,6 +1,5 @@
 const express = require("express");
 const app = express();
-var cors = require('cors')
 const mongoose = require("mongoose");
 const passport = require("passport");
 const session = require("express-session");
@@ -12,24 +11,6 @@ const connectDB = require("./config/database");
 const mainRoutes = require("./routes/main");
 const updateRoutes = require("./routes/update");
 const profileRoutes = require("./routes/profile");
-
-var livereload = require("livereload");
-var connectLiveReload = require("connect-livereload");
-
-const liveReloadServer = livereload.createServer();
-liveReloadServer.server.once("connection", () => {
-  setTimeout(() => {
-    liveReloadServer.refresh("/");
-  }, 100);
-});
-
-app.use(connectLiveReload());
-
-app.use(cors({
-  // origin: process.env.HOSTNAME,
-  // methods: ['GET'],
-}))
-
 
 //Use .env file in config folder
 require("dotenv").config({ path: "./config/.env" });
@@ -79,5 +60,5 @@ app.use("/update", updateRoutes);
 
 //Server Running
 app.listen(process.env.PORT, () => {
-  console.log(`CORS-Enabled web Server is listening on port ${process.env.PORT}`);
+  console.log(`Server is listening on port ${process.env.PORT}`);
 });

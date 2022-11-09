@@ -50,7 +50,7 @@ function dNoneAndClerData() {
 
 
 async function getCardInfo(userId) {
-  const url = 'http://localhost:3000/profile/userProfile'
+  const url = '/profile/userProfile'
   fetch(`${url}/${userId}`)
           .then(res => res.json() )
           .then(data =>{

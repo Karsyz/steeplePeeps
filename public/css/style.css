@@ -1,8 +1,45 @@
+body {
+    background: var(--bg-color);
+    color: var(--color);
+}
+
+h1, h2, h3, h4, h5, h6, p, span, td {
+    color: var(--color);
+}
+
+:root {
+    --bg-color: white;
+    --background-color-primary: #0d6efd;
+    --color: #343a40;
+    --table-bg: #212529;
+
+}
+
+.theme-dark {
+    --bg-color: #343a40; 
+    --background-color-primary: #0e58c7;
+    --color: #ebebeb;
+    --table-bg: #d1d6db;
+}
+
+
 .ts {
     font-family: 'Archivo Black', sans-serif;
     text-decoration: none;
-    color: black;
+    color: var(--color);
 }
+
+.btn-primary {
+    background: var(--background-color-primary);
+    border: var(--background-color-primary);
+}
+
+.table-dark {
+    --bs-table-bg: var(--table-bg);
+    color: var(--bg-color);
+    
+}
+
 
 main {
     height: 100vh;
@@ -53,7 +90,7 @@ main {
 .dashboardTable::-webkit-scrollbar-thumb,
 .directoryContainer::-webkit-scrollbar-thumb {
     border-radius: 1rem;
-    background-color: rgb(13, 110, 253);
+    background-color: #0d6dfc;
     /* background-image: linear-gradient(to top, #00d2ff 0%, #3a7bd5 100%); */
 }
 
@@ -71,6 +108,7 @@ main {
 .imgC {
     max-width: 250px;
     padding: 0;
+    background: var(--bg-color);
 }
 
 .imgC:hover {
@@ -90,15 +128,15 @@ main {
 .profileCardContainer {
     width: 100vw;
     height: 100vh;
-    background: rgba(44, 44, 44, 0.9);
+    background: rgba(33, 34, 34, 0.9);
     position: absolute;
     top: 0;
     right: 0;
-    -webkit-animation: fadein 0.2s; /* Safari, Chrome and Opera > 12.1 */
-       -moz-animation: fadein 0.2s; /* Firefox < 16 */
-        -ms-animation: fadein 0.2s; /* Internet Explorer */
-         -o-animation: fadein 0.2s; /* Opera < 12.1 */
-            animation: fadein 0.2s;
+    -webkit-animation: fadein 0.5s; /* Safari, Chrome and Opera > 12.1 */
+       -moz-animation: fadein 0.5s; /* Firefox < 16 */
+        -ms-animation: fadein 0.5s; /* Internet Explorer */
+         -o-animation: fadein 0.5s; /* Opera < 12.1 */
+            animation: fadein 0.5s;
 }
 
 /* Safari, Chrome and Opera > 12.1 */
@@ -108,7 +146,7 @@ main {
 }
 
 .imageUploadContainerInner {
-    background: white;
+    background: var(--bg-color);
     padding: 50px;
     border-radius: 8px;
 }
@@ -118,7 +156,7 @@ main {
     height: 80vh; */
     /* max-width: 1000px;
     max-height: 600px; */
-    background: white;
+    background: var(--bg-color);
     /* padding: 50px; */
     border-radius: 8px;
 }
@@ -138,11 +176,12 @@ main {
     z-index: 5;
     width: 100%;
     height: 100%;
-    background: white;
+    background: var(--bg-color);
     padding: 50px;
     border-radius: 8px;
     border: 1px solid black;
 }
+
 .imageWrapper img {
     position: absolute;
     z-index: 10;
@@ -201,4 +240,8 @@ table tr:last-child td:first-child {
 /* bottom-right border-radius */
 table tr:last-child td:last-child {
   border-bottom-right-radius: 6px;
+}
+
+.rounded-5 {
+    border-radius: 10px;
 }
