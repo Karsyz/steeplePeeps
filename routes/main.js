@@ -35,6 +35,6 @@ router.post("/buildAChurch/createUser", authController.buildAChurch);
 router.post("/createUser", authController.createUser);
 
 // Send email to new user
-router.post("/sendEmail/:id", emailController.sendEmail);
+// router.post("/sendEmail/:id", emailController.sendEmail);
 
 module.exports = router;

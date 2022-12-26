@@ -6,20 +6,24 @@ const nodemailer = require("nodemailer");
 
 // Go To Login Page
 exports.getLogin = (req, res) => {
+  //if a user is already logged in
   if (req.user) {
+    // if admin redrirect to dashboard
     if (req.user.isAdmin) {
       res.redirect("/dashboard");
+    // if not admin redirect to directory
     }else {
-      res.redirect("/profile/user");
+      res.redirect("/directory");
     }
-  }
+  }else {
     res.render("login", {
     title: "Login",
   });
+}
 };
 
 // Login to Server
-exports.postLogin = (req, res, next) => {
+exports.postLogin = async (req, res, next) => {
 
   const validationErrors = [];
   
@@ -50,17 +54,19 @@ exports.postLogin = (req, res, next) => {
       if (err) {
         return next(err);
       }
-      
+
       // redirect to admin dashboard or user directory
       req.flash("success", { msg: "Success! You are logged in." });
+      
       if (req.user.isAdmin) {
         res.redirect(req.session.returnTo || "/dashboard");
       }else {
         res.redirect(req.session.returnTo || "/directory");
       }
     });
-  })(req, res, next);
 
+  })(req, res, next);
+  
 };
 
 
@@ -130,8 +136,10 @@ exports.buildAChurch = (req, res, next) => {
     image: `https://robohash.org/${randomAvatar}?set=set4`,
     cloudinaryId: "",
     bio: "Example: Retired Teacher, love to golf, and I'm here to help where and when I can.",
-    iCanHelpWith: "Example:I can help with yard work, bible study, cooking",
-    members: []
+    iCanHelpWith: "Example: I can help with yard work, bible study, cooking",
+    members: [],
+    numOfSessions: 0,
+    numOfEmailsSent: 0,
   });
 
   // Add new user id to user.church array
@@ -205,8 +213,10 @@ exports.createUser = async (req, res, next) => {
     image: `https://robohash.org/${randomAvatar}`,
     cloudinaryId: "",
     bio: "Example: Retired Teacher, love to golf, and I'm here to help where and when I can.",
-    iCanHelpWith: "Example:I can help with yard work, bible study, cooking",
-    members: []
+    iCanHelpWith: "Example: I can help with yard work, bible study, cooking",
+    members: [],
+    numOfSessions: 0,
+    numOfEmailsSent: 0,
   });
 
   User.findOne(
@@ -229,7 +239,6 @@ exports.createUser = async (req, res, next) => {
       return next(err);
     }
   });
-
 
 
   // Send login email to user

@@ -1,16 +1,14 @@
 <%- include('partials/header') -%>
-<%- include('partials/btmLeftTxt') -%>
-<%- include('partials/darkMode') -%>
-<%- include('partials/navBar') -%>
-<main class="d-flex flex-column justify-content-center">
-  <section>
-    <div class="d-flex flex-row justify-content-center ">
-      
-    </div>
-    
-    <div class="d-flex flex-row justify-content-center">
-      
-      <div class="col-3">
+
+
+<main class="d-flex flex-column">
+
+  <section class="d-flex flex-row justify-content-center pe-5 ">
+
+    <div class="colsContainer">
+
+      <!-- Col 1 -->
+      <div class="width">
           <h1 class="ts">Edit Profile</h1>
           <p><strong>Name:</strong> <%= displayedUser.name %></p>
           <p><strong>Email:</strong> <%= displayedUser.email %></p>
@@ -18,12 +16,13 @@
             <i class="position-absolute bottom-0 start-0 ms-2 mb-2 fa fa-cog fa-2x text-primary" id="imgCog"></i>
             <img class="img-fluid rounded-5" src="<%= displayedUser.image %>" alt="Picture Of <%= displayedUser.name %>">
           </div>
-          <h3 class="mt-5"><a class="text-decoration-none text-dark" href="/update">Update Password</a></h3>
-          <h3 class="mt-3"><a class="text-decoration-none text-dark" href="#">Setup 2FA</a></h3>
+          <h3 class="mt-5"><a class="text-decoration-none" href="/update">Update Password</a></h3>
+          <!-- <h3 class="mt-3"><a class="text-decoration-none" href="#">Setup 2FA</a></h3> -->
       </div>
-      <div class="col-3 mx-5 cmt-1">
-        <h3 class="">Phone Number</h3>
 
+      <!-- Col 2 -->
+      <div class="width cmt-1">
+        <h3 class="">Phone Number</h3>
         <form action="/update/userProfile/<%= displayedUser._id %>?_method=PUT" method="POST"> <!-- enctype="multipart/form-data" -->
           <div class="mb-3">
             <input type="text" class="form-control" value="<%= displayedUser.phoneNumber %>" id="phoneNumber" name="phoneNumber">
@@ -46,7 +45,9 @@
             <textarea class="form-control bioForm" id="iCanHelpWith" name="iCanHelpWith"><%= displayedUser.iCanHelpWith %></textarea>
           </div>
       </div>
-      <div class="col-3 cmt-1 position-relative">
+
+      <!-- Col 3 -->
+      <div class="width cmt-1 position-relative">
         <h3 class="">Mailing Address</h3>
           <div class="mb-3">
               <input type="text" class="form-control"       value="<%= displayedUser.address1 %>"  id="address1" name="address1">
@@ -56,12 +57,46 @@
               <input type="text" class="form-control mt-2"  value="<%= displayedUser.country %>"   id="country"  name="country">
               <input type="text" class="form-control mt-2"  value="<%= displayedUser.postCode %>"  id="postCode" name="postCode">
           </div>
-          <button type="submit" class="position-absolute btn btn-primary col-4 bottom-0 end-0 me-2 mb-2">Update</button>
+          <button type="submit" class="position-absolute btn btn-primary col-4 bottom-1 end-0">Update</button>
         </form>
-
       </div>
+
     </div>
+
+      
+      <!-- Nav Bar Right -->
+      <div class="navBarRight d-flex justify-content-center">
+        <div class="fa-2x text-primary d-flex flex-column ">
+          <% if (user.isAdmin) { %> 
+            <a href="/dashboard"><i class="fa fa-cog"></i></a>
+            <% } %>
+            <a href="/profile/user"><i class="fa-solid fa-user"></i></a>
+            <a href="/logout"><i class="fa-solid fa-arrow-right-from-bracket mt-3"></i></a>
+            <a href="/directory"><i class="fa-regular fa-address-book mt-3"></i></a>
+          </div>
+        </div>
+        
+        
   </section>
+  
+  <!-- Nav Bar Bottom -->
+  <section class="navBarBottom d-flex flex-row justify-content-between align-items-center">
+    
+    <!-- App Name Text -->
+    <h2 class=""><a href="/" class="ts">Steeple Peeps</a></h2>
+  
+  <!-- Darkmode Button -->
+    <div class="form-check form-switch">
+      <input 
+      class="form-check-input cB-custom" 
+      type="checkbox" 
+      id="darkMode" 
+      name="darkMode">
+    </div>
+  
+</section>
+
 <%- include('partials/imageUpload') -%>
-</main>
 <%- include('partials/footer') -%>
+
+</main>

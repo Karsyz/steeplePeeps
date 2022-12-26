@@ -1,12 +1,12 @@
 <%- include('partials/header') -%>
 <%- include('partials/btmLeftTxt') -%>
 <%- include('partials/darkMode') -%>
-    <main class="d-flex flex-row-reverse align-items-center justify-content-center ">
-      <div class="d-flex flex-row align-items-center justify-content-center col-4">
+    <main class="mainPage">
+      <div class="mainPageLogo">
         <i class="fa-solid fa-church fa-10x"></i>
       </div>
       <div class="row justify-content-center">
-        <section class="col-12">
+        <section class="formWidth">
               <h1 class="ts">Build A Church</h1>
                 <% if (locals.messages.errors) { %>
                     <% messages.errors.forEach( el => { %>

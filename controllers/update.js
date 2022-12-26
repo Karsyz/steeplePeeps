@@ -8,7 +8,7 @@ const { restart } = require("nodemon");
 
 // Go To Password Update Page
 exports.updatePage = async (req, res) => {
-  console.log(req.user)
+  // console.log(req.user)
   res.render("updatePassword", {user: req.user.password });
   // console.log(req.user)
 },
@@ -44,8 +44,8 @@ exports.updatePassword = async (req, res, next) => {
   
   // Does existing password match? 
   try {
-    if (await bcrypt.compare(req.body.existingPassword, user.password)) {
-      console.log("Existing password matches database")
+    // if (await bcrypt.compare(req.body.existingPassword, user.password)) {
+    //   console.log("Existing password matches database")
 
       // Update password in the model
       user.password = req.body.newPassword
@@ -55,10 +55,10 @@ exports.updatePassword = async (req, res, next) => {
         if (err) console.log(err)
       })
         
-    } else {
-      console.log('Existing Password does not match')
-      res.redirect('/update')
-    }
+    // } else {
+    //   console.log('Existing Password does not match')
+    //   res.redirect('/update')
+    // }
   } catch (err) {
     console.log(err)
     res.status(500).send()
@@ -69,7 +69,7 @@ exports.updatePassword = async (req, res, next) => {
   // investigate opening up a new db connection?
     setTimeout(async () => {
       const dbCheck = await User.findOne({ _id: user._id })
-      console.log(dbCheck)
+      // console.log(dbCheck)
       if (await bcrypt.compare(req.body.newPassword, dbCheck.password)) {
         console.log('Password has been updated')
         res.redirect('/profile/user')

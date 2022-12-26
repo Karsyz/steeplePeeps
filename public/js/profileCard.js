@@ -53,7 +53,7 @@ async function getCardInfo(userId) {
   const url = '/profile/userProfile'
   fetch(`${url}/${userId}`)
           .then(res => res.json() )
-          .then(data =>{
+          .then(data => {
               document.getElementById('cardImage').src = data.image
               document.getElementById('cardImage').alt = `Picture of ${data.name}`
               document.getElementById('cardName').innerHTML = data.name
@@ -73,8 +73,8 @@ async function getCardInfo(userId) {
                 document.getElementById('cardTxtOk').innerHTML = 'Phone Only: '
               }
 
-              if (data.address2 === "" || data.address === "Address 2") {
-                document.getElementById('cardAddress2Container').classList.add('d-none')
+              if (data.address2 === "" || data.address2 === "Address 2") {
+                document.getElementById('cardAddress2').classList.add('d-none')
               }
 
   
