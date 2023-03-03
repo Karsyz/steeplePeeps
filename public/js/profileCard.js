@@ -19,11 +19,18 @@ document.addEventListener('keydown', function(evt){
 	}
 });
 
+// function activateCard(evt) {
+//   if (evt.target !== this) return // this ensures child elements do not toggle  
+//   cardCont.classList.remove('d-none')
+//   const userId = evt.target.id
+//   getCardInfo(userId)
+// }
+
 function activateCard(evt) {
-  if (evt.target !== this) return // this ensures child elements do not toggle  
-  cardCont.classList.remove('d-none')
+  if (evt.target !== this) return // this ensures child elements do not toggle 
   const userId = evt.target.id
   getCardInfo(userId)
+    .then(() => cardCont.classList.remove('d-none'))
 }
 
 function deactivateCard(evt) {
