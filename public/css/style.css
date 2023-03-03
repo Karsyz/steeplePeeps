@@ -130,11 +130,11 @@ main {
     position: absolute;
     top: 0;
     right: 0;
-    -webkit-animation: fadein 0.5s; /* Safari, Chrome and Opera > 12.1 */
-       -moz-animation: fadein 0.5s; /* Firefox < 16 */
-        -ms-animation: fadein 0.5s; /* Internet Explorer */
-         -o-animation: fadein 0.5s; /* Opera < 12.1 */
-            animation: fadein 0.5s;
+    -webkit-animation: fadein 0.3s; /* Safari, Chrome and Opera > 12.1 */
+       -moz-animation: fadein 0.3s; /* Firefox < 16 */
+        -ms-animation: fadein 0.3s; /* Internet Explorer */
+         -o-animation: fadein 0.3s; /* Opera < 12.1 */
+            animation: fadein 0.3s;
 }
 
 /* Safari, Chrome and Opera > 12.1 */
@@ -159,6 +159,11 @@ main {
     flex-direction: row;
     max-width: 1000px;
     max-height: 600px;
+}
+
+.profileCardContInIn > img {
+  display: inline-block;
+  flex-basis: 500px;
 }
 
 .imageWrapper {

@@ -19,18 +19,12 @@ document.addEventListener('keydown', function(evt){
 	}
 });
 
-// function activateCard(evt) {
-//   if (evt.target !== this) return // this ensures child elements do not toggle  
-//   cardCont.classList.remove('d-none')
-//   const userId = evt.target.id
-//   getCardInfo(userId)
-// }
-
 async function activateCard(evt) {
   if (evt.target !== this) return // this ensures child elements do not toggle 
   const userId = evt.target.id
   await getCardInfo(userId)
-  cardCont.classList.remove('d-none')
+  // wait for info to populate in dom
+  setTimeout(function(){cardCont.classList.remove('d-none')}, 500)
 }
 
 function deactivateCard(evt) {
@@ -42,16 +36,16 @@ function dNoneAndClerData() {
   cardCont.classList.add('d-none')
   document.getElementById('cardImage').src = ""
   document.getElementById('cardImage').alt = ""
-  document.getElementById('cardName').innerHTML = ""
-  document.getElementById('cardEmail').innerHTML = ""
-  document.getElementById('cardPhone').innerHTML = ""
-  document.getElementById('cardAddress1').innerHTML = ""
-  document.getElementById('cardAddress2').innerHTML = ""
-  document.getElementById('cardCity').innerHTML = ""
-  document.getElementById('cardCountry').innerHTML = ""
-  document.getElementById('cardPostalCode').innerHTML = ""
-  document.getElementById('cardBio').innerHTML = ""
-  document.getElementById('cardICanHelpWith').innerHTML = ""
+  document.getElementById('cardName').textContent = ""
+  document.getElementById('cardEmail').textContent = ""
+  document.getElementById('cardPhone').textContent = ""
+  document.getElementById('cardAddress1').textContent = ""
+  document.getElementById('cardAddress2').textContent = ""
+  document.getElementById('cardCity').textContent = ""
+  document.getElementById('cardCountry').textContent = ""
+  document.getElementById('cardPostalCode').textContent = ""
+  document.getElementById('cardBio').textContent = ""
+  document.getElementById('cardICanHelpWith').textContent = ""
 }
 
 
@@ -63,28 +57,27 @@ async function getCardInfo(userId) {
           .then(data => {
               document.getElementById('cardImage').src = data.image
               document.getElementById('cardImage').alt = `Picture of ${data.name}`
-              document.getElementById('cardName').innerHTML = data.name
-              document.getElementById('cardEmail').innerHTML = data.email
-              document.getElementById('cardPhone').innerHTML = data.phoneNumber
-              document.getElementById('cardAddress1').innerHTML = data.address1
-              document.getElementById('cardAddress2').innerHTML = data.address2
-              document.getElementById('cardCity').innerHTML = data.city
-              document.getElementById('cardCountry').innerHTML = data.country
-              document.getElementById('cardPostalCode').innerHTML = data.postCode
-              document.getElementById('cardBio').innerHTML = data.bio
-              document.getElementById('cardICanHelpWith').innerHTML = data.iCanHelpWith
+              document.getElementById('cardName').textContent = data.name
+              document.getElementById('cardEmail').textContent = data.email
+              document.getElementById('cardPhone').textContent = data.phoneNumber
+              document.getElementById('cardAddress1').textContent = data.address1
+              document.getElementById('cardAddress2').textContent = data.address2
+              document.getElementById('cardCity').textContent = data.city
+              document.getElementById('cardCountry').textContent = data.country
+              document.getElementById('cardPostalCode').textContent = data.postCode
+              document.getElementById('cardBio').textContent = data.bio
+              document.getElementById('cardICanHelpWith').textContent = data.iCanHelpWith
 
               if (data.txtOk) {
-                document.getElementById('cardTxtOk').innerHTML = 'Phone & Txt: '
+                document.getElementById('cardTxtOk').textContent = 'Phone & Txt: '
               }else {
-                document.getElementById('cardTxtOk').innerHTML = 'Phone Only: '
+                document.getElementById('cardTxtOk').textContent = 'Phone Only: '
               }
 
               if (data.address2 === "" || data.address2 === "Address 2") {
                 document.getElementById('cardAddress2').classList.add('d-none')
               }
 
-  
           })
           .catch(err => {
               console.log(`error ${err}`)

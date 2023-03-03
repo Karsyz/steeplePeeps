@@ -1,8 +1,4 @@
-// Darkmode
-
 const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches
-// console.log(isDark)
-
 
 let darkMode
 const dmSwich = document.getElementById('darkMode')
