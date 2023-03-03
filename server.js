@@ -7,7 +7,7 @@ const MongoStore = require("connect-mongo")(session);
 const methodOverride = require("method-override");
 const flash = require("express-flash");
 const logger = require("morgan");
-const connectDB = require("./config/database");
+// const connectDB = require("./config/database");
 const mainRoutes = require("./routes/main");
 const updateRoutes = require("./routes/update");
 const profileRoutes = require("./routes/profile");
@@ -19,7 +19,23 @@ require("dotenv").config({ path: "./config/.env" });
 require("./config/passport")(passport);
 
 //Connect To Database
-connectDB();
+// connectDB()
+
+mongoose.connect(process.env.DB_STRING, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useFindAndModify: false,
+  useCreateIndex: true,
+})
+.then(() => {
+  // listen for requests
+  app.listen(process.env.PORT, () => {
+    console.log(`Server is listening on port ${process.env.PORT}`)
+  })
+})
+.catch((error) => {
+  console.log(error)
+})
 
 //Using EJS for views
 app.set("view engine", "ejs");
@@ -59,6 +75,6 @@ app.use("/profile", profileRoutes);
 app.use("/update", updateRoutes);
 
 //Server Running
-app.listen(process.env.PORT, () => {
-  console.log(`Server is listening on port ${process.env.PORT}`);
-});
+// app.listen(process.env.PORT, () => {
+//   console.log(`Server is listening on port ${process.env.PORT}`);
+// });
