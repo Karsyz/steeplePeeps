@@ -26,11 +26,11 @@ document.addEventListener('keydown', function(evt){
 //   getCardInfo(userId)
 // }
 
-function activateCard(evt) {
+async function activateCard(evt) {
   if (evt.target !== this) return // this ensures child elements do not toggle 
   const userId = evt.target.id
-  getCardInfo(userId)
-    .then(() => cardCont.classList.remove('d-none'))
+  await getCardInfo(userId)
+  cardCont.classList.remove('d-none')
 }
 
 function deactivateCard(evt) {
