@@ -196,7 +196,7 @@ exports.createUser = async (req, res, next) => {
   });
 
   const user = new User({
-    name: req.body.name,
+    name: req.body.name ? req.body.name : 'user' + Math.floor( Math.random() * 10000000),
     email: req.body.email,
     password: genPass,
     isAdmin: false,
@@ -263,7 +263,7 @@ exports.createUser = async (req, res, next) => {
       html: `<h1>
               Welcome to the ${req.user.name} Member Directory
             </h1>
-            <p>Login to your account at <a href="http://localhost:3000/">Steeple Peeps</a>
+            <p>Login to your account at <a href="https://steeplepeeps.cyclic.app/">Steeple Peeps</a>
             </p>
             <p>Your password is ${genPass}</p>`, // html body
     });

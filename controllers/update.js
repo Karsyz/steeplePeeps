@@ -8,9 +8,14 @@ const { restart } = require("nodemon");
 
 // Go To Password Update Page
 exports.updatePage = async (req, res) => {
-  // console.log(req.user)
-  res.render("updatePassword", {user: req.user.password });
-  // console.log(req.user)
+  console.log(req.user.isAdmin)
+  if(req.user.isAdmin) {
+    const user = await User.findById(req.params.id);
+    // pass in both the currently logged in user and the user from req.params.id
+    res.render("updatePassword", { displayedUser: user, user: req.user } );
+  }else {
+    res.render("updatePassword", {user: req.user.password });
+  }
 },
 
 
@@ -35,50 +40,41 @@ exports.updatePassword = async (req, res, next) => {
   };
 
   // declare user
-  const user = req.user
+  let user;
+  if(req.user.isAdmin) {
+    user = await User.findOne({_id: req.params.id})
+  }else {
+    user = req.user
+  }
 
   // error if no user
   if (!user) {
     return res.status(400).sent('Cannot find user')
   }
-  
-  // Does existing password match? 
+
   try {
-    // if (await bcrypt.compare(req.body.existingPassword, user.password)) {
-    //   console.log("Existing password matches database")
-
-      // Update password in the model
-      user.password = req.body.newPassword
-
-      // Saves new password to model (mongoose will then hash the password and update db)
-      await user.save( (err) => {
-        if (err) console.log(err)
-      })
-        
-    // } else {
-    //   console.log('Existing Password does not match')
-    //   res.redirect('/update')
-    // }
+      bcrypt.hash(req.body.newPassword, 10, async function(err, hash) {
+        if (err) return next(err)
+        await User.findOneAndUpdate({_id: user.id}, {password: hash})
+      });
   } catch (err) {
     console.log(err)
     res.status(500).send()
-  }        
-  // Check if password was updated in database
-  // setTimeout is here because save callback doesn't produce anything. 
-  // Update this in the future so it works properly.
-  // investigate opening up a new db connection?
-    setTimeout(async () => {
-      const dbCheck = await User.findOne({ _id: user._id })
-      // console.log(dbCheck)
-      if (await bcrypt.compare(req.body.newPassword, dbCheck.password)) {
-        console.log('Password has been updated')
-        res.redirect('/profile/user')
-      } else {
-        console.log(`Password didn't update in the db`)
-        res.redirect('/update')
-      }
+  }     
 
-    }, 3000)
+  // check if password is updated in db
+  setTimeout(async () =>{
+    const updated = await User.findOne({_id: user.id})
+    const result = await bcrypt.compare(req.body.newPassword, updated.password)
+      if(result) {
+        console.log('Password successfully updated')
+        res.redirect('/dashboard')
+      }else {
+        console.log('Password not updated')
+        res.redirect('/dashboard')
+      }
+       
+  }, 1000)
 }
 
 // Update User Information
@@ -95,6 +91,8 @@ exports.putUpdateUserProfile = async (req, res, next) => {
       { _id: req.params.id },
       {
         $set: { 
+          name:         req.body.name,
+          email:        req.body.email,
           phoneNumber:  req.body.phoneNumber,
           txtOk:        txtOk,
           address1:     req.body.address1,

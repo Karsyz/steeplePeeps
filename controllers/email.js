@@ -26,9 +26,6 @@ module.exports = {
       const link = 'http://localhost:3000/update'
       // create a separate password update page for first time login?
       // get info from the link using req.params in the new page
-      // 
-
-
     
     // create reusable transporter object using the default SMTP transport
     let transporter = nodemailer.createTransport({
@@ -39,6 +36,7 @@ module.exports = {
         pass: process.env.SERVER_EMAIL_PSWD, 
       },
     });
+
     // send mail with defined transport object
     let info = await transporter.sendMail({
       from: '"Karsy" <steeplepeeps100@gmail.com>', // sender address

@@ -1,29 +1,38 @@
 <%- include('partials/header') -%>
 
 
+<h1 class="ts d-inline-block">Edit Profile</h1>
+
 <main class="d-flex flex-column">
+
 
   <section class="d-flex flex-row justify-content-center pe-5 ">
 
-    <div class="colsContainer">
+    <div class="colsContainer ">
 
       <!-- Col 1 -->
       <div class="width">
-          <h1 class="ts">Edit Profile</h1>
-          <p><strong>Name:</strong> <%= displayedUser.name %></p>
-          <p><strong>Email:</strong> <%= displayedUser.email %></p>
+          <form action="/update/userProfile/<%= displayedUser._id %>?_method=PUT" method="POST"> <!-- enctype="multipart/form-data" -->
+          <h3 class="">Name</h3>
+          <input type="text" class="form-control" value="<%= displayedUser.name %>" id="name" name="name">
+          <h3 class="mt-3">Email</h3>
+          <input type="text" class="form-control" value="<%= displayedUser.email %>" id="email" name="email">
           <div class="position-relative">
             <i class="position-absolute bottom-0 start-0 ms-2 mb-2 fa fa-cog fa-2x text-primary" id="imgCog"></i>
             <img class="img-fluid rounded-5" src="<%= displayedUser.image %>" alt="Picture Of <%= displayedUser.name %>">
           </div>
-          <h3 class="mt-5"><a class="text-decoration-none" href="/update">Update Password</a></h3>
+          <% if(user.isAdmin) { %>
+            <h3 class="mt-1"><a class="text-decoration-none" href="/update/<%= displayedUser._id %>">Update Password</a></h3>
+          <% }else{ %>
+            <h3 class="mt-1"><a class="text-decoration-none" href="/update">Update Password</a></h3>
+          <% } %>
+
           <!-- <h3 class="mt-3"><a class="text-decoration-none" href="#">Setup 2FA</a></h3> -->
       </div>
 
       <!-- Col 2 -->
-      <div class="width cmt-1">
+      <div class="width">
         <h3 class="">Phone Number</h3>
-        <form action="/update/userProfile/<%= displayedUser._id %>?_method=PUT" method="POST"> <!-- enctype="multipart/form-data" -->
           <div class="mb-3">
             <input type="text" class="form-control" value="<%= displayedUser.phoneNumber %>" id="phoneNumber" name="phoneNumber">
           </div>
@@ -35,7 +44,7 @@
               id="txtOk" 
               name="txtOk" 
               <% if(displayedUser.txtOk == true) {%>checked<%}%>>
-          </div>
+          </div> 
           <div class="mb-3">
             <h3>Bio</h3>
             <textarea class="form-control bioForm" id="bioForm" name="bioForm"><%= displayedUser.bio %></textarea>
@@ -47,7 +56,7 @@
       </div>
 
       <!-- Col 3 -->
-      <div class="width cmt-1 position-relative">
+      <div class="width position-relative">
         <h3 class="">Mailing Address</h3>
           <div class="mb-3">
               <input type="text" class="form-control"       value="<%= displayedUser.address1 %>"  id="address1" name="address1">

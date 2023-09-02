@@ -19,8 +19,8 @@ require("dotenv").config({ path: "./config/.env" });
 require("./config/passport")(passport);
 
 //Connect To Database
+// Deploy on cyclic requires .then notation because serverless
 // connectDB()
-
 mongoose.connect(process.env.DB_STRING, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -66,7 +66,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-//Use flash messages for errors, info, ect...
+// Use flash messages for errors, info, ect...
 app.use(flash());
 
 //Setup Routes For Which The Server Is Listening
