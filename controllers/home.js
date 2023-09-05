@@ -10,7 +10,8 @@ module.exports = {
         res.redirect("/directory");
       }
     }else {
-      res.render("index.ejs", { user: req.user });
+      res.render("index.ejs", { user: req.user, isLoggedIn: false });
+      // console.log(req.user)
     }
     
   },

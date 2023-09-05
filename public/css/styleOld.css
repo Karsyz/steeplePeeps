@@ -1,0 +1,461 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background: var(--bg-color);
+    color: var(--color);
+}
+
+h1, h2, h3, h4, h5, h6, p, span, td {
+    color: var(--color);
+}
+
+:root {
+    --bg-color: white;
+    --background-color-primary: #0d6efd;
+    --color: #343a40;
+    --table-bg: #212529;
+}
+
+.theme-dark {
+    --bg-color: #343a40; 
+    --background-color-primary: #0e58c7;
+    --color: #ebebeb;
+    --table-bg: #d1d6db;
+}
+
+.ts {
+    font-family: 'Archivo Black', sans-serif;
+    text-decoration: none;
+    color: var(--color);
+    margin: 0;
+    padding: 0;
+}
+
+.btn-primary {
+    background: var(--background-color-primary);
+    border: var(--background-color-primary);
+}
+
+.table-dark {
+    --bs-table-bg: var(--table-bg);
+    color: var(--bg-color);
+}
+
+main {
+    height: 100vh;
+}
+
+.cB-custom {
+  /* Double-sized Checkboxes */
+  -ms-transform: scale(1.5); /* IE */
+  -moz-transform: scale(1.5); /* FF */
+  -webkit-transform: scale(1.5); /* Safari and Chrome */
+  -o-transform: scale(1.5); /* Opera */
+  padding: 10px;
+
+  margin-left: 0;
+  margin-right: 20px;
+  margin-bottom: 20px;
+  box-sizing: border-box;
+}
+
+.bioForm {
+    height: 135px;
+}
+
+.cmt-1 {
+    padding-top: 93px;
+}
+
+.dashboardTable {
+    height: 70vh;
+}
+
+.dashboardTable::-webkit-scrollbar,
+.directoryContainer::-webkit-scrollbar {
+    height: 10px;
+    width: 10px;
+    overflow: visible;
+}
+
+.dashboardTable::-webkit-scrollbar-track,
+.directoryContainer::-webkit-scrollbar-track {
+    background: #eee;
+    border-radius: 1rem;
+}
+
+.dashboardTable::-webkit-scrollbar-thumb,
+.directoryContainer::-webkit-scrollbar-thumb {
+    border-radius: 1rem;
+    background-color: var(--background-color-primary);
+    /* background-image: linear-gradient(to top, #00d2ff 0%, #3a7bd5 100%); */
+}
+
+.tableWidth {
+    min-width: 1250px;
+}
+.stuff {
+    height: 50vh;
+}
+
+.zedIndex {
+    z-index: 10;
+}
+
+.imgC {
+    max-width: 18%;
+    padding: 0;
+    background: var(--bg-color);
+}
+
+.imgC:hover {
+    border: 2px solid var(--background-color-primary);
+}
+
+.sectionC {
+    position: absolute;
+    height: calc(100vh - 150px);
+    width: calc(100vw - 150px);
+    margin-left: 50px;
+    margin-right: 80px;
+}
+
+.imageUploadContainer,
+.profileCardContainer {
+    width: 100vw;
+    height: 100vh;
+    background: rgba(33, 34, 34, 0.9);
+    position: absolute;
+    top: 0;
+    right: 0;
+    -webkit-animation: fadein 0.3s; /* Safari, Chrome and Opera > 12.1 */
+       -moz-animation: fadein 0.3s; /* Firefox < 16 */
+        -ms-animation: fadein 0.3s; /* Internet Explorer */
+         -o-animation: fadein 0.3s; /* Opera < 12.1 */
+            animation: fadein 0.3s;
+}
+
+/* Safari, Chrome and Opera > 12.1 */
+@keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+.imageUploadContainerInner {
+    background: var(--bg-color);
+    padding: 50px;
+    border-radius: 8px;
+}
+
+.profileCardContainerInner {
+    background: var(--bg-color);
+    border-radius: 8px;
+}
+
+.profileCardContInIn {
+    display: flex;
+    flex-direction: row;
+    max-width: 1000px;
+    max-height: 600px;
+}
+
+.profileCardContInIn > img {
+  display: inline-block;
+  flex-basis: 500px;
+}
+
+.imageWrapper {
+    position: relative;
+    min-width: 350px;
+    min-height: 350px;
+    width: 500px;
+    height: 500px;
+}
+
+.imgPlaceholder {
+    z-index: 5;
+    width: 100%;
+    height: 100%;
+    background: var(--bg-color);
+    padding: 50px;
+    border-radius: 8px;
+    border: 1px solid black;
+}
+
+.imageWrapper img {
+    position: absolute;
+    z-index: 10;
+    border-radius: 8px;
+    max-width: 100%;
+    max-height: 100%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.mouseOver {
+    cursor: pointer
+}
+
+.tableWrapper {
+    width: 90vw;
+    height: 80vh;
+}
+
+.directoryContainer {
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.listGroupItem {
+    display: block;
+    padding: 0.5rem 1rem;
+    color: #212529;
+    text-decoration: none;
+}
+
+.wsNoWrap {
+    white-space: nowrap;
+}
+
+.hidden {
+    visibility: hidden;
+}
+
+/* top-left border-radius */
+table tr:first-child th:first-child {
+    border-top-left-radius: 6px;
+}
+
+/* top-right border-radius */
+table tr:first-child th:last-child {
+  border-top-right-radius: 6px;
+}
+
+/* bottom-left border-radius */
+table tr:last-child td:first-child {
+  border-bottom-left-radius: 6px;
+}
+
+/* bottom-right border-radius */
+table tr:last-child td:last-child {
+  border-bottom-right-radius: 6px;
+}
+
+.rounded-5 {
+    border-radius: 10px;
+}
+
+.img {
+    border: 1px solid #dee2e6;
+    margin-right: 20px;
+}
+
+.navBarRight {
+    position: fixed;
+    right: 0;
+    width: 75px;
+    height: 100%;
+    padding-top: 15px;
+    /* border: 1px solid red; */
+}
+
+.navBarBottom {
+    position: fixed;
+    bottom: 0;
+    background: var(--bg-color);
+    width: 100vw;
+    height: 60px;
+    padding-left: 20px;
+    padding-right: 10px;
+    /* border: 1px solid red; */
+}
+
+.width {
+    min-width: 290px;
+    max-width: 320px;
+    width: 30.3333vw;
+    height: 100vh;
+    padding-left: 20px;
+}
+
+.colsContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* flex-wrap: wrap; */
+}
+
+.colsContainer > div:nth-child(1) > h1 {
+    margin-top: 15px;
+}
+
+div.colsContainer > div:nth-child(1) > h3 > a {
+    color: var(--color);
+}
+
+.displayNone {
+    display: none;
+}
+
+.mainPage {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+    align-items: center;
+}
+
+.mainPageLogo {
+    margin-left: 50px;
+}
+
+.formWidth {
+    padding: 0 15px 0 25px;
+}
+
+@media only screen and (max-width: 420px) {
+    .imgC {
+        max-width: 80%;
+    }
+
+    .directoryContainer::-webkit-scrollbar {
+        display: none;
+    }
+    
+    .directoryContainer {
+        width: 100%;
+        padding: 0 50px 0 0;
+        margin: 0 ;
+        
+    }
+
+    .profileCardContInIn {
+        flex-direction: column;
+        max-width: 60vw;        
+        max-height: 90vh;
+    }
+
+    .cmt-1 {
+        padding-top: 10px;
+    }
+
+    .img {
+        margin-right: 0px;
+        margin-bottom: 20px;
+    }
+
+    .width {
+        width: 350px;
+        height: 100%;
+    }
+
+    body > main > section.d-flex.flex-row.justify-content-center.pe-5 > div.colsContainer > div.width.cmt-1.position-relative {
+        padding-bottom: 100px;
+    }
+
+    .mainPage {
+        flex-direction: column;
+    }
+    
+    .mainPageLogo {
+        margin-left: 0;
+        margin-bottom: 50px;
+    }
+}
+
+
+
+@media only screen and (min-width: 421px) and (max-width: 850px) {
+    .imgC {
+        max-width: 40%;
+    }
+
+    .directoryContainer::-webkit-scrollbar {
+        display: none;
+        
+    }
+
+    .profileCardContInIn {
+        flex-direction: column;
+        max-width: 60vw;        
+        max-height: 90vh;
+    }
+    
+    .img {
+        margin-right: 0px;
+        margin-bottom: 20px;
+    }
+
+    .width {
+        width: 400px;
+        height: 100%;
+    }
+
+    .cmt-1 {
+        padding-top: 10px;
+    }
+
+    body > main > section.d-flex.flex-row.justify-content-center.pe-5 > div.colsContainer > div.width.cmt-1.position-relative {
+        padding-bottom: 100px;
+    }
+
+    .mainPage {
+        flex-direction: column;
+    }
+    
+    .mainPageLogo {
+        margin-left: 0;
+        margin-bottom: 50px;
+    }
+
+
+}
+
+@media only screen and (min-width: 851px) and (max-width: 1200px) {
+    .imgC {
+        max-width: 30%;
+    }
+
+    .directoryContainer::-webkit-scrollbar {
+        display: none;
+        
+    }
+
+    .colsContainer {
+        flex-direction: row;
+    }
+
+    .width {
+        min-width: 230px;
+        max-width: 290px;
+    }
+
+    body > main > section.d-flex.flex-row.justify-content-center.pe-5 > div.colsContainer > div.width.cmt-1.position-relative {
+        padding-bottom: 100px;
+    }
+
+}
+
+@media only screen and (min-width: 1201px) and (max-width: 7680px) {
+    .imgC {
+        max-width: 30%;
+    }
+
+    .directoryContainer::-webkit-scrollbar {
+        display: none;
+        
+    }
+
+    .colsContainer {
+        flex-direction: row;
+    }
+
+    .width {
+        min-width: 350px;
+        max-width: 500px;
+    }
+
+
+}

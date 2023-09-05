@@ -1,0 +1,10 @@
+<nav class="ml-5" aria-label="Global">
+  <ul class="flex flex-col gap-4 text-blue-700 mt-6 mr-5">
+      <% if (user.isAdmin) { %> 
+        <li><a href="/dashboard"><i class="fa fa-cog fa-2x hover:text-blue-500"></i></a></li> 
+      <% } %>
+      <li><a href="/profile/user"><i class="fa-solid fa-user fa-2x hover:text-blue-500"></i></a></li>
+      <li><a href="/logout"><i class="fa-solid fa-arrow-right-from-bracket fa-2x hover:text-blue-500"></i></a></li>
+      <li><a href="/directory"><i class="fa-regular fa-address-book fa-2x hover:text-blue-500"></i></a></li>
+  </ul>
+</nav>

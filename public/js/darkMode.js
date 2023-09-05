@@ -1,39 +1,49 @@
-const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches
+// set darkMode to initially to browser preference
+let darkMode = window.matchMedia("(prefers-color-scheme: dark)").matches
+const html = document.querySelector('html')
+const dmSwitch = document.querySelector('#darkModeButton')
+const toggle = document.querySelector('#darkModeButton > span')
 
-let darkMode
-const dmSwich = document.getElementById('darkMode')
-
+// set returning preference if any
 window.onload = () => {
-  darkMode = localStorage.getItem('darkMode')
-  if (darkMode === 'on') {
-    dmSwich.checked = true
-    dark()
-  } else {
-    dmSwich.checked = false
-    light()
-  }
+  darkMode = JSON.parse( localStorage.getItem('darkMode') )
+  darkMode ? dark() : light()
 }
 
-dmSwich.addEventListener('click', () => {
-  
-  // Write switch state to local storage
-  if (dmSwich.checked) {
-    darkMode = 'on'
-    localStorage.setItem('darkMode', 'on');
-    dark()
-  } else {
-    darkMode = 'off'
-    localStorage.setItem('darkMode', 'off');
+dmSwitch.addEventListener('click', () => {
+  if (darkMode) {
+    darkMode = false
+    localStorage.setItem('darkMode', JSON.stringify(darkMode));
     light()
+  } else {
+    darkMode = true
+    localStorage.setItem('darkMode', JSON.stringify(darkMode));
+    dark()
   }
 })
 
 function dark() {
-  document.querySelector('body').classList.add('theme-dark')
-  document.querySelector('body').classList.remove('theme-light')
+  // set dark mode html class
+  html.classList.add('dark')
+
+  // set switch state
+  dmSwitch.classList.remove('bg-gray-200')
+  dmSwitch.classList.add('bg-blue-600')
+  toggle.classList.remove('translate-x-0')
+  toggle.classList.add('translate-x-5')
+
+  
 }
 
 function light() {
-  document.querySelector('body').classList.add('theme-light')
-  document.querySelector('body').classList.remove('theme-dark')
+  // set dark mode html class
+  html.classList.remove('dark')
+
+  // set switch state
+  dmSwitch.classList.add('bg-gray-200')
+  dmSwitch.classList.remove('bg-blue-600')
+  toggle.classList.add('translate-x-0')
+  toggle.classList.remove('translate-x-5')
+
+
 }

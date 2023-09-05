@@ -18,8 +18,8 @@ exports.getLogin = (req, res) => {
   }else {
     res.render("login", {
     title: "Login",
-  });
-}
+    });
+  }
 };
 
 // Login to Server

@@ -1,15 +1,29 @@
-<%- include('partials/header') -%>
-<%- include('partials/btmLeftTxt') -%>
+<%- include('partials/head') -%>
+  <body class="flex flex-row justify-between bg-slate-20 dark:bg-slate-800">
+    <main class="flex flex-col w-full h-screen">
+      <%- include('partials/header') -%>
+
+    <div class="flex flex-col grow m-0 w-full bg-red-500 gap-4">
+      <div class="w-full h-24 bg-violet-500"></div>
+    <div class="w-24 h-24 bg-blue-500"></div>
+    </div>
+
+
+    
+      <!-- <h1 class="ts ms-2 pt-2"><%=church.name%></h1> -->
+  
+  <!-- <section class="row row-gap-3 col-gap-3"> -->
+    <!-- <% if (directory) { directory.forEach( el => { %>  -->
+      <!-- <div class=""> -->
+        <!-- <img src="<%=el.image%>" alt="Picture of <%=el.name%>" class="object-fit-cover" id="<%=el._id%>"> -->
+        <!-- </div>     -->
+        <!-- <% })} %> -->
+        <!-- </section> -->
+        
+        <!-- <%- include('partials/profileCard') -%> -->
+     
+        
+  </main>
+<%- include('partials/nav') -%>
 <%- include('partials/darkMode') -%>
-<%- include('partials/navBar') -%>
-
-<h1 class="ts ms-2 pt-2"><%=church.name%></h1>
-
-<section class="directoryContainer container-fluid d-flex flex-row justify-content-center align-items-start flex-wrap sectionC">
-  <% if (directory) { directory.forEach( el => { %>     
-      <img src="<%=el.image%>" alt="Picture of <%=el.name%>" class="img-fluid img-thumbnail rounded-3 m-2 imgC" id="<%=el._id%>">
-  <% })} %>
-</section>
-
-<%- include('partials/profileCard') -%>
 <%- include('partials/footer') -%>
