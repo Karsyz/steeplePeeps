@@ -55,7 +55,7 @@
 
             <div class="">
               <div class="-mx-4 -my-2 sm:-mx-6 lg:-mx-8">
-                <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+                <div class="min-w-full py-2 sm:px-6 lg:px-8">
                   <table class="min-w-full divide-y divide-gray-300">
                     <thead class="sticky top-0 bg-slate-300 h-10">
                       <tr class="">
@@ -63,14 +63,14 @@
                         <th scope="col" class="whitespace-nowrap py-2 text-sm font-semibold text-gray-900 hidden md:table-cell">Txt Ok?</th>
                         <th scope="col" class="whitespace-nowrap py-2 text-sm font-semibold text-gray-900 hidden md:table-cell">Updated?</th>
                         <th scope="col" class="whitespace-nowrap py-2 text-sm font-semibold text-gray-900 hidden md:table-cell">Email Sent?</th>
-                        <th scope="col" class="whitespace-nowrap pr-4 text-sm font-semibold text-gray-900"><span class="sr-only">Edit</span></th>
+                        <th scope="col" class="whitespace-nowrap py-2 text-sm font-semibold text-gray-900 hidden sm:table-cell">Controls</th>
                       </tr> 
                     </thead>
-                    <tbody class="divide-y divide-gray-200 bg-white  dark:bg-slate-800">
+                    <tbody class="divide-y divide-gray-200 bg-white dark:bg-slate-800">
                     
                     <% if (allUsers) { allUsers.forEach( el => { %>
                       <tr class="">
-                        <td class="whitespace-nowrap py-5 pr-3 text-sm pl-4">
+                        <td class="whitespace-nowrap py-5 pr-3 text-sm pl-4 w-1/5">
                           <div class="flex items-center">
                             <div class="h-11 w-11 flex-shrink-0">
                               <img class="h-11 w-11 rounded-full" src="<%=el.image%>" alt="">
@@ -85,25 +85,25 @@
                             </div>
                           </div>
                         </td>
-                        <td class="whitespace-nowrap text-center py-5 text-sm text-gray-500 hidden md:table-cell">
+                        <td class="whitespace-nowrap text-center py-5 text-sm text-gray-500 hidden md:table-cell w-1/5">
                           <!-- <div class="text-gray-900">Front-end Developer</div> -->
                             <div class="mt-1 text-gray-500">
                                 <% if (el.txtOk) { %><i class="fa fa-check"></i><% } %>
                             </div>
                         </td>
-                        <td class="whitespace-nowrap text-center py-5 text-sm text-gray-500 hidden md:table-cell">
+                        <td class="whitespace-nowrap text-center py-5 text-sm text-gray-500 hidden md:table-cell w-1/5">
                             <span class="inline-flex items-center rounded-md px-2 py-1 text-xs font-medium">
                                 <% if (el.cloudinaryId !== "") { %><i class="fa fa-check"></i><% } %>
                             </span>
                         </td>
 
-                        <td class="whitespace-nowrap text-center py-5 text-sm text-gray-500 hidden md:table-cell">
+                        <td class="whitespace-nowrap text-center py-5 text-sm text-gray-500 hidden md:table-cell w-1/5">
                             <span class="inline-flex items-center rounded-md px-2 py-1 text-xs font-medium">
                                 <% if (el.numOfEmailsSent !== 0) { %><i class="fa fa-check"></i><% } %>
                             </span>
                         </td>
 
-                        <td class="whitespace-nowrap py-5 pl-3 pr-4 text-right text-sm font-medium sm:pr-0 hidden sm:table-cell">
+                        <td class="whitespace-nowrap text-center py-5 text-sm text-gray-500 hidden sm:table-cell w-1/5">
                             <%- include('partials/dashboardIcons', {el: el}) -%>
                         </td>
                       </tr>
