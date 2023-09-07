@@ -1,7 +1,7 @@
 
 <ul class="flex flex-row justify-center gap-5 sm:gap-5">
 
-    <li class="text-blue-700 hover:text-blue-400">
+    <li class="text-blue-700 hover:text-blue-400 cursor-pointer">
         <form action="/sendEmail/<%= el._id %>" method="POST">
             <button type="submit" class="border-0 bg-transparent text-primary">
                 <i class="text-xl fa-solid fa-paper-plane"></i>
@@ -9,7 +9,7 @@
         </form>
     </li>
 
-    <li class="text-blue-700 hover:text-red-400 ">
+    <li class="text-blue-700 hover:text-red-400 cursor-pointer">
         <form action="/profile/deleteProfile/<%= el._id %>?_method=DELETE" method="POST">
             <button type="submit" class="border-0 bg-transparent text-primary">
                 <i class="text-xl fa fa-trash-can"></i>
@@ -17,16 +17,16 @@
         </form>
     </li>
 
-    <li class="text-blue-700 hover:text-blue-400">
-        <i class="text-xl fa fa-id-card" id="<%= el._id %>"></i>
+    <li class="text-blue-700 hover:text-blue-400 cursor-pointer">
+        <i class="imgC text-xl fa fa-id-card" id="<%= el._id %>"></i>
     </li>
 
-    <li class="text-blue-700 hover:text-blue-400">
+    <li class="text-blue-700 hover:text-blue-400 cursor-pointer">
         <a href="/profile/user/<%= el._id %>">
-            <i class="text-xl fa fa-gear"></i></a>
+            <i class=" text-xl fa fa-gear"></i></a>
     </li>
 
-    <li class="text-blue-700 hover:text-blue-400">
+    <li class="text-blue-700 hover:text-blue-400 cursor-pointer">
         <a href="<%= el.phoneNumber.replace(/\s/g, '') %>">
             <i class="text-xl fa fa-phone"></i></a>
     </li>

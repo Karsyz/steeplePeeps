@@ -79,6 +79,8 @@ exports.updatePassword = async (req, res, next) => {
 
 // Update User Information
 exports.putUpdateUserProfile = async (req, res, next) => {
+
+  const user = await User.findOne({ _id: req.params.id })
   
   //covert txtOk string to boolean
   let txtOk = false
@@ -102,7 +104,7 @@ exports.putUpdateUserProfile = async (req, res, next) => {
           country:      req.body.country,
           postCode:     req.body.postCode,
           bio:          req.body.bioForm,
-          iCanHelpWith: req.body.iCanHelpWith,
+          iCanHelpWith: tagHelper(req.body.iCanHelpWith),
          },
         }
     );
@@ -111,6 +113,15 @@ exports.putUpdateUserProfile = async (req, res, next) => {
   } catch (err) {
     console.log(err);
   }
+}
+
+  // this function needs more input tolerance or need to change
+  // the way tags are added by the user
+function tagHelper(tagsString) {
+  if(tagsString === "") {
+    return []
+  }
+  return tagsString.split(', ')
 }
 
 // Update User Profile Picture

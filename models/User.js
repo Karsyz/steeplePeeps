@@ -74,7 +74,7 @@ const UserSchema = new mongoose.Schema({
     require: true,
   },
   iCanHelpWith: {
-    type: String,
+    type: Array,
     require: true,
   },
   members: {
@@ -89,6 +89,11 @@ const UserSchema = new mongoose.Schema({
     type: Number,
     require: true,
   },
+  // example: { 
+  //   type: mongoose.ObjectId, 
+  //   ref: Example  // another collection schema 
+  // }
+
 });
 
 // Password hash middleware.

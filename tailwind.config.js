@@ -2,10 +2,30 @@
 module.exports = {
   content: ["./views/**/*.ejs"],
   theme: {
-    extend: {},
+    extend: {
+      animation: {
+        pCardModalEnter: {
+          
+        }
+      },
+      keyframes: {
+        pCardModalEnter: {
+
+        }
+      },
+    },
   },
   plugins: [
     require('@tailwindcss/forms'),
   ],
   darkMode: 'class',
 }
+
+
+// Entering: "ease-out duration-300"
+//   From: "opacity-0"
+//   To: "opacity-100"
+
+// Leaving: "ease-in duration-200"
+//   From: "opacity-100"
+//   To: "opacity-0"

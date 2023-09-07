@@ -213,7 +213,7 @@ exports.createUser = async (req, res, next) => {
     image: `https://robohash.org/${randomAvatar}`,
     cloudinaryId: "",
     bio: "Example: Retired Teacher, love to golf, and I'm here to help where and when I can.",
-    iCanHelpWith: "Example: I can help with yard work, bible study, cooking",
+    iCanHelpWith: ['Prayer Group', 'Golf', 'Carpentry', 'Landscaping'],
     members: [],
     numOfSessions: 0,
     numOfEmailsSent: 0,

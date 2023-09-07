@@ -1,0 +1,101 @@
+<script type="text/javascript" src="/js/profileCardModal.js" async></script>
+
+<div class="relative z-50" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+  <!--
+    Background backdrop, show/hide based on modal state.
+
+    Entering: "ease-out duration-300"
+      From: "opacity-0"
+      To: "opacity-100"
+    Leaving: "ease-in duration-200"
+      From: "opacity-100"
+      To: "opacity-0"
+  -->
+  <div id="profileCardModalBg" class="hidden hide fixed inset-0 bg-gray-500 opacity-0 transition-opacity duration-200 w-screen h-screen"></div>
+  <div class="hidden hide fixed inset-0 z-10 overflow-y-auto no-scrollbar m-4">
+    <div class="hidden hide flex flex-row items-start justify-center w-full h-full lg:items-center">
+      <!--
+        Modal panel, show/hide based on modal state.
+
+        Entering: "ease-out duration-300"
+          From: "opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+          To: "opacity-100 translate-y-0 sm:scale-100"
+        Leaving: "ease-in duration-200"
+          From: "opacity-100 translate-y-0 sm:scale-100"
+          To: "opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+      -->
+      <div id="profileCard"  class="hidden hide relative overflow-scroll sm:overflow-hidden no-scrollbar rounded-xl bg-white dark:bg-slate-700 text-left shadow-xl max-w-9/12 max-h-4/12 opacity-0 transition-opacity duration-300">
+        <div class="flex flex-col justify-center items-center">
+
+          <div class="flex flex-col md:flex-row items-start gap-4 p-4 md:p-8">
+
+            <div class="flex flex-col justify-between gap-4 min-w-[231px] max-w-[500px] max-h-4/12">
+
+              <div class="flex justify-center items-center aspect-square bg-blue-300 rounded-lg rounded-3">
+                <img src="" alt="" id="cardImage" class="rounded-lg object-cover">
+              </div>
+  
+            </div>
+
+            <div class="max-w-[500px] w-full h-full flex flex-col justify-between gap-4">
+              
+              <div class="bg-blue-300 rounded-lg  p-5">
+                <h1 id="cardName" class="whitespace-nowrap font-bold text-xl md:text-3xl">Namey McNameface</h1>
+              </div>
+
+              <div class="flex flex-col lg:flex-row justify-start gap-3 w-full ">
+
+                <div class="flex flex-row items-center gap-5 w-full bg-blue-300 rounded-lg p-5 flex-nowrap">
+
+                  <div class="grow-0">
+                    <h3 id="cardTxtOk" class="font-bold whitespace-nowrap text-xl">Phoney</h3>
+                    <span id="cardPhone" class="whitespace-nowrap"></span>
+                  </div>
+
+                  <a id="cardPhoneLink" href="" >
+                    <i class="text-4xl fa fa-phone text-blue-700 hover:text-blue-400 grow-0"></i>
+                  </a>
+
+                </div>
+
+                <div class="bg-blue-300 rounded-lg p-5 grow">
+                  <h3 class="font-bold whitespace-nowrap text-xl">Email:</h3>
+                  <span id="cardEmail" class="whitespace-nowrap"></span>
+                </div>
+
+              </div>
+
+              <div class=" bg-blue-300 rounded-lg p-5">
+                <h3 class="font-bold text-xl">Mailing Address:</h3>
+                <ul>
+                  <li><span id="cardAddress1" class="block"></span></li>
+                  <li><span id="cardAddress2" class="block"></span></li>
+                  <li><span id="cardCity" class="block"></span>  </li>
+                  <li><span id="cardCountry" class="block"></span></li>
+                  <li><span id="cardPostalCode" class="block"></span></li>
+                </ul>
+              </div>
+
+              <ul id="cardICanHelpWith" class="flex flex-row items-start gap-5 flex-wrap">
+              </ul>
+
+            </div>
+          </div>
+      
+          <div class="relative bg-blue-200 rounded-lg p-4 mx-4 sm:mx-8 mb-6 overflow-hidden max-w-[500px] md:max-w-[1016px]">
+              <h4><span class="font-bold text-xl">Bio</h4>
+                <div class="relative overflow-scroll no-scrollbar max-h-28">
+                  <p id="cardBio" class="text-bold pb-3"></p>
+                </div>
+            </div>
+
+          
+
+            <button type="button" id="profileCardModalButton" class="flex flex-row justify-center items-center w-48 mb-6 rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600">Go back to dashboard</button>
+          </div>
+
+
+      </div>
+    </div>
+  </div>
+</div>
