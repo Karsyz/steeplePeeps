@@ -97,9 +97,9 @@ async function getCardInfo(userId) {
               if (data.iCanHelpWith !== null) {
                 data.iCanHelpWith.forEach(tag => {
                 const listItem = document.createElement('li');
-                listItem.classList.add('bg-blue-100')
+                listItem.classList.add('bg-blue-300')
                 listItem.classList.add('rounded-lg')
-                listItem.classList.add('p-3')
+                listItem.classList.add('p-4')
                 listItem.classList.add('font-semibold')
                 listItem.textContent = tag
                 helpTagsCont.appendChild(listItem);

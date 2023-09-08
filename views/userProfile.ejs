@@ -1,111 +1,274 @@
-<%- include('partials/header') -%>
+<%- include('partials/head') -%>
+  <body class="relative flex flex-row justify-between bg-slate-20 dark:bg-slate-800 z-10">
+    <main class="flex flex-col w-full h-screen overflow-hidden"> 
 
+    <!-- Page Heading -->
+    <div class="pl-8 pr-4 mb-4 sm:flex sm:items-center flex-row ">
 
-<h1 class="ts d-inline-block">Edit Profile</h1>
-
-<main class="d-flex flex-column">
-
-
-  <section class="d-flex flex-row justify-content-center pe-5 ">
-
-    <div class="colsContainer ">
-
-      <!-- Col 1 -->
-      <div class="width">
-          <form action="/update/userProfile/<%= displayedUser._id %>?_method=PUT" method="POST"> <!-- enctype="multipart/form-data" -->
-          <h3 class="">Name</h3>
-          <input type="text" class="form-control" value="<%= displayedUser.name %>" id="name" name="name">
-          <h3 class="mt-3">Email</h3>
-          <input type="text" class="form-control" value="<%= displayedUser.email %>" id="email" name="email">
-          <div class="position-relative">
-            <i class="position-absolute bottom-0 start-0 ms-2 mb-2 fa fa-cog fa-2x text-primary" id="imgCog"></i>
-            <img class="img-fluid rounded-5" src="<%= displayedUser.image %>" alt="Picture Of <%= displayedUser.name %>">
-          </div>
-          <% if(user.isAdmin) { %>
-            <h3 class="mt-1"><a class="text-decoration-none" href="/update/<%= displayedUser._id %>">Update Password</a></h3>
-          <% }else{ %>
-            <h3 class="mt-1"><a class="text-decoration-none" href="/update">Update Password</a></h3>
-          <% } %>
-
-          <!-- <h3 class="mt-3"><a class="text-decoration-none" href="#">Setup 2FA</a></h3> -->
+      <div class="flex flex-row items-end mt-8 gap-4">
+          <h1 class="inline text-3xl font-bold text-gray-900 dark:text-slate-100">User Profile</h1>
+          <span class="text-xl font-semibold text-gray-900 dark:text-slate-100"><%= user.name %></span>
       </div>
-
-      <!-- Col 2 -->
-      <div class="width">
-        <h3 class="">Phone Number</h3>
-          <div class="mb-3">
-            <input type="text" class="form-control" value="<%= displayedUser.phoneNumber %>" id="phoneNumber" name="phoneNumber">
-          </div>
-          <div class="mb-3 form-check form-switch">
-            <label for="txtOk" class="form-label">Text Message Ok?</label>
-            <input 
-              class="form-check-input" 
-              type="checkbox" 
-              id="txtOk" 
-              name="txtOk" 
-              <% if(displayedUser.txtOk == true) {%>checked<%}%>>
-          </div> 
-          <div class="mb-3">
-            <h3>Bio</h3>
-            <textarea class="form-control bioForm" id="bioForm" name="bioForm"><%= displayedUser.bio %></textarea>
-          </div>
-          <div class="mb-3">
-            <h3>I can Help with</h3>
-            <textarea class="form-control bioForm" id="iCanHelpWith" name="iCanHelpWith"><%= displayedUser.iCanHelpWith.join(', ')%></textarea>
-          </div>
-      </div>
-
-      <!-- Col 3 -->
-      <div class="width position-relative">
-        <h3 class="">Mailing Address</h3>
-          <div class="mb-3">
-              <input type="text" class="form-control"       value="<%= displayedUser.address1 %>"  id="address1" name="address1">
-              <input type="text" class="form-control mt-2"  value="<%= displayedUser.address2 %>"  id="address2" name="address2">
-              <input type="text" class="form-control mt-2"  value="<%= displayedUser.city %>"      id="City"     name="city">
-              <input type="text" class="form-control mt-2"  value="<%= displayedUser.province %>"  id="province" name="province">
-              <input type="text" class="form-control mt-2"  value="<%= displayedUser.country %>"   id="country"  name="country">
-              <input type="text" class="form-control mt-2"  value="<%= displayedUser.postCode %>"  id="postCode" name="postCode">
-          </div>
-          <button type="submit" class="position-absolute btn btn-primary col-4 bottom-1 end-0">Update</button>
-        </form>
-      </div>
-
     </div>
-
-      
-      <!-- Nav Bar Right -->
-      <div class="navBarRight d-flex justify-content-center">
-        <div class="fa-2x text-primary d-flex flex-column ">
-          <% if (user.isAdmin) { %> 
-            <a href="/dashboard"><i class="fa fa-cog"></i></a>
-            <% } %>
-            <a href="/profile/user"><i class="fa-solid fa-user"></i></a>
-            <a href="/logout"><i class="fa-solid fa-arrow-right-from-bracket mt-3"></i></a>
-            <a href="/directory"><i class="fa-regular fa-address-book mt-3"></i></a>
-          </div>
-        </div>
-        
-        
-  </section>
-  
-  <!-- Nav Bar Bottom -->
-  <section class="navBarBottom d-flex flex-row justify-content-between align-items-center">
     
-    <!-- App Name Text -->
-    <h2 class=""><a href="/" class="ts">Steeple Peeps</a></h2>
-  
-  <!-- Darkmode Button -->
-    <div class="form-check form-switch">
-      <input 
-      class="form-check-input cB-custom" 
-      type="checkbox" 
-      id="darkMode" 
-      name="darkMode">
-    </div>
-  
-</section>
+    <!-- Scrollable Container -->
+    <section class="ml-8 mr-4 mt-3 overflow-scroll no-scrollbar rounded-lg">
+    
+    <!-- Page Container -->
+    <div class="flex flex-col items-center m-0 min-h-0">
 
-<%- include('partials/imageUpload') -%>
-<%- include('partials/footer') -%>
+      <form class="items-center w-9/12" action="/update/userProfile/<%= displayedUser._id %>?_method=PUT" method="POST">
 
+        <div class="space-y-12">
+
+            <div class="mt-10 grid grid-cols-1 sm:grid-cols-6 gap-x-6 gap-y-8 ">
+              <div class="col-span-full sm:col-span-3">
+                <label for="name" class="block text-sm font-medium leading-6 text-gray-900 dark:text-slate-100">Name</label>
+                <div class="mt-2">
+                  <div class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-blue-700 sm:max-w-md">
+                    <input 
+                      type="text" 
+                      name="name" 
+                      id="name" 
+                      autocomplete="name" 
+                      class="block flex-1 border-0 bg-transparent py-1.5 pl-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 dark:bg-blue-200 rounded-lg"
+                      value="<%= displayedUser.name %>"
+                    >
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-span-full sm:col-span-4 col-start-1">
+                <label for="photo" class="block text-sm font-medium leading-6 text-gray-900 dark:text-slate-100 ">Photo</label>
+                <div class="relative mt-2 flex items-center gap-x-3 bg-gray-100 aspect-square rounded-xl max-w-[500px]">
+                  <img class="img-fluid rounded-xl object-cover aspect-square w-full" src="<%= displayedUser.image %>" alt="Picture Of <%= displayedUser.name %>">
+                  <button type="button" class="fa fa-gear absolute bottom-2 right-2 fa-2x text-blue-700">
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+              <div class="col-span-full sm:col-span-3">
+                <label for="phoneNumber" class="block text-sm font-medium leading-6 text-gray-900 dark:text-slate-100">Phone Number</label>
+                <div class="mt-2">
+                  <input 
+                    id="phoneNumber" 
+                    name="phoneNumber" 
+                    type="text" 
+                    autocomplete="tel" 
+                    class="block w-full rounded-md border-0 py-1.5 pl-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6 dark:bg-blue-200 rounded-lg"
+                    value="<%= displayedUser.phoneNumber %>"
+                  >
+                </div>
+              </div>
+
+              <div class="flex flex-row items-center col-span-full sm:col-span-2 self-end mb-2">
+                <input 
+                  id="txtOk" 
+                  name="txtOk" 
+                  type="checkbox" 
+                  class="hidden form-check-input" 
+                  <% if(displayedUser.txtOk == true) { %>checked<% } %>
+                >
+                <span class="text-sm h-2" id="annual-billing-label">
+                  <span class="font-medium text-base text-gray-900 whitespace-nowrap dark:text-slate-100">Text Message Ok?</span>
+                </span>
+                <!-- Enabled: "bg-blue-700", Not Enabled: "bg-gray-200" -->
+                <button type="button" id="txtOkToggle" class="bg-gray-200 relative inline-flex h-6 w-11 ml-3 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-700 focus:ring-offset-2" role="switch" aria-checked="false">
+                  <span class="sr-only">Text Message Ok?</span>
+                  <!-- Enabled: "translate-x-5", Not Enabled: "translate-x-0" -->
+                  <span id="togbtn" class="translate-x-0 pointer-events-none relative inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out">
+                    <!-- Enabled: "opacity-0 duration-100 ease-out", Not Enabled: "opacity-100 duration-200 ease-in" -->
+                    <span id="togbtnX" id="togbtn" class="opacity-100 duration-200 ease-in absolute inset-0 flex h-full w-full items-center justify-center transition-opacity" aria-hidden="true">
+                      <svg class="h-3 w-3 text-gray-400" fill="none" viewBox="0 0 12 12">
+                        <path d="M4 8l2-2m0 0l2-2M6 6L4 4m2 2l2 2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                      </svg>
+                    </span>
+                    <!-- Enabled: "opacity-100 duration-200 ease-in", Not Enabled: "opacity-0 duration-100 ease-out" -->
+                    <span id="togbtnChk" class="opacity-0 duration-100 ease-out absolute inset-0 flex h-full w-full items-center justify-center transition-opacity" aria-hidden="true">
+                      <svg class="h-3 w-3 text-blue-700" fill="currentColor" viewBox="0 0 12 12">
+                        <path d="M3.707 5.293a1 1 0 00-1.414 1.414l1.414-1.414zM5 8l-.707.707a1 1 0 001.414 0L5 8zm4.707-3.293a1 1 0 00-1.414-1.414l1.414 1.414zm-7.414 2l2 2 1.414-1.414-2-2-1.414 1.414zm3.414 2l4-4-1.414-1.414-4 4 1.414 1.414z" />
+                      </svg>
+                    </span>
+                  </span>
+                </button>
+              </div> 
+
+              <div class="col-span-full sm:col-span-4 col-start-1">
+                <label for="email" class="block text-sm font-medium leading-6 text-gray-900 dark:text-slate-100">Email address</label>
+                <div class="mt-2">
+                  <input 
+                    id="email" 
+                    name="email" 
+                    type="text" 
+                    autocomplete="email" 
+                    class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6 dark:bg-blue-200 rounded-lg"
+                    value="<%= displayedUser.email %>"
+                  >
+                </div>
+              </div>
+
+              <div class="col-span-full sm:col-span-3">
+                <label for="address1" class="block text-sm font-medium leading-6 text-gray-900 dark:text-slate-100">Street Address 1</label>
+                <div class="mt-2">
+                  <input 
+                    type="text" 
+                    name="address1" 
+                    id="address1" 
+                    autocomplete="address-line1" 
+                    class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6 dark:bg-blue-200 rounded-lg"
+                    value="<%= displayedUser.address1 %>"
+                  >
+                </div>
+              </div>
+
+              <div class="col-span-full sm:col-span-3">
+                <label for="address2" class="block text-sm font-medium leading-6 text-gray-900 dark:text-slate-100">Street Address 2</label>
+                <div class="mt-2">
+                  <input 
+                    type="text" 
+                    name="address2" 
+                    id="address2" 
+                    autocomplete="address-line2" 
+                    class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6 dark:bg-blue-200 rounded-lg"
+                    value="<%= displayedUser.address2 %>"
+                  >
+                </div>
+              </div>
+
+              <div class="col-span-full sm:col-span-3 col-span-full">
+                <label for="city" class="block text-sm font-medium leading-6 text-gray-900 dark:text-slate-100">City</label>
+                <div class="mt-2">
+                  <input 
+                    type="text" 
+                    name="city" 
+                    id="city" 
+                    autocomplete="address-level2" 
+                    class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6 dark:bg-blue-200 rounded-lg"
+                    value="<%= displayedUser.city %>"
+                  >
+                </div>
+              </div>
+
+              <div class="col-span-full sm:col-span-3 col-start-1">
+                <label for="province" class="block text-sm font-medium leading-6 text-gray-900 dark:text-slate-100">State / Province</label>
+                <div class="mt-2">
+                  <input 
+                    type="text" 
+                    name="province" 
+                    id="province" 
+                    autocomplete="address-level1" 
+                    class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6 dark:bg-blue-200 rounded-lg"
+                    value="<%= displayedUser.province %>"
+                  >
+                </div>
+              </div>
+
+              <div class="col-span-full sm:col-span-3 col-start-1">
+                <label for="postCode" class="block text-sm font-medium leading-6 text-gray-900 dark:text-slate-100">ZIP / Postal code</label>
+                <div class="mt-2">
+                  <input 
+                      type="text" 
+                      name="postCode" 
+                      id="postCode" 
+                      autocomplete="postal-code" 
+                      class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6 dark:bg-blue-200 rounded-lg"
+                      value="<%= displayedUser.postCode %>"
+                    >
+                </div>
+              </div>
+
+              <div class="col-span-full sm:col-span-3 col-start-1">
+                <label for="country" class="block text-sm font-medium leading-6 text-gray-900 dark:text-slate-100">Country</label>
+                <div class="mt-2">
+                  <input 
+                    type="text" 
+                    name="country" 
+                    id="country" 
+                    autocomplete="country" 
+                    class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6 dark:bg-blue-200 rounded-lg"
+                    value="<%= displayedUser.country %>"
+                  >
+                </div>
+              </div>
+
+            
+              <div class="col-span-full">
+                <label for="about" class="block text-sm font-medium leading-6 text-gray-900 dark:text-slate-100">Bio</label>
+                <div class="mt-2">
+                  <textarea 
+                    id="bioForm" 
+                    name="bioForm" 
+                    rows="3" 
+                    class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6 dark:bg-blue-200 rounded-lg"
+                    ><%= displayedUser.bio %></textarea>
+                </div>
+                <p class="mt-3 text-sm leading-6 text-gray-600 dark:text-gray-300">Write a few sentences about yourself.</p>
+              </div>
+
+            </div>   
+
+            <!-- Help Tags -->
+            <div class="mt-6 grid grid-cols-1 sm:grid-cols-4 gap-x-4 gap-y-4 ">
+              
+              
+              <div class="col-span-2">
+                <label for="name" class="grid-cols-full block text-sm font-medium leading-6 text-gray-900 whitespace-nowrap dark:text-slate-100">How would you like to help others?</label>
+                <div class="mt-2">
+                  <div class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-blue-700 sm:max-w-md">
+                    <input 
+                      type="text" 
+                      name="iCanHelpWith" 
+                      id="iCanHelpWith" 
+                      autocomplete="iCanHelpWith" 
+                      class="block flex-1 border-0 bg-transparent py-1.5 pl-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 dark:bg-blue-200 rounded-lg" 
+                    >
+                  </div>
+                </div>
+              </div>
+              
+              <button type="button" href="" class="rounded-md bg-blue-300 px-2.5 py-1.5 text-sm sm:leading-6 font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 self-end">Add</button>
+            </div>
+        </div>
+
+            <div class="flex flex-row gap-4 flex-wrap mt-4 mb-8">
+              <% if(displayedUser.iCanHelpWith) { displayedUser.iCanHelpWith.forEach(el => { %>
+                <div class="inline-block bg-orange-200 px-3 py-2 text-base text-gray-900 rounded-lg">
+                  <%- el -%>
+                </div>
+              <%})}%>
+            </div>
+
+            <!-- Update Password -->
+            <% if(user.isAdmin) { %>
+              <a type="button" href="/update/<%= displayedUser._id %>" class="rounded-md bg-blue-300 px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">Update Password</a>
+            <% }else{ %>
+              <a type="button" href="/update" class="rounded-md bg-blue-300 px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">Update Password</a>
+            <% } %>
+
+        
+
+        <div class="mt-6 flex items-center justify-end gap-x-6">
+
+            <% if(user.isAdmin) { %>
+              <a href="/dashboard" class="text-sm font-semibold leading-6 text-gray-900 dark:text-gray-300">Cancel</a>
+            <% }else{ %>
+              <a href="/directory" class="text-sm font-semibold leading-6 text-gray-900 dark:text-gray-300">Cancel</a>
+            <% } %>
+
+          <button type="submit" class="rounded-md bg-blue-700 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700">Save</button>
+        </div>
+      </form>
+
+        </section>
+      </div>
+  </div>
+
+<%- include('partials/btmLeftTxt') -%>
 </main>
+<%- include('partials/nav') -%>
+<%- include('partials/profileCardModal') -%>
+    
+<script type="text/javascript" src="/js/txtOkToggle.js"></script>
+<%- include('partials/darkMode') -%>
+<%- include('partials/footer') -%>
