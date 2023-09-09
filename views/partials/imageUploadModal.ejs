@@ -1,0 +1,55 @@
+<div class="relative z-50" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+
+  <div id="picUploadModalBg" class="hidden hide fixed inset-0 bg-gray-500 opacity-0 transition-opacity duration-200 w-screen h-screen"></div>
+
+  <div class="hidden hide fixed inset-0 z-10 overflow-y-auto no-scrollbar m-4">
+    <div class="hidden hide flex flex-row justify-center w-full h-full items-center">
+
+      <div id="picUploadCont"  class="hidden hide relative overflow-scroll sm:overflow-hidden no-scrollbar rounded-2xl bg-white dark:bg-slate-700 text-left shadow-xl sm:min-w-[300px] opacity-0 transition-opacity duration-300">
+
+
+        <div class="flex h-full flex-col justify-center items-center p-6 lg:px-8">
+          
+          <h1 class="text-center text-2xl font-bold leading-9 tracking-tight text-gray-900  dark:text-slate-100 mb-6">Profile Picture Upload</h1>
+        
+          <div class="bg-blue-200 w-11/12 aspect-square rounded-xl max-w-[500px]">
+            <img class="hidden object-cover aspect-square w-full w-full rounded-xl" id="uploadImagePreview" src="" alt="">
+          </div>
+          
+          <form 
+            action="/update/profilePicture/<%= displayedUser._id %>" 
+            enctype="multipart/form-data" 
+            class="flex flex-col items-center text-center" 
+            method="POST"
+          >
+
+            <label for="imageUpload" class="inline-block rounded-xl p-3 cursor-pointer bg-blue-200 mt-6">
+              <i class="fa fa-cloud-upload"></i> Choose File
+            </label>
+
+            <input 
+              type="file" 
+              class="hidden text-base text-gray-900 whitespace-nowrap dark:text-slate-100 mt-6" 
+              id="imageUpload" 
+              name="file" 
+              accept="image/*" 
+              onchange="loadFile(event)" 
+              required
+            >
+
+            <button 
+              type="submit" 
+              class="flex w-full justify-center rounded-md bg-blue-700 mt-6 px-3 py-2.5 text-base font-semibold leading-6 text-white shadow-sm hover:bg-blue-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700"
+            >
+              Upload
+            </button>
+            
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+

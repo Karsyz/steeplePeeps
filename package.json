@@ -4,7 +4,7 @@
   "description": "Church Directory App",
   "main": "server.js",
   "scripts": {
-    "dev": "nodemon server.js",
+    "dev": "concurrently --kill-others \"nodemon server.js\" \"npx tailwindcss -i ./src/css/style.css -o ./public/css/style.css --watch\" ",
     "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -38,6 +38,7 @@
   },
   "devDependencies": {
     "@tailwindcss/forms": "^0.5.6",
+    "concurrently": "^8.2.1",
     "tailwindcss": "^3.3.3"
   }
 }
