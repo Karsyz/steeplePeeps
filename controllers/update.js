@@ -5,10 +5,11 @@ const User = require("../models/User");
 const cloudinary = require("../middleware/cloudinary");
 const mongoose = require('mongoose');
 const { restart } = require("nodemon");
+const { useRevalidator } = require("react-router-dom");
 
 // Go To Password Update Page
 exports.updatePage = async (req, res) => {
-  console.log(req.user.isAdmin)
+  // console.log(req.user.isAdmin)
   if(req.user.isAdmin) {
     const user = await User.findById(req.params.id);
     // pass in both the currently logged in user and the user from req.params.id
@@ -23,22 +24,6 @@ exports.updatePage = async (req, res) => {
 exports.updatePassword = async (req, res, next) => {
    const validationErrors = [];
 
-  // Validate new password length
-  if (!validator.isLength(req.body.newPassword, { min: 8 }))
-    validationErrors.push({
-      msg: "Password must be at least 8 characters long",
-    });
-    
-  // Confirm new password fields match
-  if (req.body.newPassword !== req.body.confirmNewPassword)
-    validationErrors.push({ msg: "Passwords do not match" });
-  
-  // Display errors if any and redirect
-  if (validationErrors.length) {
-    req.flash("errors", validationErrors);
-    return res.redirect("/update");
-  };
-
   // declare user
   let user;
   if(req.user.isAdmin) {
@@ -51,6 +36,36 @@ exports.updatePassword = async (req, res, next) => {
   if (!user) {
     return res.status(400).sent('Cannot find user')
   }
+
+  // Validate existing password
+  const existPass = await bcrypt.compare(req.body.existingPassword, user.password)
+  if (!existPass)
+    validationErrors.push({
+      type: 'exPass',
+      msg: "Existing password is not correct",
+    });
+    
+
+  // Validate new password length
+  if (!validator.isLength(req.body.newPassword, { min: 8 }))
+    validationErrors.push({
+      type: 'passLength',
+      msg: "Password must be at least 8 characters long",
+    });
+    
+  // Confirm new password fields match
+  if (req.body.newPassword !== req.body.confirmNewPassword)
+    validationErrors.push({ 
+      type: 'passMatch',
+      msg: "Passwords do not match" 
+    });
+  
+  // Display errors if any and redirect
+  if (validationErrors.length) {
+    req.flash("errors", validationErrors);
+    console.log(req.flash)
+    return res.redirect(`/update/${req.params.id}`);
+  };
 
   try {
       bcrypt.hash(req.body.newPassword, 10, async function(err, hash) {
@@ -77,10 +92,36 @@ exports.updatePassword = async (req, res, next) => {
   }, 1000)
 }
 
+
+
 // Update User Information
 exports.putUpdateUserProfile = async (req, res, next) => {
+  const validationErrors = [];
 
-  const user = await User.findOne({ _id: req.params.id })
+  // declare user
+  let user
+  if(req.user.isAdmin) {
+    user = await User.findOne({_id: req.params.id})
+  }else {
+    user = req.user
+  }
+
+  // Validate user name does not exist already
+  const existName = await User.findOne({name: req.body.name})
+  console.log(existName)
+  if (existName && existName !== user.name )
+    validationErrors.push({
+      type: 'exUserName',
+      msg: "Existing Name already exists",
+    });
+
+  // Display errors if any and redirect
+  if (validationErrors.length) {
+    req.flash("errors", validationErrors);
+    console.log(req.flash)
+    return res.redirect(`/profile/user/${req.params.id}`);
+  };
+  
   
   //covert txtOk string to boolean
   let txtOk = false

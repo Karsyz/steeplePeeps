@@ -34,6 +34,16 @@
                       class="block flex-1 border-0 bg-transparent py-1.5 pl-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 dark:bg-blue-200 rounded-lg"
                       value="<%= displayedUser.name %>"
                     >
+                    <% if (locals.messages.errors) { %>
+                      <% messages.errors.forEach( el => { %>
+                        <% if (el.type === 'exUserName') { %>
+                          <div class="mt-2 self-end">
+                            <span class="text-sm text-red-500 font-semibold w-1/2 self-end"><%= el.msg %></span>
+                            <a href="/profile/user/<%= el.id %>" class="inline text-sm text-blue-400 font-base w-1/2 self-end">Existing Profile</a>
+                          </div>
+                          <% } %>
+                      <% }) %>    
+                    <% } %>
                   </div>
                 </div>
               </div>

@@ -182,15 +182,31 @@ exports.createUser = async (req, res, next) => {
   const genPass = generator.generate({length: 12, numbers: true, symbols: true})
   const randomAvatar = generator.generate({length: 16})
 
-  console.log(genPass)
+  // check if email already exists in database
+  // if exists return a link to the associated profile
+  const emailExists = User.findOne({ email: req.body.email })
+  if (emailExists)
+    validationErrors.push({ 
+      type: 'emailExists',
+      msg: 'That email already exists',
+      id: emailExists.id
+    });
 
+  
   if (!validator.isEmail(req.body.email))
-    validationErrors.push({ msg: "Please enter a valid email address." });
+    validationErrors.push({ 
+      type: 'validEmail',
+      msg: "Please enter a valid email address." 
+    });
+
+
 
   if (validationErrors.length) {
     req.flash("errors", validationErrors);
-    return res.redirect("../buildAChurch");
+    return res.redirect("/dashboard");
   }
+
+  // sanitize email
   req.body.email = validator.normalizeEmail(req.body.email, {
     gmail_remove_dots: false,
   });
@@ -212,7 +228,7 @@ exports.createUser = async (req, res, next) => {
     postCode: "Post Code",
     image: `https://robohash.org/${randomAvatar}`,
     cloudinaryId: "",
-    bio: "Example: Retired Teacher, love to golf, and I'm here to help where and when I can.",
+    bio: "I'm a retired teacher, I love to golf, and I'm here to help where and when I can.",
     iCanHelpWith: ['Prayer Group', 'Golf', 'Carpentry', 'Landscaping'],
     members: [],
     numOfSessions: 0,
