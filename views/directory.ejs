@@ -1,29 +1,46 @@
 <%- include('partials/head') -%>
-  <body class="relative flex flex-row justify-between bg-slate-20 dark:bg-slate-800">
-    <main class="flex flex-col w-full h-screen">
-      <%- include('partials/header') -%>
+  <body class="relative flex flex-row justify-between bg-slate-20 dark:bg-slate-800 z-10">
+    <main class="flex flex-col w-full h-screen overflow-hidden"> 
 
-    <div class="flex flex-col grow m-0 w-full bg-red-500 gap-4">
-      <div class="w-full h-24 bg-violet-500"></div>
-    <div class="w-24 h-24 bg-blue-500"></div>
-    </div>
-
-
+    <!-- Page Heading -->
     
-      <!-- <h1 class="ts ms-2 pt-2"><%=church.name%></h1> -->
-  
-  <!-- <section class="row row-gap-3 col-gap-3"> -->
-    <!-- <% if (directory) { directory.forEach( el => { %>  -->
-      <!-- <div class=""> -->
-        <!-- <img src="<%=el.image%>" alt="Picture of <%=el.name%>" class="object-fit-cover" id="<%=el._id%>"> -->
-        <!-- </div>     -->
-        <!-- <% })} %> -->
-        <!-- </section> -->
+    <div class="pl-8 pr-4 mb-4 sm:flex sm:items-center flex-row ">
+      <div class="sm:flex-auto">
+        <div class="flex flex-col items-start flex-wrap">
+            <h1 class="text-2xl mt-5 font-semibold leading-6 text-gray-900 dark:text-slate-100"><%=church.name%></h1>
+            <p class="mt-2 text-md font-semibold text-gray-700 dark:text-slate-300">Member Directory</p>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Scrollable Container -->
+    <section class="ml-8 mr-4 mt-3 overflow-scroll no-scrollbar rounded-lg grow">
+    
+      <!-- Page Container -->
+      <div class="flex flex-col items-center m-0 min-h-0">
+
+        <div class="grid grid-rows-full grid-cols-full sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5  gap-4 m-2 sm:mx-10 max-w-[1800px]"> 
+          <% if (directory) { directory.forEach( el => { %> 
+
+            <div class="relative col-span-1 aspect-square rounded-xl max-w-[500px]">
+              <img class="rounded-xl object-cover w-full bg-gray-300" src="<%=el.image%>" alt="Picture Of <%=el.name%> z-10">
+              <div id="<%=el._id%>" class="imgC absolute left-0 top-0 w-full h-full bg-slate-900/30 z-50 opacity-0 hover:opacity-100 hover:border-2 hover:border-slate-800 dark:hover:border-slate-100 rounded-xl cursor-pointer">
+                <span class="absolute bottom-7 right-3 text-md font-semibold text-slate-100 pointer-events-none"><%=el.name%></span>
+                <span class="absolute bottom-2 right-3 text-sm font-semibold text-slate-100 pointer-events-none"><%=el.phoneNumber%></span>
+              </div>
+            </div>
+            
+          <% })} %> 
+        </div>
+
+    </div>
         
-        <!-- <%- include('partials/profileCard') -%> -->
-     
-        
-  </main>
+      
+    </section>
+
+
+    <%- include('partials/btmLeftTxt') -%>
+</main>
 <%- include('partials/nav') -%>
 <%- include('partials/profileCardModal') -%>
 <%- include('partials/darkMode') -%>

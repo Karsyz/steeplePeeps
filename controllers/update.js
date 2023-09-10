@@ -107,9 +107,9 @@ exports.putUpdateUserProfile = async (req, res, next) => {
   }
 
   // Validate user name does not exist already
-  const existName = await User.findOne({name: req.body.name})
-  console.log(existName)
-  if (existName && existName !== user.name )
+  const existingUser = await User.findOne({name: req.body.name})
+  console.log(existingUser && existingUser.name !== user.name)
+  if (existingUser && existingUser.name !== user.name )
     validationErrors.push({
       type: 'exUserName',
       msg: "Existing Name already exists",

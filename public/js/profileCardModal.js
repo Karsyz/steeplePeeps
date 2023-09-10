@@ -23,14 +23,14 @@ document.addEventListener('keydown', function(evt) {
 async function activateCard(evt) {
   if (evt.target !== this) return // this ensures child elements do not toggle 
   const userId = evt.target.id
-  await getCardInfo(userId)
+  await getCardInfo(userId) 
   // wait for info to populate in dom
+  hide.forEach(el => {
+    el.classList.remove('hidden')} ) 
+
   setTimeout(function(){
-    hide.forEach(el => {el.classList.remove('hidden')} ) 
-    profileCardModalBg.classList.remove('opacity-0')
-    profileCardModalBg.classList.add('opacity-100')
-    profileCard.classList.remove('opacity-0')
-    profileCard.classList.add('opacity-100')
+    profileCardModalBg.style.opacity = 1
+    profileCard.style.opacity = 1
   }, 500)
 }
 
@@ -41,25 +41,26 @@ function deactivateCard(evt) {
 
 function hideAndClearData() {
 
-  hide.forEach(el => {el.classList.add('hidden')} ) 
-  profileCardModalBg.classList.remove('opacity-100')
-  profileCardModalBg.classList.add('opacity-0')
-  profileCard.classList.remove('opacity-100')
-  profileCard.classList.add('opacity-0')
-
-  document.getElementById('cardImage').src = ""
-  document.getElementById('cardImage').alt = ""
-  document.getElementById('cardName').textContent = ""
-  document.getElementById('cardEmail').textContent = ""
-  document.getElementById('cardPhone').textContent = ""
-  document.getElementById('cardPhoneLink').href = ""
-  document.getElementById('cardAddress1').textContent = ""
-  document.getElementById('cardAddress2').textContent = ""
-  document.getElementById('cardCity').textContent = ""
-  document.getElementById('cardCountry').textContent = ""
-  document.getElementById('cardPostalCode').textContent = ""
-  document.getElementById('cardBio').textContent = ""
+  profileCardModalBg.style.opacity = ''
+  profileCard.style.opacity = ''
   
+  setTimeout(function(){
+    hide.forEach(el => {el.classList.add('hidden')} ) 
+
+    document.getElementById('cardImage').src = ""
+    document.getElementById('cardImage').alt = ""
+    document.getElementById('cardName').textContent = ""
+    document.getElementById('cardEmail').textContent = ""
+    document.getElementById('cardPhone').textContent = ""
+    document.getElementById('cardPhoneLink').href = ""
+    document.getElementById('cardAddress1').textContent = ""
+    document.getElementById('cardAddress2').textContent = ""
+    document.getElementById('cardCity').textContent = ""
+    document.getElementById('cardCountry').textContent = ""
+    document.getElementById('cardPostalCode').textContent = ""
+    document.getElementById('cardBio').textContent = ""
+  }, 200)
+
   // remove all the tags
   document.querySelectorAll('#cardICanHelpWith > li').forEach(e => e.remove())
 }
