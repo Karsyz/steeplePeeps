@@ -8,6 +8,7 @@ const methodOverride = require("method-override");
 const flash = require("express-flash");
 const logger = require("morgan");
 // const connectDB = require("./config/database");
+const authRoutes = require("./routes/auth");
 const mainRoutes = require("./routes/main");
 const updateRoutes = require("./routes/update");
 const profileRoutes = require("./routes/profile");
@@ -55,7 +56,7 @@ app.use(methodOverride("_method"));
 
 // Setup Sessions - stored in MongoDB
 app.use(session({
-    secret: "keyboard cat",
+    secret: "keyboard catzzz",
     resave: false,
     saveUninitialized: false,
     store: new MongoStore({ mongooseConnection: mongoose.connection }),
@@ -73,6 +74,7 @@ app.use(flash());
 app.use("/", mainRoutes);
 app.use("/profile", profileRoutes);
 app.use("/update", updateRoutes);
+app.use("/auth", authRoutes);
 
 //Server Running
 // app.listen(process.env.PORT, () => {

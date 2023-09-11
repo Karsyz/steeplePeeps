@@ -6,7 +6,7 @@ const UserSchema = new mongoose.Schema({
   name: { 
     type: String, 
     unique: false,
-    required: true,
+    required: false,
   },
   email: { 
     type: String, 
@@ -15,7 +15,7 @@ const UserSchema = new mongoose.Schema({
   },
   password: {
     type: String,
-    required: true,
+    required: false,
   },
   church: { 
     type: Array, 
@@ -27,67 +27,79 @@ const UserSchema = new mongoose.Schema({
   },
   isAdmin: {
     type: Boolean,
-    require: true,
+    required: true,
   },
   phoneNumber: {
     type: String,
-    require: true,
+    required: false,
   },
   txtOk: {
     type: Boolean,
-    require: true,
+    required: false,
   },
   address1: {
     type: String,
-    require: true,
+    required: false,
   },
   address2: {
     type: String,
-    require: true,
+    required: false,
   },
   city: {
     type: String,
-    require: true,
+    required: false,
   },
   province: {
     type: String,
-    require: true,
+    required: false,
   },
   country: {
     type: String,
-    require: true,
+    required: false,
   },
   postCode: {
     type: String,
-    require: true,
+    required: false,
   },
   image: {
     type: String,
-    require: true,
+    required: false,
   },
   cloudinaryId: {
     type: String,
-    require: true,
+    required: false,
   },
   bio: {
     type: String,
-    require: true,
+    required: false,
   },
   iCanHelpWith: {
     type: Array,
-    require: true,
+    required: false,
   },
   members: {
     type: Array,
-    require: true,
+    required: false,
   },
   numOfSessions: {
     type: Number,
-    require: true,
+    required: false,
   },
   numOfEmailsSent: {
     type: Number,
-    require: true,
+    required: false,
+  },
+  googleId: {
+    type: String,
+    required: false,
+  },
+  twitterId: {
+    type: String,
+    required: false,
+  },
+  magicLinkHash: {
+    type: String,
+    required: false,
   },
   // example: { 
   //   type: mongoose.ObjectId, 

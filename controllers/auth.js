@@ -69,6 +69,43 @@ exports.postLogin = async (req, res, next) => {
   
 };
 
+// Login with Google
+exports.googleLoginCallback = async (req, res, next) => {
+  const user = User.findOne({email: req.email})
+
+  res.redirect('/directory')
+
+
+    // console.log(profile)
+
+    // const user = {
+    //   googleId: profile.id,
+    //   name: profile.name.givenName + ' ' + profile.name.familyName,
+    //   email: profile.emails[0].value,
+    //   image: profile.photos[0].value || `https://robohash.org/${randomAvatar}`,
+    // }
+
+
+
+      // try {
+    //   await User.findOrCreate({ googleId: profile.id }, (err, user) => {
+    //     return cb(err, user);
+    //   });
+    // } catch (err) {
+    //   console.log(err)
+    // }
+
+};
+
+// Login with Twitter
+exports.googleLogin = async (req, res, next) => {
+
+
+  
+};
+
+
+
 
 // Logout of Server
 exports.logout = (req, res) => {
@@ -179,27 +216,25 @@ exports.buildAChurch = (req, res, next) => {
 exports.createUser = async (req, res, next) => {
 
   const validationErrors = [];
-  const genPass = generator.generate({length: 12, numbers: true, symbols: true})
-  const randomAvatar = generator.generate({length: 16})
+  // const genPass = generator.generate({length: 12, numbers: true, symbols: true})
+  const rand = generator.generate({length: 16})
+
 
   // check if email already exists in database
   // if exists return a link to the associated profile
-  const emailExists = User.findOne({ email: req.body.email })
-  if (emailExists)
+  const emailExists = await User.findOne({ email: req.body.email })
+  if (emailExists !== null)
     validationErrors.push({ 
       type: 'emailExists',
       msg: 'That email already exists',
       id: emailExists.id
     });
 
-  
   if (!validator.isEmail(req.body.email))
     validationErrors.push({ 
       type: 'validEmail',
       msg: "Please enter a valid email address." 
-    });
-
-
+  });
 
   if (validationErrors.length) {
     req.flash("errors", validationErrors);
@@ -212,85 +247,78 @@ exports.createUser = async (req, res, next) => {
   });
 
   const user = new User({
-    name: req.body.name ? req.body.name : 'user' + Math.floor( Math.random() * 10000000),
+    name: 'user' + rand.toString(),
     email: req.body.email,
-    password: genPass,
+    password: "asdfasdf",
     isAdmin: false,
-    church: [req.user.id],
-    // Placeholder Values
-    phoneNumber: "555 515 2212",
+    church: req.user.church,
+    phoneNumber: "",
     txtOk: true,
-    address1: "Address 1",
-    address2: "Address 2",
-    city: "City",
-    province: "Province",
-    country: "Country",
-    postCode: "Post Code",
-    image: `https://robohash.org/${randomAvatar}`,
+    address1: "",
+    address2: "",
+    city: "",
+    province: "",
+    country: "",
+    postCode: "",
+    image: `https://robohash.org/${rand}`,
     cloudinaryId: "",
-    bio: "I'm a retired teacher, I love to golf, and I'm here to help where and when I can.",
-    iCanHelpWith: ['Prayer Group', 'Golf', 'Carpentry', 'Landscaping'],
+    bio: "",
+    iCanHelpWith: [],
     members: [],
     numOfSessions: 0,
     numOfEmailsSent: 0,
+    googleId: "",
+    twitterId: "",
+    magicLinkHash: "",
   });
-
-  User.findOne(
-    { $or: [{ email: req.body.email }, { name: req.body.name }] },
-    (err, existingUser) => {
-      if (err) {
-        return next(err);
-      }
-      if (existingUser) {
-        req.flash("errors", {
-          msg: "Account with that email address or name already exists.",
-        });
-        return res.redirect("../dashboard")
-      }
-    }
-  );
-
-  user.save((err) => {
-    if (err) {
-      return next(err);
-    }
-  });
-
-
-  // Send login email to user
-  try {
   
-    // create reusable transporter object using the default SMTP transport
-    let transporter = nodemailer.createTransport({
-      service: 'gmail',
-      host: 'smtp.gmail.com',
-      auth: {
-        user: process.env.SERVER_EMAIL, 
-        pass: process.env.SERVER_EMAIL_PSWD, 
-      },
+  const isSaved =  await user.save()
+  console.log(isSaved)
+  if (isSaved) {
+    return res.redirect("/dashboard")
+  }
+  if (existingUser) {
+    req.flash("errors", {
+      msg: "Account was not created",
     });
+    return res.redirect("/dashboard")
+  }
 
-    // send mail with defined transport object
-    let info = await transporter.sendMail({
-      from: '"Karsy" <steeplepeeps100@gmail.com>', // sender address
-      to: user.email, // list of receivers
-      subject: `Welcome To the ${req.user.name} Member Directory`, // Subject line
-      text: `Welcome To the ${req.user.name} Member Directory`, // plain text body
-      html: `<h1>
-              Welcome to the ${req.user.name} Member Directory
-            </h1>
-            <p>Login to your account at <a href="https://steeplepeeps.cyclic.app/">Steeple Peeps</a>
-            </p>
-            <p>Your password is ${genPass}</p>`, // html body
-    });
 
-    console.log("Message sent: %s", info.messageId);
-    res.redirect("/dashboard");
+  // // Send login email to user
+  // try {
+  
+  //   // create reusable transporter object using the default SMTP transport
+  //   let transporter = nodemailer.createTransport({
+  //     service: 'gmail',
+  //     host: 'smtp.gmail.com',
+  //     auth: {
+  //       user: process.env.SERVER_EMAIL, 
+  //       pass: process.env.SERVER_EMAIL_PSWD, 
+  //     },
+  //   });
 
-    } catch (err) {
-      console.log(err)
-      res.redirect("/dashboard");
-    }
+  //   // send mail with defined transport object
+  //   let info = await transporter.sendMail({
+  //     from: '"Karsy" <steeplepeeps100@gmail.com>', // sender address
+  //     to: user.email, // list of receivers
+  //     subject: `Welcome To the ${req.user.name} Member Directory`, // Subject line
+  //     text: `Welcome To the ${req.user.name} Member Directory`, // plain text body
+  //     html: `<h1>
+  //             Welcome to the ${req.user.name} Member Directory
+  //           </h1>
+  //           <p>Login to your account at <a href="https://steeplepeeps.cyclic.app/">Steeple Peeps</a>
+  //           </p>
+  //           <p>Your password is ${genPass}</p>`, // html body
+  //   });
+
+  //   console.log("Message sent: %s", info.messageId);
+  //   res.redirect("/dashboard");
+
+  //   } catch (err) {
+  //     console.log(err)
+  //     res.redirect("/dashboard");
+  //   }
 
 };
 

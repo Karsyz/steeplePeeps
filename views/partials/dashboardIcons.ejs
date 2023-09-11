@@ -26,9 +26,11 @@
             <i class=" text-xl fa fa-gear"></i></a>
     </li>
 
+    
     <li class="text-blue-700 hover:text-blue-400 cursor-pointer">
-        <a href="<%= el.phoneNumber.replace(/\s/g, '') %>">
+        <a href="<%= el.phoneNumber && el.phoneNumber.replace(/\s/g, '') %>">
             <i class="text-xl fa fa-phone"></i></a>
     </li>
+
 
 </ul>
