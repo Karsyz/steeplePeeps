@@ -28,10 +28,15 @@ exports.postLogin = async (req, res, next) => {
   const validationErrors = [];
   
   if (!validator.isEmail(req.body.email))
-    validationErrors.push({ msg: "Please enter a valid email address." });
+    validationErrors.push({ 
+    type: 'noEmail',
+    msg: "Please enter a valid email address." 
+  });
 
   if (validator.isEmpty(req.body.password))
-    validationErrors.push({ msg: "Password cannot be blank." });
+    validationErrors.push({ 
+    msg: "Password cannot be blank." 
+  });
 
   if (validationErrors.length) {
     req.flash("errors", validationErrors);
@@ -69,40 +74,8 @@ exports.postLogin = async (req, res, next) => {
   
 };
 
-// Login with Google
-exports.googleLoginCallback = async (req, res, next) => {
-  const user = User.findOne({email: req.email})
-
-  res.redirect('/directory')
 
 
-    // console.log(profile)
-
-    // const user = {
-    //   googleId: profile.id,
-    //   name: profile.name.givenName + ' ' + profile.name.familyName,
-    //   email: profile.emails[0].value,
-    //   image: profile.photos[0].value || `https://robohash.org/${randomAvatar}`,
-    // }
-
-
-
-      // try {
-    //   await User.findOrCreate({ googleId: profile.id }, (err, user) => {
-    //     return cb(err, user);
-    //   });
-    // } catch (err) {
-    //   console.log(err)
-    // }
-
-};
-
-// Login with Twitter
-exports.googleLogin = async (req, res, next) => {
-
-
-  
-};
 
 
 

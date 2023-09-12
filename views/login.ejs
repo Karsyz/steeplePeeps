@@ -25,6 +25,13 @@
                   required 
                 >
               </div>
+              <% if (locals.messages.errors) { %>
+                <% messages.errors.forEach( el => { %>
+                  <% if (el.type === 'noEmail') { %>
+                    <div class="text-red-600 font-bold w-1/2 self-end"><%= el.msg %></div>
+                    <% } %>
+                <% }) %>    
+              <% } %>
             </div>
 
             <div>
@@ -40,22 +47,14 @@
                 required 
               >
               </div>
-            </div>
-
-            <!-- Error Messaging -->
-            <% if (locals.messages.errors) { %> 
-              <% messages.errors.forEach( el => { %>
-                <div class="text-gray-900 dark:text-slate-100 bg-red-500">
-                <%= el.msg %></div>
-                <% }) %> 
-              <% } %> 
-              
-              <% if (locals.messages.info) { %> 
-                  <% messages.info.forEach( el => { %>
-                    <div class="text-gray-900 dark:text-slate-100 bg-yellow-200">
-                    <%= el.msg %></div>
-                <% }) %> 
+              <% if (locals.messages.errors) { %>
+                <% messages.errors.forEach( el => { %>
+                  <% if (el.type === 'passMatch') { %>
+                    <div class="text-red-600 font-bold w-1/2 self-end"><%= el.msg %></div>
+                    <% } %>
+                <% }) %>    
               <% } %>
+            </div>
 
             <div class="flex items-center justify-between">
               <div class="flex items-center">
@@ -107,6 +106,13 @@
                 <span class="text-sm font-semibold leading-6 sr-only">X</span>
               </a>
             </div>
+            <% if (locals.messages.errors) { %>
+              <% messages.errors.forEach( el => { %>
+
+                  <div class="text-red-600 font-bold w-1/2 self-end"><%= el.msg %></div>
+
+              <% }) %>    
+            <% } %>
           </div>
         </div>
 

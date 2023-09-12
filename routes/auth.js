@@ -15,7 +15,11 @@ router.get("/google", passport.authenticate('google', {scope: ['profile', 'email
 
 // @desc    Google auth callback
 // @route   GET /auth/google/callback
-router.get("/google/callback", passport.authenticate('google', {failureRedirect: "/login"}), authController.googleLoginCallback)
+router.get("/google/callback", passport.authenticate('google', {
+  successRedirect: '/directory',
+  failureRedirect: '/',
+  failureMessage: true,
+}))
 
 
 

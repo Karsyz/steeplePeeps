@@ -3,6 +3,7 @@ const GoogleStrategy = require('passport-google-oauth20').Strategy
 const TwitterStrategy = require('passport-twitter').Strategy
 const mongoose = require("mongoose");
 const User = require("../models/User");
+const generator = require('generate-password')
 
 module.exports = function (passport) {
 
@@ -38,48 +39,50 @@ module.exports = function (passport) {
   passport.use(new GoogleStrategy({
     clientID: process.env.GOOGLE_CLIENT_ID,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    callbackURL: '/auth/google/callback'
-  },
-  
-  async (accessToken, refreshToken, profile, cb) => {
-    // console.log(profile)
+    callbackURL: '/auth/google/callback',
+    passReqToCallback: true,
+  }, async (request, accessToken, refreshToken, profile, done) => {
+
+    const rand = generator.generate({length: 16})
+
+    const newUser = new User({
+      name: profile.displayName,
+      email: profile.emails[0].value,
+      password: "asdfasdf",
+      isAdmin: false,
+      church: [],
+      phoneNumber: "",
+      txtOk: true,
+      address1: "",
+      address2: "",
+      city: "",
+      province: "",
+      country: "",
+      postCode: "",
+      image: profile.photos[0].value || `https://robohash.org/${rand}`,
+      cloudinaryId: "",
+      bio: "",
+      iCanHelpWith: [],
+      members: [],
+      numOfSessions: 0,
+      numOfEmailsSent: 0,
+      googleId: profile.id,
+      twitterId: "",
+      magicLinkHash: "",
+    });
+    
     try {
-      await User.findOne({ email: profile.emails[0].value }, async (err, user) => {
-        
-        if (!user) {
-          return done(err);
-        }
-
-
-        if(!user.googleId) {
-          user.googleId = profile.id
-          await user.save()
-        }
-
-        return cb(err, user);
-      })
+      let user = await User.findOne({ email: profile.emails[0].value })
+      if(user) {
+        done(null, user)
+      } else {
+        user = await User.create(newUser)
+        done(null, user)
+      }
     } catch (error) {
       console.log(error)
     }
-
   }))
-
-
-
-  // passport.use(new TwitterStrategy({
-  //   clientID: process.env.GOOGLE_CLIENT_ID,
-  //   clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-  //   callbackURL: '/auth/google/callback'
-  // },
-  // async (accessToken, refreshToken, profile, cb) => {
-  //   console.log(profile)
-  //   // User.findOrCreate({ googleId: profile.id }, function (err, user) {
-  //   //   return cb(err, user);
-  //   // });
-  // }))
-
-
-
 
   passport.serializeUser((user, done) => {
     done(null, user.id);
