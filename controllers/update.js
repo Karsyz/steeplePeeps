@@ -63,7 +63,6 @@ exports.updatePassword = async (req, res, next) => {
   // Display errors if any and redirect
   if (validationErrors.length) {
     req.flash("errors", validationErrors);
-    console.log(req.flash)
     return res.redirect(`/update/${req.params.id}`);
   };
 
@@ -108,7 +107,7 @@ exports.putUpdateUserProfile = async (req, res, next) => {
 
   // Validate user name does not exist already
   const existingUser = await User.findOne({name: req.body.name})
-  console.log(existingUser && existingUser.name !== user.name)
+
   if (existingUser && existingUser.name !== user.name )
     validationErrors.push({
       type: 'exUserName',
@@ -118,7 +117,6 @@ exports.putUpdateUserProfile = async (req, res, next) => {
   // Display errors if any and redirect
   if (validationErrors.length) {
     req.flash("errors", validationErrors);
-    console.log(req.flash)
     return res.redirect(`/profile/user/${req.params.id}`);
   };
   

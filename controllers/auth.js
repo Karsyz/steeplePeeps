@@ -265,7 +265,7 @@ exports.createUser = async (req, res, next) => {
     });
     
     const isSaved =  await user.save()
-    console.log(isSaved)
+    // console.log(isSaved)
     if (isSaved) {
       return res.redirect("/dashboard")
     }

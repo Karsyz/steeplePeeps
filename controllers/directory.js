@@ -8,7 +8,7 @@ module.exports = {
         const churches = await User.find({isAdmin: true})
 
         // if user has no churches, list only churches
-        console.log(members)
+        // console.log(members)
         const directory = members.length > 0 ? members : churches
 
         const usersChurch = await User.findById(req.user.church[0])

@@ -1,26 +1,12 @@
 # About
 
-Steeple Peeps is an church directory to share your picture, mailing address, email, and your phone number.
+Steeple Peeps is an church directory to share your picture, mailing address, email, and your phone number with other church members.
 
 ---
 
 # What's Currently In Development?
 
-- MVP
-  - Landing
-  - Login
-  - Create Account
-  - User Profile Admin
-  - Directory
-  - 'Create a Church' w/ Admin Controls
-  - Join a Church w/ or w/o Admin Approval
-
----
-# Upcoming Features
-
-- Oauth login options
 - 2FA
-- Light/Dark Mode
 - Customize Church Directory Pages
   - Background
   - Color Schemes
@@ -34,6 +20,5 @@ Steeple Peeps is an church directory to share your picture, mailing address, ema
 - Mobile Apps
 - Realtime face recognition
 - Mail/Messaging
-- Prayer Request / Notifications
-- Crowdfunding/Donation/Giving System?
-
+- Prayer Chain / Request / Notification System
+- Crowdfunding/Donation/Giving System
