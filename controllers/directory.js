@@ -4,9 +4,29 @@ module.exports = {
     getDirectory: async (req, res) => {
       try {
         // Find all users that belong to the same churches user belongs to
-        const directory = await User.find({church: req.user.church[0]})
+        const members = await User.find({church: req.user.church[0]})
+        const churches = await User.find({isAdmin: true})
 
-        const church = await User.findById(req.user.church[0]) || {name: "You Don't has a Church Yet"}
+        // if user has no churches, list only churches
+        console.log(members)
+        const directory = members.length > 0 ? members : churches
+
+        const usersChurch = await User.findById(req.user.church[0])
+        
+        let church;
+        
+        // if user has no church, change the page title and description
+        if(usersChurch) {
+          church = usersChurch
+          church.description = 'Member Directory'
+
+        } else {
+          church = {
+            name: "You Don't has a Church Yet", 
+            description: 'Contact your church for access.'
+          }
+        }
+
 
         res.render("directory.ejs", { user: req.user, church, directory });
       } catch (err) {

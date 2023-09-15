@@ -192,70 +192,91 @@ exports.createUser = async (req, res, next) => {
   // const genPass = generator.generate({length: 12, numbers: true, symbols: true})
   const rand = generator.generate({length: 16})
 
+  // check if user is in db ? is user already a member of the church ? show error : add church id to users churches array : create user and add church id to users churches array 
 
-  // check if email already exists in database
-  // if exists return a link to the associated profile
-  const emailExists = await User.findOne({ email: req.body.email })
-  if (emailExists !== null)
-    validationErrors.push({ 
-      type: 'emailExists',
-      msg: 'That email already exists',
-      id: emailExists.id
-    });
-
-  if (!validator.isEmail(req.body.email))
-    validationErrors.push({ 
-      type: 'validEmail',
-      msg: "Please enter a valid email address." 
-  });
-
-  if (validationErrors.length) {
-    req.flash("errors", validationErrors);
-    return res.redirect("/dashboard");
-  }
-
-  // sanitize email
-  req.body.email = validator.normalizeEmail(req.body.email, {
-    gmail_remove_dots: false,
-  });
-
-  const user = new User({
-    name: 'user' + rand.toString(),
-    email: req.body.email,
-    password: "asdfasdf",
-    isAdmin: false,
-    church: req.user.church,
-    phoneNumber: "",
-    txtOk: true,
-    address1: "",
-    address2: "",
-    city: "",
-    province: "",
-    country: "",
-    postCode: "",
-    image: `https://robohash.org/${rand}`,
-    cloudinaryId: "",
-    bio: "",
-    iCanHelpWith: [],
-    members: [],
-    numOfSessions: 0,
-    numOfEmailsSent: 0,
-    googleId: "",
-    twitterId: "",
-    magicLinkHash: "",
-  });
   
-  const isSaved =  await user.save()
-  console.log(isSaved)
-  if (isSaved) {
-    return res.redirect("/dashboard")
-  }
-  if (existingUser) {
-    req.flash("errors", {
-      msg: "Account was not created",
+  // is user in db ?
+  const existingUser = await User.findOne({email: req.body.email })
+  if(existingUser) {
+    // is user already a member of the church ?
+    if(existingUser.church.includes(req.user.id)) {
+      req.flash("errors", { 
+        type: 'emailExists',
+        msg: 'That user already exists',
+        id: existingUser.id
+      });
+      return res.redirect("/dashboard")
+    }else {
+      // add church id to users churches array
+      existingUser.church.push(req.user.id)
+      const userSaved = await existingUser.save();
+      if (userSaved) {
+        return res.redirect("/dashboard")
+      }
+      if (existingUser) {
+        req.flash("errors", {
+          msg: "Account was not created",
+        });
+        return res.redirect("/dashboard")
+      }
+    }
+  } else {
+    // create user and add church id to users churches array 
+    if (!validator.isEmail(req.body.email))
+      validationErrors.push({ 
+        type: 'validEmail',
+        msg: "Please enter a valid email address." 
     });
-    return res.redirect("/dashboard")
+
+    if (validationErrors.length) {
+      req.flash("errors", validationErrors);
+      return res.redirect("/dashboard");
+    }
+
+    // sanitize email
+    req.body.email = validator.normalizeEmail(req.body.email, {
+      gmail_remove_dots: false,
+    });
+
+    const user = new User({
+      name: 'user' + rand.toString(),
+      email: req.body.email,
+      password: "asdfasdf",
+      isAdmin: false,
+      church: req.user.church,
+      phoneNumber: "",
+      txtOk: true,
+      address1: "",
+      address2: "",
+      city: "",
+      province: "",
+      country: "",
+      postCode: "",
+      image: `https://robohash.org/${rand}`,
+      cloudinaryId: "",
+      bio: "",
+      iCanHelpWith: [],
+      members: [],
+      numOfSessions: 0,
+      numOfEmailsSent: 0,
+      googleId: "",
+      twitterId: "",
+      magicLinkHash: "",
+    });
+    
+    const isSaved =  await user.save()
+    console.log(isSaved)
+    if (isSaved) {
+      return res.redirect("/dashboard")
+    }
+    if (existingUser) {
+      req.flash("errors", {
+        msg: "Account was not created",
+      });
+      return res.redirect("/dashboard")
+    }
   }
+};
 
 
   // // Send login email to user
@@ -292,6 +313,4 @@ exports.createUser = async (req, res, next) => {
   //     console.log(err)
   //     res.redirect("/dashboard");
   //   }
-
-};
 

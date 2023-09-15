@@ -39,8 +39,9 @@
                             <% if (el.type === 'emailExists') { %>
                               <div class="mt-2 self-end">
                                 <span class="text-sm text-red-500 font-semibold w-1/2 self-end"><%= el.msg %></span>
-                                <a href="/profile/user/<%= el.id %>" class="inline text-sm text-blue-400 font-base w-1/2 self-end">Existing Profile</a>
-                              </div>
+                                <a id="scrollToUser" href="#<%= el.id %>" class="inline text-sm text-blue-400 font-base w-1/2 self-end">Scroll to User</a>
+                              </div>       
+                              <script type="text/javascript" src="/js/scrollToErr.js"></script>               
                               <% } %>
                           <% }) %>    
                         <% } %>
@@ -52,11 +53,11 @@
             </div>
 
             <!-- Scrollable Container -->
-            <section class="ml-8 mr-4 mt-3 overflow-scroll no-scrollbar rounded-lg">
+            <section class="ml-8 mr-4 mt-3 overflow-scroll no-scrollbar rounded-lg scroll-smooth">
 
             <div class="">
-              <div class="-mx-4 -my-2 sm:-mx-6 lg:-mx-8">
-                <div class="min-w-full py-2 sm:px-6 lg:px-8">
+              <div class="">
+                <div class="min-w-full">
                   <table class="min-w-full divide-y divide-gray-300">
                     <thead class="sticky top-0 bg-slate-300 h-10">
                       <tr class="">
@@ -70,7 +71,7 @@
                     <tbody class="divide-y divide-gray-200 bg-white dark:bg-slate-800">
                     
                     <% if (allUsers) { allUsers.forEach( el => { %>
-                      <tr class="">
+                      <tr id="<%=el._id%>">
                         <td class="whitespace-nowrap py-5 pr-3 text-sm pl-4 w-1/5">
                           <div class="flex items-center">
                             <div class="h-11 w-11 flex-shrink-0">
