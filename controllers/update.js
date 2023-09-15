@@ -1,11 +1,7 @@
-const passport = require("passport");
 const validator = require("validator");
 const bcrypt = require("bcrypt");
 const User = require("../models/User");
 const cloudinary = require("../middleware/cloudinary");
-const mongoose = require('mongoose');
-const { restart } = require("nodemon");
-const { useRevalidator } = require("react-router-dom");
 
 // Go To Password Update Page
 exports.updatePage = async (req, res) => {
