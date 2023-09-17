@@ -13,6 +13,9 @@ router.get("/user/:id", ensureAdmin, profileController.getUserProfileId);
 // Send user profile object to front end for profile cards
 router.get("/userProfile/:id", ensureAuth, profileController.sendUserProfile);
 
+// Remove church id from user profile
+router.put("/removeProfile/:id", profileController.removeChruchIdFromUser);
+
 // Delete Profile
 router.delete("/deleteProfile/:id", profileController.deleteProfile);
 

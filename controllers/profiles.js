@@ -3,6 +3,7 @@ const User = require("../models/User");
 
 
 module.exports = {
+
   getUserProfileId: async (req, res) => {
     try {
       const user = await User.findById(req.params.id);
@@ -29,6 +30,20 @@ module.exports = {
     } catch (err) {
       console.log(err)
     }
+  },
+
+  removeChruchIdFromUser: async (req, res) => {
+    try {      
+      let user = await User.findById({ _id: req.params.id });
+      user.church.pull(req.user.id)
+      await user.save()
+      console.log(`Removed User from ${req.user.name}`);
+      res.redirect("/dashboard");
+    } catch (err) {
+        console.log(err)
+        res.redirect("/dashboard");
+    }
+
   },
 
   deleteProfile: async (req, res) => {
