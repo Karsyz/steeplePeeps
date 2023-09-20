@@ -19,10 +19,12 @@ function EmailLoginPayload (userEmailAddress, link) {
 }
 
 const emailLoginSubmit = async (req, res, next) => {
-    if(req.user.isAdmin) {
+    if(req.user === undefined) {
+      res.redirect('/emailLoginCheck');
+    }else if(req.user.isAdmin)  {
       res.redirect('/dashboard');
     }else {
-      res.redirect('/emailLoginCheck');
+      res.redirect('/');
     }
 }
 
