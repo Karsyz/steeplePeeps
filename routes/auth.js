@@ -23,6 +23,16 @@ router.get("/google/callback", passport.authenticate('google', {
 
 
 
+// @desc    Magic Link Login
+// @route   POST /auth/emailLogin/:token
+router.get('/emailLogin', passport.authenticate('magiclink', {
+  successReturnToOrRedirect: '/directory',
+  failureRedirect: '/login',
+  failureMessage: true
+}));
+
+
+
 
 // // Login with Twitter 
 // router.post("/twitter", authController.twitterLogin)

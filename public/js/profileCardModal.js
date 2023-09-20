@@ -1,3 +1,8 @@
+// search bar
+// search db with name to get user id
+// activate profile card modal with id
+
+
 // Activate/Deactivate Profile Card Modal
 
 // selectors
@@ -6,11 +11,45 @@ const profileCard = document.querySelector('#profileCard')
 const cardCloseButton = document.querySelector('#profileCardModalButton')
 const hide = document.querySelectorAll('.hide')
 const imgC = document.querySelectorAll('.imgC')
+const searchInput = document.querySelector('#search')
+const searchButton = document.querySelector('#searchSubmit')
+const searchErrorMessage = document.querySelector('#searchErrorMessage')
 
 // event listeners
 imgC.forEach(el => {el.addEventListener('click', activateCard)} ) 
 cardCloseButton.addEventListener('click', deactivateCard)
 profileCardModalBg.addEventListener('click', deactivateCard)
+searchButton.addEventListener('click', searchForUser)
+
+// search for user
+async function searchForUser() {
+  const searchTerm = searchInput.value
+  searchInput.value = ''
+  searchErrorMessage.textContent = ''
+  const url = '/profile/userProfile/search'
+  fetch(`${url}/${searchTerm}`)
+    .then(res => res.json() )
+    .then(data => {
+      // userData = data
+      if(data.length === 0) {
+        searchErrorMessage.textContent = 'No user found by that name'
+        return
+      } 
+
+
+  getCardInfo(data[0]._id) 
+  // wait for info to populate in dom
+  hide.forEach(el => {
+  el.classList.remove('hidden')} ) 
+
+  setTimeout(function(){
+    profileCardModalBg.style.opacity = 1
+    profileCard.style.opacity = 1
+  }, 500)
+
+})
+}
+
 
 // escape key profile card modal close
 document.addEventListener('keydown', function(evt) {

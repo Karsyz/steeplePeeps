@@ -101,13 +101,12 @@ exports.putUpdateUserProfile = async (req, res, next) => {
     user = req.user
   }
 
-  // Validate user name does not exist already
-  const existingUser = await User.findOne({name: req.body.name})
-
-  if (existingUser && existingUser.name !== user.name )
+  // Validate user email does not exist already
+  const existingUser = await User.findOne({email: req.body.email})
+  if (existingUser && existingUser.email !== user.email )
     validationErrors.push({
-      type: 'exUserName',
-      msg: "Existing Name already exists",
+      type: 'exUserEmail',
+      msg: "A user already exists with that email address",
     });
 
   // Display errors if any and redirect
@@ -144,7 +143,12 @@ exports.putUpdateUserProfile = async (req, res, next) => {
         }
     );
     console.log("Updated User Info");
-    res.redirect(`/profile/user/${req.params.id}`);
+    
+    if(req.user.isAdmin) {
+      res.redirect(`/dashboard`);
+    }else {
+      res.redirect(`/directory`);
+    }
   } catch (err) {
     console.log(err);
   }

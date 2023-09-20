@@ -1,0 +1,22 @@
+<%- include('partials/head') -%>
+
+<body class="flex flex-row justify-center items-center bg-slate-100 dark:bg-slate-800">
+  <div class="md:w-3/5">
+
+    <div class="flex min-h-full flex-col justify-center py-12 sm:px-6 lg:px-8">
+      <a href="/" class="text-center"><i class="fa-solid fa-church fa-3x text-blue-700"></i></a>
+      <div class="sm:mx-auto sm:w-full sm:max-w-md">
+        <h2 class="mt-6 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900  dark:text-slate-100">Check Your Email</h2>
+      </div>
+    </div>
+  </div>
+
+  <script>
+  setTimeout(function () {
+     // after 5 seconds
+     window.location = "/";
+  }, 5000)
+</script>
+
+<%- include('partials/darkMode') -%>
+<%- include('partials/footer') -%>

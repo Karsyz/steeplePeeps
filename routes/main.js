@@ -6,7 +6,7 @@ const homeController = require("../controllers/home");
 const dashboardController = require("../controllers/dashboard");
 const directoryController = require("../controllers/directory");
 const emailController = require("../controllers/email");
-const { ensureAuth, ensureGuest } = require("../middleware/auth");
+const { ensureAuth, ensureGuest, ensureAdmin } = require("../middleware/auth");
 
 // Index
 router.get("/", homeController.getIndex);
@@ -17,11 +17,27 @@ router.get("/dashboard", ensureAuth, dashboardController.getDashboard);
 // Get Directory
 router.get("/directory", ensureAuth, directoryController.getDirectory);
 
-// Login
+// Login Page
 router.get("/login", authController.getLogin);
 
 // Login Submit
 router.post("/login", authController.postLogin);
+
+// @desc    EmailLogin Page
+// @route   GET /emailLogin
+router.get("/emailLogin", authController.emailLoginPage)
+
+// @desc    EmailLogin Submit
+// @route   POST emailLogin
+router.post('/emailLogin', passport.authenticate('magiclink', {
+  action: 'requestToken',
+  failureRedirect: '/login',
+  failureMessage: true
+}), emailController.emailLoginSubmit);
+
+// @desc    EmailLogin Check Email Page
+// @route   GET /emailLoginCheck
+router.get("/emailLoginCheck", authController.emailLoginCheck)
 
 // Logout
 router.get("/logout", authController.logout);
@@ -35,7 +51,5 @@ router.post("/buildAChurch/createUser", authController.buildAChurch);
 // Create User
 router.post("/createUser", authController.createUser);
 
-// Send email to new user
-router.post("/sendEmail/:id", emailController.sendEmail);
 
 module.exports = router;

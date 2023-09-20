@@ -11,9 +11,7 @@ const helpTags = document.querySelectorAll('#iCanHelpWithCont > li')
 helpButton.addEventListener('click', addTag)
 
 helpTags && helpTags.forEach(e => {
-  e.addEventListener('mousedown', removeTag)
-  e.addEventListener('mouseup', stopTimer)
-  e.addEventListener('mouseout', stopTimer)
+  e.addEventListener('click', removeTag)
 }) 
 
 // get tags and declare tag container
@@ -29,7 +27,6 @@ function getPageTags() {
 
 getPageTags()
 
-// create tag element
 function addTag() {
   console.log(input.value)
   if (input.value !== null && input.value !== "") {
@@ -50,37 +47,16 @@ function addTag() {
       listItem.textContent = input.value
       iCanHelpWithCont.appendChild(listItem);
 
-      document.querySelector(`#${tagId}`).addEventListener('mousedown', removeTag)
-      document.querySelector(`#${tagId}`).addEventListener('mouseup', stopTimer)
-      document.querySelector(`#${tagId}`).addEventListener('mouseout', stopTimer)
-
+      document.querySelector(`#${tagId}`).addEventListener('click', removeTag)
       input.value = null
-
       getPageTags()
   }
 
 }
 
-// global timer var
-let timer
 
-// long click tag remove
 function removeTag(evt) {
-  const selector = document.getElementById(evt.target.id)
-  selector.style.opacity = 0.2
-  selector.style.transition = 'opacity 2s ease'
-
-  timer = setTimeout(() => {
-      selector.remove()
-      console.log('removed')  
-      getPageTags()
-    }, 1200 )
+ document.getElementById(evt.target.id).remove()
+  getPageTags()
 }
 
-function stopTimer(evt) {
-  const selector = document.getElementById(evt.target.id)
-  clearTimeout(timer)
-  selector.style.opacity = ''
-  selector.style.transition = ''
-  
-}

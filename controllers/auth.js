@@ -74,9 +74,26 @@ exports.postLogin = async (req, res, next) => {
   
 };
 
+exports.emailLoginPage = (req, res) => {
+  //if a user is already logged in
+  if (req.user) {
+    // if admin redrirect to dashboard
+    if (req.user.isAdmin) {
+      res.redirect("/dashboard");
+    // if not admin redirect to directory
+    }else {
+      res.redirect("/directory");
+    }
+  }else {
+    res.render("emailLogin")
+  }
+  
+}
 
 
-
+exports.emailLoginCheck = (req, res) => {
+  res.render("emailLoginCheck");
+}
 
 
 
@@ -192,9 +209,6 @@ exports.createUser = async (req, res, next) => {
   // const genPass = generator.generate({length: 12, numbers: true, symbols: true})
   const rand = generator.generate({length: 16})
 
-  // check if user is in db ? is user already a member of the church ? show error : add church id to users churches array : create user and add church id to users churches array 
-
-  
   // is user in db ?
   const existingUser = await User.findOne({email: req.body.email })
   if(existingUser) {

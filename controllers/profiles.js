@@ -32,6 +32,15 @@ module.exports = {
     }
   },
 
+  searchUser: async (req, res) => {
+    try {
+      const existingUser = await User.find({ name: new RegExp(req.params.searchTerm, "i") })
+      res.send(existingUser);
+    } catch (err) {
+      console.log(err)
+    }
+  },
+
   removeChruchIdFromUser: async (req, res) => {
     try {      
       let user = await User.findById({ _id: req.params.id });
