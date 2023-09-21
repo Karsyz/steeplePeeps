@@ -59,11 +59,12 @@ app.use(session({
     secret: "keyboard catzzz",
     resave: false,
     saveUninitialized: false,
+    cookie: { 
+      maxAge: 60 * 60 * 1000,
+    },
     store: new MongoStore({ mongooseConnection: mongoose.connection }),
   })
 );
-
-// app.use(passport.authenticate('session'));
 
 // Passport middleware
 app.use(passport.initialize());

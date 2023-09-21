@@ -29,7 +29,7 @@ const emailLoginSubmit = async (req, res, next) => {
 }
 
 
-const sendEmail = async (obj) => {
+const sendEmail = async (obj) => { 
   // console.log(obj)
   try {
     // create reusable transporter object using the default SMTP transport
@@ -61,5 +61,4 @@ module.exports = {
   EmailWelcomePayload,
   emailLoginSubmit,
   sendEmail,
-  
 }

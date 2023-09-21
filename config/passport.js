@@ -15,7 +15,7 @@ module.exports = function (passport) {
       secret: 'keyboard catzzz',
       userFields: [ 'email' ],
       tokenField: 'token',
-      verifyUserAfterToken: false
+      verifyUserAfterToken: false,
       
     }, (user, token) => {
       const payload = new EmailLoginPayload(user.email, `${process.env.EMAIL_URL}/auth/emailLogin?token=${token}`)

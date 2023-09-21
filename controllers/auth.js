@@ -279,9 +279,8 @@ exports.createUser = async (req, res, next) => {
     });
     
     const isSaved =  await user.save()
-    // console.log(isSaved)
     if (isSaved) {
-      return res.redirect("/dashboard")
+      return res.redirect("/sendEmail")
     }
     if (existingUser) {
       req.flash("errors", {
