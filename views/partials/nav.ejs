@@ -1,48 +1,58 @@
-<nav class="ml-5" aria-label="Global">
-  <ul class="flex flex-col gap-4 text-blue-700 mt-6 mr-5">
-      <% if (user.isAdmin) { %> 
-        <li>
-          <a  
-            href="/dashboard"
-            data-te-toggle="tooltip"
-            title="Admin Dashboard"
-            class="transititext-primary text-primary transition duration-150 ease-in-out hover:text-primary-600 focus:text-primary-600 active:text-primary-700 dark:text-primary-400 dark:hover:text-primary-500 dark:focus:text-primary-500 dark:active:text-primary-600"
-          >
-            <i class="fa fa-cog fa-2x hover:text-blue-500"></i>
-          </a>
-        </li> 
-      <% } %>
+<nav id="navCont" class="absolute w-full h-screen right-0 ease duration-300 translate-x-full sm:translate-x-0 z-50 sm:pointer-events-none select-none">
+  <div id="menuClose" class="absolute right-0 min-w-full h-full sm:pointer-events-none"></div>
+  <div class="absolute right-0 flex flex-col items-center justify-between bg-slate-200 h-full p-5 sm:pointer-events-auto ">
+    <ul class="flex flex-col items-center gap-6 text-blue-700 sm:pointer-events-auto">
+        <% if (user.isAdmin) { %> 
+          <li>
+            <a  
+              href="/dashboard"
+              data-te-toggle="tooltip"
+              title="Admin Dashboard"
+              class=""
+            >
+              <i class="fa fa-cog fa-2x hover:text-blue-500"></i>
+            </a>
+          </li> 
+        <% } %>
 
-      <li>
-        <a 
-          href="/profile/user"
-          data-te-toggle="tooltip"
-          title="Edit User Profile"
-          class="transititext-primary text-primary transition duration-150 ease-in-out hover:text-primary-600 focus:text-primary-600 active:text-primary-700 dark:text-primary-400 dark:hover:text-primary-500 dark:focus:text-primary-500 dark:active:text-primary-600"
-        >
-          <i class="fa-solid fa-user fa-2x hover:text-blue-500"></i>
+        <li>
+          <a 
+            href="/profile/user"
+            data-te-toggle="tooltip"
+            title="Edit User Profile"
+            class=""
+          >
+            <i class="fa-solid fa-user fa-2x hover:text-blue-500"></i>
+          </a>
+          
+        </li>
+        <li>
+          <a 
+            href="/directory"
+            data-te-toggle="tooltip"
+            title="Member Directory"
+            class=""
+          >
+          <i class="fa-regular fa-address-book fa-2x hover:text-blue-500"></i>
         </a>
-        
       </li>
-      <li>
-        <a
-          href="/logout"
-          data-te-toggle="tooltip"
-          title="Logout"
-          class="transititext-primary text-primary transition duration-150 ease-in-out hover:text-primary-600 focus:text-primary-600 active:text-primary-700 dark:text-primary-400 dark:hover:text-primary-500 dark:focus:text-primary-500 dark:active:text-primary-600"
-        >
-          <i class="fa-solid fa-arrow-right-from-bracket fa-2x hover:text-blue-500"></i>
-        </a>
-      </li>
-      <li>
-        <a 
-          href="/directory"
-          data-te-toggle="tooltip"
-          title="Member Directory"
-          class="transititext-primary text-primary transition duration-150 ease-in-out hover:text-primary-600 focus:text-primary-600 active:text-primary-700 dark:text-primary-400 dark:hover:text-primary-500 dark:focus:text-primary-500 dark:active:text-primary-600"
-        >
-        <i class="fa-regular fa-address-book fa-2x hover:text-blue-500"></i>
-      </a>
-    </li>
-  </ul>
+    </ul>
+
+    <!-- Bottom Right Darkmode Button -->
+    <div class="flex flex-col items-center gap-6 text-blue-700">
+      <span id="darkModeButton" class="fa fa-2x"></span>
+
+      <a
+      href="/logout"
+      data-te-toggle="tooltip"
+      title="Logout"
+      class=""
+      >
+        <i class="fa-solid fa-arrow-right-from-bracket fa-2x hover:text-blue-500"></i>
+      </a>    
+    </div>
+
+
+  </div>
 </nav>
+<script type="text/javascript" src="/js/darkModeIcons.js"></script>

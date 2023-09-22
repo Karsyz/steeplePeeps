@@ -1,21 +1,24 @@
 <%- include('partials/head') -%>
-  <body class="relative flex flex-row justify-between bg-slate-20 dark:bg-slate-800 z-10 overflow-hidden">
-    <main class="flex flex-col w-full h-screen overflow-hidden">
+  <body class="relative flex flex-row grow bg-slate-20 dark:bg-slate-800 z-10 overflow-hidden">
+    <main class="flex flex-col w-full h-screen ">
     
     <!-- Page Container -->
-    <div class="flex flex-col grow m-0 w-full min-h-0">
+    <div class="flex flex-col self-center grow m-0 w-full lg:w-9/12 min-h-0">
 
       <!-- Page Heading -->
-      <div class="pl-8 pr-4 sm:flex sm:items-center flex-row">
+      <div class="flex flex-row justify-between items-center flex-wrap mx-4 sm:mx-8 sm:flex sm:items-center">
 
-          <div class="sm:flex-auto">
-              
-              <h1 class="text-2xl mt-5 font-semibold leading-6 text-gray-900 dark:text-slate-100"><%= user.name %></h1>
-              <p class="mt-2 text-sm text-gray-700 dark:text-slate-300">A list of all the users in your church</p>
+          <div class="flex flex-col">
+              <h1 class="text-2xl mt-4 font-semibold leading-6 text-gray-900 dark:text-slate-100 whitespace-nowrap"><%= user.name %></h1>
+              <p class="mt-2 text-sm text-gray-700 dark:text-slate-300 whitespace-nowrap">Member Directory</p>
           </div>
 
-          <form action="/createUser" method="POST">
-              <div class="flex flex-col ml-0 sm:ml-4 mb-4">
+          <form 
+            action="/createUser" 
+            method="POST"
+            class="hidden sm:block"
+          >
+              <div class="flex flex-col ml-0 sm:ml-4 mb-4 mr-14 lg:mr-0">
                   <div class="flex flex-row justify-end items-end mt-4">
                       <div class="w-full">
                           <!-- <label for="email" class="block text-sm font-medium leading-6 text-gray-900 dark:text-slate-100 mt-2">Quick Add User</label>  -->
@@ -43,85 +46,77 @@
                         <% } %>
                     <% }) %>    
                   <% } %>
-                
-
               </div>       
           </form>
+
+          <span id="menu" class="fa-solid fa-bars fa-2x text-slate-800 dark:text-slate-100 hover:text-blue-500 inline sm:hidden"></span>
+          
       </div>
 
       <!-- Scrollable Container -->
-      <section class="ml-8 mr-4 mt-3 overflow-scroll no-scrollbar rounded-lg scroll-smooth">
+      <section class="self-center mx-4 sm:mx-8 mt-4 sm:mt-10 overflow-scroll no-scrollbar scroll-smooth rounded-lg xl:w-10/12">
 
-      <div class="">
-        <div class="">
-          <div class="min-w-full">
-            <table class="min-w-full divide-y divide-gray-300">
-              <thead class="sticky top-0 bg-slate-300 h-10">
-                <tr class="">
-                  <th scope="col" class="whitespace-nowrap pl-4 text-center sm:text-left text-sm font-semibold text-gray-900">Name</th>
-                  <th scope="col" class="whitespace-nowrap py-2 text-sm font-semibold text-gray-900 hidden md:table-cell">Txt Ok?</th>
-                  <th scope="col" class="whitespace-nowrap py-2 text-sm font-semibold text-gray-900 hidden md:table-cell">Updated?</th>
-                  <th scope="col" class="whitespace-nowrap py-2 text-sm font-semibold text-gray-900 hidden md:table-cell">Email Sent?</th>
-                  <th scope="col" class="whitespace-nowrap py-2 text-sm font-semibold text-gray-900 hidden sm:table-cell">Controls</th>
-                </tr> 
-              </thead>
-              <tbody class="divide-y divide-gray-200 bg-white dark:bg-slate-800">
-              
-              <% if (allUsers) { allUsers.forEach( el => { %>
-                <tr id="<%=el._id%>">
-                  <td class="whitespace-nowrap py-5 pr-3 text-sm pl-4 w-1/5">
-                    <div class="flex items-center">
-                      <div class="h-11 w-11 flex-shrink-0">
-                        <img class="h-11 w-11 rounded-full" src="<%=el.image%>" alt="">
+        <table class="min-w-full divide-y divide-gray-300">
+          <thead class="sticky top-0 bg-slate-300 h-0 sm:h-10">
+            <tr class="">
+              <th scope="col" class="whitespace-nowrap pl-4 text-center sm:text-left text-sm font-semibold text-gray-900 hidden sm:table-cell">Name</th>
+              <th scope="col" class="whitespace-nowrap py-2 text-sm font-semibold text-gray-900 hidden lg:table-cell">Txt Ok?</th>
+              <th scope="col" class="whitespace-nowrap py-2 text-sm font-semibold text-gray-900 hidden lg:table-cell">Updated?</th>
+              <th scope="col" class="whitespace-nowrap py-2 text-sm font-semibold text-gray-900 hidden lg:table-cell">Email Sent?</th>
+              <th scope="col" class="whitespace-nowrap py-2 text-sm font-semibold text-gray-900 hidden sm:table-cell">Controls</th>
+            </tr> 
+          </thead>
+          <tbody class="divide-y divide-gray-200 bg-white dark:bg-slate-800">
+          
+          <% if (allUsers) { allUsers.forEach( el => { %>
+            <tr id="<%=el._id%>">
+              <td class="whitespace-nowrap py-5 pr-3 text-sm pl-4 w-1/5">
+                <div class="flex items-center">
+                  <div class="h-11 w-11 flex-shrink-0">
+                    <img class="h-11 w-11 rounded-full" src="<%=el.image%>" alt="">
+                  </div>
+                  <div class="ml-4">
+                      <div class="font-medium text-gray-900 dark:text-slate-100"><%=el.name%></div>
+                      <div class="mt-1 text-gray-500 dark:text-slate-300"><%=el.email%></div>
+                      <div class="mt-1 text-gray-500 dark:text-slate-300"><%=el.phoneNumber%></div>
+                      <div class="whitespace-nowrap mt-1 text-right text-sm font-medium sm:pr-0 flex sm:hidden">
+                          <%- include('partials/dashboardIcons', {el: el}) -%>
                       </div>
-                      <div class="ml-4">
-                          <div class="font-medium text-gray-900 dark:text-slate-100"><%=el.name%></div>
-                          <div class="mt-1 text-gray-500 dark:text-slate-300"><%=el.email%></div>
-                          <div class="mt-1 text-gray-500 dark:text-slate-300"><%=el.phoneNumber%></div>
-                          <div class="whitespace-nowrap mt-1 text-right text-sm font-medium sm:pr-0 flex sm:hidden">
-                              <%- include('partials/dashboardIcons', {el: el}) -%>
-                          </div>
-                      </div>
-                    </div>
-                  </td>
-                  <td class="whitespace-nowrap text-center py-5 text-sm text-gray-500 hidden md:table-cell w-1/5">
-                    <!-- <div class="text-gray-900">Front-end Developer</div> -->
-                      <div class="mt-1 text-gray-500">
-                          <% if (el.txtOk) { %><i class="fa fa-check"></i><% } %>
-                      </div>
-                  </td>
-                  <td class="whitespace-nowrap text-center py-5 text-sm text-gray-500 hidden md:table-cell w-1/5">
-                      <span class="inline-flex items-center rounded-md px-2 py-1 text-xs font-medium">
-                          <% if (el.cloudinaryId !== "") { %><i class="fa fa-check"></i><% } %>
-                      </span>
-                  </td>
+                  </div>
+                </div>
+              </td>
+              <td class="whitespace-nowrap text-center py-5 text-sm text-gray-500 hidden lg:table-cell w-1/5">
+                <!-- <div class="text-gray-900">Front-end Developer</div> -->
+                  <div class="mt-1 text-gray-500">
+                      <% if (el.txtOk) { %><i class="fa fa-check"></i><% } %>
+                  </div>
+              </td>
+              <td class="whitespace-nowrap text-center py-5 text-sm text-gray-500 hidden lg:table-cell w-1/5">
+                  <span class="inline-flex items-center rounded-md px-2 py-1 text-xs font-medium">
+                      <% if (el.cloudinaryId !== "") { %><i class="fa fa-check"></i><% } %>
+                  </span>
+              </td>
 
-                  <td class="whitespace-nowrap text-center py-5 text-sm text-gray-500 hidden md:table-cell w-1/5">
-                      <span class="inline-flex items-center rounded-md px-2 py-1 text-xs font-medium">
-                          <% if (el.numOfEmailsSent !== 0) { %><i class="fa fa-check"></i><% } %>
-                      </span>
-                  </td>
+              <td class="whitespace-nowrap text-center py-5 text-sm text-gray-500 hidden lg:table-cell w-1/5">
+                  <span class="inline-flex items-center rounded-md px-2 py-1 text-xs font-medium">
+                      <% if (el.numOfEmailsSent !== 0) { %><i class="fa fa-check"></i><% } %>
+                  </span>
+              </td>
 
-                  <td class="whitespace-nowrap text-center py-5 text-sm text-gray-500 hidden sm:table-cell w-1/5">
-                      <%- include('partials/dashboardIcons', {el: el}) -%>
-                  </td>
-                </tr>
-                <% })} %>
-    
+              <td class="whitespace-nowrap text-center py-5 text-sm text-gray-500 hidden sm:table-cell w-1/5">
+                  <%- include('partials/dashboardIcons', {el: el}) -%>
+              </td>
+            </tr>
+            <% })} %>
 
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
+          </tbody>
+        </table>
       </section>
 
     </div>
-
-
     <%- include('partials/btmLeftTxt') -%>
 </main>
 <%- include('partials/nav') -%>
 <%- include('partials/profileCardModal') -%>
-<%- include('partials/darkMode') -%>
+<script type="text/javascript" src="/js/menu.js"></script>
 <%- include('partials/footer') -%>
