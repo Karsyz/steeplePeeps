@@ -1,9 +1,8 @@
 // adds highlight to table row element on scroll to link
-const scrollToUser = document.querySelector('#scrollToUser')
+let scrollToUser = document.querySelectorAll('.scrollToUser')
 
-scrollToUser.addEventListener('click', () => {
-
-  const userId = scrollToUser.href.split('#')[1]
+scrollToUser.forEach(e => e.addEventListener('click', () => {
+  let userId = scrollToUser[0].href.split('#')[1]
 
   document.getElementById(userId).style.background = '#5bb262'
 
@@ -11,4 +10,4 @@ scrollToUser.addEventListener('click', () => {
     document.getElementById(userId).style.transition = 'background 3s ease' 
     document.getElementById(userId).style.background = '' 
   }, 4000 ) 
-})
+}))

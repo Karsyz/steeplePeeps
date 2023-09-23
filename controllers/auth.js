@@ -216,7 +216,7 @@ exports.createUser = async (req, res, next) => {
     if(existingUser.church.includes(req.user.id)) {
       req.flash("errors", { 
         type: 'emailExists',
-        msg: 'That user already exists',
+        msg: 'User exists',
         id: existingUser.id
       });
       return res.redirect("/dashboard")
