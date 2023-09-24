@@ -1,12 +1,12 @@
 <%- include('partials/head') -%>
-  <body class="relative flex flex-row grow bg-slate-20 dark:bg-slate-800 z-10 overflow-hidden">
-    <main class="flex flex-col w-full h-screen ">
-    
-    <!-- Page Container -->
-    <div class="flex flex-col m-0 w-full self-center lg:w-9/12 min-h-0">
+  <body class="">
 
+    <!-- Page Container -->
+    <main class="absolute w-full h-full z-10 overflow-hidden flex flex-col m-0 self-center bg-slate-20 dark:bg-slate-800">
+
+      
       <!-- Page Heading -->
-      <div class="flex flex-row justify-between items-start mx-4 sm:mx-10 mt-4 sm:mt-8 sm:mr-28 lg:ml-0 lg:mr-14">
+      <div class="flex flex-row justify-between items-start mx-4 sm:mx-10 mt-4 sm:mt-8 sm:mr-28 ">
 
           <div class="flex flex-col">
               <h1 class="text-2xl font-semibold leading-6 text-gray-900 dark:text-slate-100 whitespace-nowrap"><%= user.name %></h1>
@@ -18,9 +18,9 @@
           </div>
 
           <div class="flex flex-row gap-8 block sm:hidden">
-            <span id="openAddUserButton" class="fa-solid fa-user-plus fa-2x text-slate-800 dark:text-slate-100 hover:text-blue-500"></span>
+            <span id="openAddUserButton" class="fa-solid fa-user-plus fa-2x text-blue-700 hover:text-blue-500"></span>
   
-            <span id="menu" class="fa-solid fa-bars fa-2x text-slate-800 dark:text-slate-100 hover:text-blue-500"></span>
+            <span id="menu" class="fa-solid fa-bars fa-2x text-blue-700 hover:text-blue-500"></span>
           </div>
           
       </div>
@@ -34,9 +34,9 @@
       </div>
 
       <!-- Scrollable Container -->
-      <section class="self-center mx-4 sm:mx-8 mt-4 sm:mt-10 overflow-scroll no-scrollbar scroll-smooth rounded-lg md:w-8/12 lg:w-10/12 sm:mr-28">
+      <section class="self-center h-full mx-4 sm:mx-8 mt-4 sm:mt-10 overflow-scroll no-scrollbar scroll-smooth rounded-lg md:w-8/12 xl:w-6/12 sm:mr-28 drop-shadow-xl">
 
-        <table class="min-w-full divide-y divide-gray-300">
+        <table class="min-w-full divide-y divide-gray-300 p-8">
           <thead class="sticky top-0 bg-slate-300 h-0 sm:h-10">
             <tr class="">
               <th scope="col" class="whitespace-nowrap pl-4 text-center sm:text-left text-sm font-semibold text-gray-900 hidden sm:table-cell">Name</th>
@@ -50,7 +50,7 @@
           
           <% if (allUsers) { allUsers.forEach( el => { %>
             <tr id="<%=el._id%>">
-              <td class="whitespace-nowrap py-5 pr-3 text-sm pl-4 w-1/5">
+              <td class="whitespace-nowrap py-5 pl-4 text-sm w-1/5">
                 <div class="flex items-center">
                   <div class="h-11 w-11 flex-shrink-0">
                     <img class="h-11 w-11 rounded-full" src="<%=el.image%>" alt="">
@@ -92,12 +92,10 @@
           </tbody>
         </table>
       </section>
-
-    </div>
-    <%- include('partials/btmLeftTxt') -%>
+      <%- include('partials/btmLeftTxt') -%>
+      <%- include('partials/nav') -%>
+      <%- include('partials/profileCardModal') -%>
 </main>
-<%- include('partials/nav') -%>
-<%- include('partials/profileCardModal') -%>
 <script type="text/javascript" src="/js/menu.js"></script>
 <script type="text/javascript" src="/js/scrollToErr.js"></script>  
 <%- include('partials/footer') -%>

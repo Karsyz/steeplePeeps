@@ -1,18 +1,21 @@
 <%- include('partials/head') -%>
-  <body class="relative flex flex-row justify-between bg-slate-20 dark:bg-slate-800 z-10">
-    <main class="flex flex-col w-full h-screen overflow-hidden"> 
+  <body class="">
+
+    <main class="absolute w-full h-full flex flex-col overflow-hidden bg-slate-20 dark:bg-slate-800 z-10"> 
 
     <!-- Page Heading -->
-    <div class="pl-8 pr-4 mb-4 sm:flex sm:items-center flex-row ">
+    <div class="pl-4 pr-4 mb-4 flex flex-row justify-between items-center">
 
-      <div class="flex flex-row items-end mt-8 gap-4">
+      <div class="flex flex-col mt-4">
           <h1 class="inline text-3xl font-bold text-gray-900 dark:text-slate-100">User Profile</h1>
           <span class="text-xl font-semibold text-gray-900 dark:text-slate-100"><%= user.name %></span>
       </div>
+
+      <span id="menu" class="fa-solid fa-bars fa-2x text-blue-700 hover:text-blue-500"></span>
     </div>
-    
+
     <!-- Scrollable Container -->
-    <section class="ml-8 mr-4 mt-3 overflow-scroll no-scrollbar rounded-lg">
+    <section class="mr-4 mt-3 overflow-scroll no-scrollbar rounded-lg">
     
     <!-- Page Container -->
     <div class="flex flex-col items-center m-0 min-h-0">
@@ -288,11 +291,11 @@
   </div>
 
 <%- include('partials/btmLeftTxt') -%>
-</main>
 <%- include('partials/nav') -%>
+</main>
 <script type="text/javascript" src="/js/txtOkToggle.js"></script>
 <script type="text/javascript" src="/js/iCanHelpWithTags.js"></script>
 <%- include('partials/imageUploadModal') -%>
 <script type="text/javascript" src="/js/imageUpload.js"></script>
-<%- include('partials/darkMode') -%>
+<script type="text/javascript" src="/js/menu.js"></script>
 <%- include('partials/footer') -%>

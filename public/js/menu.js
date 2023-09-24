@@ -7,6 +7,7 @@ const openAddUserButton = document.querySelector('#openAddUserButton')
 const closeAddUserButton = document.querySelector('#closeAddUserButton')
 
 menu.addEventListener('click', () => {
+  console.log('it works')
   // menu.classList.toggle('hidden')
   navCont.classList.remove('translate-x-full')
   navCont.classList.add('translate-x-0')
@@ -19,14 +20,16 @@ function deactivateMenu() {
   navCont.classList.add('translate-x-full')
 }
 
-openAddUserButton.addEventListener('click', () => {
-  // addUserModalCont.classList.toggle('hidden')
+if(openAddUserButton) {
+  openAddUserButton.addEventListener('click', () => {
   addUserModalCont.classList.remove('-translate-y-full')
   addUserModalCont.classList.add('translate-y-0')
 })
+}
 
-closeAddUserButton.addEventListener('click', () => {
-  // addUserModalCont.classList.toggle('hidden')
-  addUserModalCont.classList.remove('translate-y-0')
-  addUserModalCont.classList.add('-translate-y-full')
-})
+if(closeAddUserButton) {
+  closeAddUserButton.addEventListener('click', () => {
+    addUserModalCont.classList.remove('translate-y-0')
+    addUserModalCont.classList.add('-translate-y-full')
+  })
+}
