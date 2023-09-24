@@ -111,8 +111,9 @@ async function getCardInfo(userId) {
               document.getElementById('cardImage').alt = `Picture of ${data.name}`
               document.getElementById('cardName').textContent = data.name
               document.getElementById('cardEmail').textContent = data.email
+              document.getElementById('cardEmail').href = `mailto:${data.email}`
               document.getElementById('cardPhone').textContent = data.phoneNumber
-              document.getElementById('cardPhoneLink').href = data.phoneNumber.replace(/\s/g, '')
+              document.getElementById('cardPhoneLink').href = `tel:${data.phoneNumber.replace(/\s/g, '')}`
               document.getElementById('cardAddress1').textContent = data.address1
               document.getElementById('cardAddress2').textContent = data.address2
               document.getElementById('cardCity').textContent = data.city
