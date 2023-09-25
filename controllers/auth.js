@@ -87,15 +87,11 @@ exports.emailLoginPage = (req, res) => {
   }else {
     res.render("emailLogin")
   }
-  
 }
-
 
 exports.emailLoginCheck = (req, res) => {
   res.render("emailLoginCheck");
 }
-
-
 
 // Logout of Server
 exports.logout = (req, res) => {
@@ -151,19 +147,18 @@ exports.buildAChurch = (req, res, next) => {
     password: req.body.password,
     isAdmin: true,
     church: [],
-    // Placeholder Values
-    phoneNumber: "555 515 2212",
+    phoneNumber: "",
     txtOk: true,
-    address1: "Address 1",
-    address2: "Address 2",
-    city: "City",
-    province: "Province",
-    country: "Country",
-    postCode: "Post Code",
+    address1: "",
+    address2: "",
+    city: "",
+    province: "",
+    country: "",
+    postCode: "",
     image: `https://robohash.org/${randomAvatar}?set=set4`,
     cloudinaryId: "",
-    bio: "Example: Retired Teacher, love to golf, and I'm here to help where and when I can.",
-    iCanHelpWith: "Example: I can help with yard work, bible study, cooking",
+    bio: "",
+    iCanHelpWith: "",
     members: [],
     numOfSessions: 0,
     numOfEmailsSent: 0,
@@ -200,7 +195,6 @@ exports.buildAChurch = (req, res, next) => {
   });
 
 };
-
 
 // Create a user from dashboard
 exports.createUser = async (req, res, next) => {
@@ -280,7 +274,9 @@ exports.createUser = async (req, res, next) => {
     
     const isSaved =  await user.save()
     if (isSaved) {
-      return res.redirect("/sendEmail")
+      console.log('new is saved into database, send email')
+      req.body.email = isSaved.email
+      return next()
     }
     if (existingUser) {
       req.flash("errors", {
@@ -290,40 +286,4 @@ exports.createUser = async (req, res, next) => {
     }
   }
 };
-
-
-  // // Send login email to user
-  // try {
-  
-  //   // create reusable transporter object using the default SMTP transport
-  //   let transporter = nodemailer.createTransport({
-  //     service: 'gmail',
-  //     host: 'smtp.gmail.com',
-  //     auth: {
-  //       user: process.env.SERVER_EMAIL, 
-  //       pass: process.env.SERVER_EMAIL_PSWD, 
-  //     },
-  //   });
-
-  //   // send mail with defined transport object
-  //   let info = await transporter.sendMail({
-  //     from: '"Karsy" <steeplepeeps100@gmail.com>', // sender address
-  //     to: user.email, // list of receivers
-  //     subject: `Welcome To the ${req.user.name} Member Directory`, // Subject line
-  //     text: `Welcome To the ${req.user.name} Member Directory`, // plain text body
-  //     html: `<h1>
-  //             Welcome to the ${req.user.name} Member Directory
-  //           </h1>
-  //           <p>Login to your account at <a href="https://steeplepeeps.cyclic.app/">Steeple Peeps</a>
-  //           </p>
-  //           <p>Your password is ${genPass}</p>`, // html body
-  //   });
-
-  //   console.log("Message sent: %s", info.messageId);
-  //   res.redirect("/dashboard");
-
-  //   } catch (err) {
-  //     console.log(err)
-  //     res.redirect("/dashboard");
-  //   }
 

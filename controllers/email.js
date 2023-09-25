@@ -1,6 +1,7 @@
 const nodemailer = require("nodemailer");
 const User = require("../models/User");
 const jwt = require('jsonwebtoken')
+const passport = require('passport')
 
 function EmailWelcomePayload (userEmailAddress, church, link) {
   this.from = '"Karsy" <steeplepeeps100@gmail.com>',
@@ -26,6 +27,14 @@ const emailLoginSubmit = async (req, res, next) => {
     }else {
       res.redirect('/');
     }
+}
+
+const magicLinkEmail = async (req, res, next) => {
+  console.log('holy shit it works')
+  // console.log(req.body.email)
+  req.body.email = 'mattkars@gmail.com'
+  // console.log(req.body.email)
+  return next()
 }
 
 
@@ -61,4 +70,5 @@ module.exports = {
   EmailWelcomePayload,
   emailLoginSubmit,
   sendEmail,
+  magicLinkEmail,
 }

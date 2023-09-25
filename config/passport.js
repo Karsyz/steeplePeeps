@@ -9,22 +9,21 @@ const EmailLoginPayload = require('../controllers/email').EmailLoginPayload
 const sendEmail = require('../controllers/email').sendEmail
 
 module.exports = function (passport) {
-
-  passport.use(
-    new MagicLinkStrategy( {
+    passport.use(
+      new MagicLinkStrategy( {
       secret: 'keyboard catzzz',
       userFields: [ 'email' ],
       tokenField: 'token',
       verifyUserAfterToken: false,
-      
     }, (user, token) => {
+      console.log(user)
       const payload = new EmailLoginPayload(user.email, `${process.env.EMAIL_URL}/auth/emailLogin?token=${token}`)
       return sendEmail(payload)
     }, function verify(user) {
       return new Promise( async function(resolve, reject) {
         try {
+          console.log(user.email)
           const existingUser = await User.findOne({ email: user.email })
-
           if(existingUser) { 
             existingUser.numOfEmailsSent++
             await existingUser.save()
@@ -32,7 +31,6 @@ module.exports = function (passport) {
           } else {
             return reject()
           }
-
         } catch (error) {
           console.log(error)
           return reject(error);

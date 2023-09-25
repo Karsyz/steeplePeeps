@@ -11,9 +11,7 @@ module.exports = {
         // if user has no churches, list only churches
         // console.log(members)
         const directory = members.length > 0 ? members : churches
-
         const usersChurch = await User.findById(req.user.church[0])
-        
         let church;
         
         // if user has no church, change the page title and description

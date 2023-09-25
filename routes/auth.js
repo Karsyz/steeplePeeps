@@ -19,7 +19,7 @@ router.get("/google/callback", passport.authenticate('google', {
   successRedirect: '/directory',
   failureRedirect: '/',
   failureMessage: true,
-}))
+}));
 
 
 

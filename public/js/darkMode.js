@@ -1,11 +1,13 @@
 // set darkMode to initially to browser preference
 let darkMode = window.matchMedia("(prefers-color-scheme: dark)").matches
+console.log(darkmode)
 const html = document.querySelector('html')
 const dmSwitch = document.querySelector('#darkModeButton')
 const toggle = document.querySelector('#darkModeButton > span')
 
 // set returning preference if any
 window.onload = () => {
+  console.log('dark mode preference loaded')
   darkMode = JSON.parse( localStorage.getItem('darkMode') )
   darkMode ? dark() : light()
 }
