@@ -3,6 +3,7 @@ const validator = require("validator");
 const User = require("../models/User");
 const generator = require('generate-password')
 const nodemailer = require("nodemailer");
+const fs = require('fs/promises');
 
 // Go To Login Page
 exports.getLogin = (req, res) => {
@@ -71,7 +72,6 @@ exports.postLogin = async (req, res, next) => {
     });
 
   })(req, res, next);
-  
 };
 
 exports.emailLoginPage = (req, res) => {
@@ -196,6 +196,17 @@ exports.buildAChurch = (req, res, next) => {
 
 };
 
+async function getRandomName() {
+  try {
+    const data = await fs.readFile('./src/data/names.txt', { encoding: 'utf8' });
+    return data.split('\n')[ Math.floor( Math.random() * 21985 ) ].replace('\r', '')
+  } catch (err) {
+    console.log(err);
+  };
+};
+
+exports.getRandomName = getRandomName
+
 // Create a user from dashboard
 exports.createUser = async (req, res, next) => {
 
@@ -246,37 +257,75 @@ exports.createUser = async (req, res, next) => {
       gmail_remove_dots: false,
     });
 
-    const user = new User({
-      name: 'user' + rand.toString(),
-      email: req.body.email,
-      password: "asdfasdf",
-      isAdmin: false,
-      church: req.user.church,
-      phoneNumber: "",
-      txtOk: true,
-      address1: "",
-      address2: "",
-      city: "",
-      province: "",
-      country: "",
-      postCode: "",
-      image: `https://robohash.org/${rand}`,
-      cloudinaryId: "",
-      bio: "",
-      iCanHelpWith: [],
-      members: [],
-      numOfSessions: 0,
-      numOfEmailsSent: 0,
-      googleId: "",
-      twitterId: "",
-      magicLinkHash: "",
-    });
+    let user 
+    if (req.user.isAdmin && req.user.email === 'demo@user.com') {
+
+      user = new User({
+        name: await getRandomName() + ' ' + await getRandomName(),
+        email: req.body.email,
+        password: rand.toString(),
+        isAdmin: false,
+        church: req.user.church,
+        phoneNumber: "414 555 1515",
+        txtOk: true,
+        address1: "123 Any Street",
+        address2: "Rue 22",
+        city: "Anytown",
+        province: "OH",
+        country: "USA",
+        postCode: "12345",
+        image: `https://robohash.org/${rand}`,
+        cloudinaryId: "",
+        bio: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic temporibus sunt perferendis quidem necessitatibus voluptatibus minima ipsa iure consectetur earum mollitia obcaecati maiores harum, molestiae alias maxime fugit, deserunt excepturi recusandae ex asperiores quod. Esse.",
+        iCanHelpWith: ['Cooking', 'Cleaning', 'Yard work'],
+        members: [],
+        numOfSessions: 0,
+        numOfEmailsSent: 0,
+        googleId: "",
+        twitterId: "",
+        magicLinkHash: "",
+      });
+
+    } else {
+
+      user = new User({
+        name: 'user' + rand.toString(),
+        email: req.body.email,
+        password: "asdfasdf",
+        isAdmin: false,
+        church: req.user.church,
+        phoneNumber: "",
+        txtOk: true,
+        address1: "",
+        address2: "",
+        city: "",
+        province: "",
+        country: "",
+        postCode: "",
+        image: `https://robohash.org/${rand}`,
+        cloudinaryId: "",
+        bio: "",
+        iCanHelpWith: [],
+        members: [],
+        numOfSessions: 0,
+        numOfEmailsSent: 0,
+        googleId: "",
+        twitterId: "",
+        magicLinkHash: "",
+      });
+
+    }
     
     const isSaved =  await user.save()
     if (isSaved) {
       console.log('new is saved into database, send email')
       req.body.email = isSaved.email
-      return next()
+
+      if (req.user.isAdmin && req.user.email === 'demo@user.com') {
+        return res.redirect("/dashboard")
+      } else {
+        return next()
+      }
     }
     if (existingUser) {
       req.flash("errors", {
@@ -287,3 +336,8 @@ exports.createUser = async (req, res, next) => {
   }
 };
 
+
+
+// module.exports = {
+//   getRandomName,
+// }

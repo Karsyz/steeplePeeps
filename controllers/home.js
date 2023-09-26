@@ -1,4 +1,5 @@
 module.exports = {
+
   getIndex: (req, res) => {
     //if a user is already logged in
     if (req.user) {
@@ -15,4 +16,15 @@ module.exports = {
     }
     
   },
+
+  errorPage: (req, res) => {
+    res.render("errorPage.ejs");
+  },
+
+
+  demo: (req, res) => {
+    res.render("demo.ejs");
+  },
+
+
 };

@@ -14,7 +14,7 @@
           </div>
 
           <div class="z-50 hidden sm:block">
-            <%- include('partials/addUser') -%>
+            <%- include('partials/addUser', {demo: demo}) -%>
           </div>
 
           <div class="flex flex-row gap-8 block sm:hidden">
@@ -28,7 +28,7 @@
       <!-- Add User Modal -->
       <div id="addUserModalCont" class="-translate-y-full ease-in-out duration-150 block sm:hidden absolute top-0 flex flex-col items-center bg-gray-900/70 w-full h-full z-50">
         <div class="flex flex-row justify-end gap-5 mt-28 bg-slate-300 p-8 rounded-lg mx-5">
-          <%- include('partials/addUser') -%> 
+          <%- include('partials/addUser', {demo: demo}) -%> 
           <span id="closeAddUserButton" class="fa fa-close fa-2x text-blue-700 hover:text-blue-500 -mr-6 -mt-6"></span>
         </div>
       </div>
@@ -46,7 +46,7 @@
               <th scope="col" class="whitespace-nowrap py-2 text-sm font-semibold text-gray-900 hidden sm:table-cell">Controls</th>
             </tr> 
           </thead>
-          <tbody class="divide-y divide-gray-200 bg-white dark:bg-slate-800">
+          <tbody class="divide-y divide-gray-200 bg-white dark:bg-slate-700">
           
           <% if (allUsers) { allUsers.forEach( el => { %>
             <tr id="<%=el._id%>">
@@ -99,3 +99,4 @@
 <script type="text/javascript" src="/js/menu.js"></script>
 <script type="text/javascript" src="/js/scrollToErr.js"></script>  
 <%- include('partials/footer') -%>
+

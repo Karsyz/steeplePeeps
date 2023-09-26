@@ -260,7 +260,7 @@
 
             <ul id="iCanHelpWithCont" class="flex flex-row gap-4 flex-wrap mt-4 mb-8">
               
-              <% if(displayedUser.iCanHelpWith) { displayedUser.iCanHelpWith.forEach(el => { %>
+              <% if(displayedUser.iCanHelpWith.length > 0) { displayedUser.iCanHelpWith.forEach(el => { %>
                 <li id="<%- el -%>" class="inline-block bg-orange-200 px-3 py-2 text-base text-gray-900 rounded-lg hover:bg-red-500 cursor-pointer transition opacity-100">
                   <%- el -%>
                 </li>

@@ -49,15 +49,18 @@ router.get("/buildAChurch", authController.buildAChurchForm);
 router.post("/buildAChurch/createUser", authController.buildAChurch);
 
 // Create User
-router.post("/createUser", 
-  ensureAdmin, 
-  authController.createUser, 
-  passport.authenticate('magiclink', {
+router.post("/createUser", ensureAdmin, authController.createUser, passport.authenticate('magiclink', {
     action: 'requestToken',
     failureRedirect: '/login',
     failureMessage: true
   }), emailController.emailLoginSubmit
 );
+
+// Error Page
+router.get("/errorPage", homeController.errorPage);
+
+// Demo Login
+router.get("/demo", homeController.demo);
 
 
 module.exports = router;

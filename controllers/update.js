@@ -157,6 +157,9 @@ exports.putUpdateUserProfile = async (req, res, next) => {
   // this function needs more input tolerance or need to change
   // the way tags are added by the user
 function tagHelper(tagsString) {
+  if(tagsString[0] === "") {
+    return []
+  }
   if(tagsString === "") {
     return []
   }
