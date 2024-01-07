@@ -1,17 +1,17 @@
 <%- include('partials/head') -%>
 
-<body class="flex flex-row justify-center items-center bg-slate-100 dark:bg-slate-800">
+<body class="flex flex-row justify-center items-center bg-slate-100 dark:bg-slate-800 w-full">
 
-  <div class="">
+  <div class="w-full max-w-[500px]">
 
-    <div class="flex min-h-full flex-col justify-center mt-8">
+    <div class="flex h-full flex-col justify-center mt-8">
       <a href="/" class="text-center"><i class="fa-solid fa-church fa-3x text-blue-700"></i></a>
       <div class="">
         <h2 class="mt-6 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900  dark:text-slate-100">Sign in to your account</h2>
       </div>
 
       <div class="mt-10">
-        <div class="bg-white dark:bg-slate-400 p-6  shadow rounded-lg sm:p-12">
+        <div class="bg-white dark:bg-slate-400 p-6 shadow rounded-lg sm:p-12">
           <form class="space-y-6" action="/login" method="POST">
             <div>
               <label for="inputEmail" class="block text-sm font-medium leading-6 text-gray-900 dark:text-slate-100">Email address</label>
@@ -22,7 +22,7 @@
                   type="email" 
                   autocomplete="email" 
                   aria-describedby="emailHelp" 
-                  class="block rounded-md border-0 py-1.5 dark:bg-slate-200 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6"
+                  class="block rounded-md border-0 py-1.5 dark:bg-slate-200 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6 w-full"
                   required 
                 >
               </div>
@@ -44,7 +44,7 @@
                 type="password" 
                 autocomplete="current-password" 
                 required 
-                class="block rounded-md border-0 py-1.5 dark:bg-slate-200 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6"
+                class="block rounded-md border-0 py-1.5 dark:bg-slate-200 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6 w-full"
                 required 
               >
               

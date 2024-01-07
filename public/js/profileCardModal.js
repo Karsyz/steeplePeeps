@@ -136,7 +136,8 @@ async function getCardInfo(userId) {
               if (data.iCanHelpWith !== null) {
                 data.iCanHelpWith.forEach(tag => {
                 const listItem = document.createElement('li');
-                listItem.classList.add('bg-blue-300')
+                // listItem.classList.add('bg-orange-300')
+                listItem.style.background = '#F6A564'
                 listItem.classList.add('rounded-lg')
                 listItem.classList.add('p-4')
                 listItem.classList.add('font-semibold')
