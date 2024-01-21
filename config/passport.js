@@ -16,13 +16,13 @@ module.exports = function (passport) {
       tokenField: 'token',
       verifyUserAfterToken: false,
     }, (user, token) => {
-      console.log(user)
+      // console.log(".....", user)
       const payload = new EmailLoginPayload(user.email, `${process.env.EMAIL_URL}/auth/emailLogin?token=${token}`)
       return sendEmail(payload)
     }, function verify(user) {
       return new Promise( async function(resolve, reject) {
         try {
-          console.log(user.email)
+          // console.log(user.email)
           const existingUser = await User.findOne({ email: user.email })
           if(existingUser) { 
             existingUser.numOfEmailsSent++
