@@ -1,4 +1,5 @@
 const nodemailer = require("nodemailer");
+const { google } = require('googleapis')
 const User = require("../models/User");
 const jwt = require('jsonwebtoken')
 const passport = require('passport')
@@ -29,27 +30,31 @@ const emailLoginSubmit = async (req, res, next) => {
     }
 }
 
-// const magicLinkEmail = async (req, res, next) => {
-//   console.log('holy shit it works')
-//   // console.log(req.body.email)
-//   req.body.email = 'mattkars@gmail.com'
-//   // console.log(req.body.email)
-//   return next()
-// }
-
-
 const sendEmail = async (obj) => { 
-  // console.log(obj)
+
+  const oAuth2Client = new google.auth.OAuth2(
+    process.env.OAUTH_CLIENTID,
+    process.env.OAUTH_CLIENT_SECRET,
+    process.env.OAUTH_REDIRECT_URI
+  )
+
+  oAuth2Client.setCredentials({refresh_token: process.env.OAUTH_REFRESH_TOKEN})
+
+  const accessToken = oAuth2Client.getAccessToken()
+
   try {
-    // create reusable transporter object using the default SMTP transport
     let transporter = nodemailer.createTransport({
-      service: process.env.SERVER_EMAIL_SERVICE,
-      host: process.env.SERVER_EMAIL_HOST,
+      service: 'gmail',
       auth: {
-        user: process.env.SERVER_EMAIL, 
-        pass: process.env.SERVER_EMAIL_PSWD, 
+        type: 'OAuth2',
+        user: process.env.SERVER_EMAIL,
+        clientId: process.env.OAUTH_CLIENTID,
+        clientSecret: process.env.OAUTH_CLIENT_SECRET,
+        refreshToken: process.env.OAUTH_REFRESH_TOKEN,
+        accessToken: accessToken,
       }
-    })
+    });
+
     // send mail with defined transport object
     let info = await transporter.sendMail({
       from: obj.from,
@@ -71,5 +76,4 @@ module.exports = {
   EmailWelcomePayload,
   emailLoginSubmit,
   sendEmail,
-  // magicLinkEmail,
 }
