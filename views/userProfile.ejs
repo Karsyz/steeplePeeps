@@ -69,7 +69,7 @@
                     name="phoneNumber" 
                     type="text" 
                     autocomplete="tel" 
-                    class="block w-full rounded-md border-0 py-1.5 pl-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6 dark:bg-blue-200 rounded-lg"
+                    class="block w-full border-0 py-1.5 pl-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6 dark:bg-blue-200 rounded-lg"
                     value="<%= displayedUser.phoneNumber %>"
                   >
                 </div>
@@ -115,7 +115,7 @@
                     name="email" 
                     type="text" 
                     autocomplete="email" 
-                    class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6 dark:bg-blue-200 rounded-lg"
+                    class="block w-full border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6 dark:bg-blue-200 rounded-lg"
                     value="<%= displayedUser.email %>"
                   >
                   <% if (locals.messages.errors) { %>
@@ -138,7 +138,7 @@
                     name="address1" 
                     id="address1" 
                     autocomplete="address-line1" 
-                    class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6 dark:bg-blue-200 rounded-lg"
+                    class="block w-full border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6 dark:bg-blue-200 rounded-lg"
                     value="<%= displayedUser.address1 %>"
                   >
                 </div>
@@ -152,13 +152,13 @@
                     name="address2" 
                     id="address2" 
                     autocomplete="address-line2" 
-                    class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6 dark:bg-blue-200 rounded-lg"
+                    class="block w-full border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6 dark:bg-blue-200 rounded-lg"
                     value="<%= displayedUser.address2 %>"
                   >
                 </div>
               </div>
 
-              <div class="col-span-full sm:col-span-3 col-span-full">
+              <div class="col-span-full sm:col-span-3">
                 <label for="city" class="block text-sm font-medium leading-6 text-gray-900 dark:text-slate-100">City</label>
                 <div class="mt-2">
                   <input 
@@ -166,7 +166,7 @@
                     name="city" 
                     id="city" 
                     autocomplete="address-level2" 
-                    class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6 dark:bg-blue-200 rounded-lg"
+                    class="block w-full border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6 dark:bg-blue-200 rounded-lg"
                     value="<%= displayedUser.city %>"
                   >
                 </div>
@@ -180,7 +180,7 @@
                     name="province" 
                     id="province" 
                     autocomplete="address-level1" 
-                    class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6 dark:bg-blue-200 rounded-lg"
+                    class="block w-full border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6 dark:bg-blue-200 rounded-lg"
                     value="<%= displayedUser.province %>"
                   >
                 </div>
@@ -194,7 +194,7 @@
                       name="postCode" 
                       id="postCode" 
                       autocomplete="postal-code" 
-                      class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6 dark:bg-blue-200 rounded-lg"
+                      class="block w-full border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6 dark:bg-blue-200 rounded-lg"
                       value="<%= displayedUser.postCode %>"
                     >
                 </div>
@@ -208,7 +208,7 @@
                     name="country" 
                     id="country" 
                     autocomplete="country" 
-                    class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6 dark:bg-blue-200 rounded-lg"
+                    class="block w-full border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6 dark:bg-blue-200 rounded-lg"
                     value="<%= displayedUser.country %>"
                   >
                 </div>
@@ -222,7 +222,7 @@
                     id="bioForm" 
                     name="bioForm" 
                     rows="3" 
-                    class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6 dark:bg-blue-200 rounded-lg"
+                    class="block w-full border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6 dark:bg-blue-200 rounded-lg"
                     ><%= displayedUser.bio %></textarea>
                 </div>
                 <p class="mt-3 text-sm leading-6 text-gray-600 dark:text-gray-300">Write a few sentences about yourself.</p>
@@ -243,7 +243,7 @@
                       type="text" 
                       name="helpTagInput" 
                       id="helpTagInput" 
-                      class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6 dark:bg-blue-200 rounded-lg" 
+                      class="block w-full border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6 dark:bg-blue-200 rounded-lg" 
                     >
                     <input 
                     type="hidden" 

@@ -5,7 +5,6 @@ const txtOkToggle = document.getElementById('txtOkToggle')
 const togbtn = document.getElementById('togbtn')
 const togbtnX = document.getElementById('togbtnX')
 const togbtnChk = document.getElementById('togbtnChk')
-
 const txtOk = document.getElementById('txtOk')
 
 // eventlisteners
@@ -18,7 +17,6 @@ if(txtOk.checked) {
   toggleOff() 
 }
 
-
 function toggleTxtOkSwitch() {
   if(txtOk.checked) {
     toggleOff() 
@@ -29,7 +27,6 @@ function toggleTxtOkSwitch() {
   }
 }
 
-        
 function toggleOn() {
   // set switch state
   txtOkToggle.classList.remove('bg-gray-200')
@@ -52,7 +49,6 @@ function toggleOn() {
   togbtnChk.classList.add('duration-200')
   togbtnChk.classList.add('ease-in')
 }
-
 
 function toggleOff() {
   // set switch state

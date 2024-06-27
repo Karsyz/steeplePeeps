@@ -18,8 +18,6 @@ function activateImageUpload(evt) {
     picUploadCont.classList.remove('opacity-0')
     picUploadCont.classList.add('opacity-100')
   }, 100)
-
-
 }
 
 document.addEventListener('keydown', function(evt){

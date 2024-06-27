@@ -28,7 +28,7 @@ function getPageTags() {
 getPageTags()
 
 function addTag() {
-  console.log(input.value)
+  // console.log(input.value)
   if (input.value !== null && input.value !== "") {
     const tagId = 'tag' + ( Math.floor( Math.random() * 100000 ) ).toString()
     const listItem = document.createElement('li');

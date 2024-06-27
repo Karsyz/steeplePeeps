@@ -7,8 +7,6 @@ const openAddUserButton = document.querySelector('#openAddUserButton')
 const closeAddUserButton = document.querySelector('#closeAddUserButton')
 
 menu.addEventListener('click', () => {
-  console.log('it works')
-  // menu.classList.toggle('hidden')
   navCont.classList.remove('translate-x-full')
   navCont.classList.add('translate-x-0')
 })
