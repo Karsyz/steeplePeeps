@@ -1,12 +1,4 @@
-const html = document.querySelector('html')
 const dmButton = document.querySelector('#darkModeButton')
-
-// set darkMode to initially to browser preference
-// if dark/light mode button is used, use the stored value and not the browser setting
-let ls = localStorage.getItem('darkMode')
-let darkMode = ls !== null ? JSON.parse(ls) : window.matchMedia("(prefers-color-scheme: dark)").matches
-
-darkMode ? dark() : light()
 
 dmButton.addEventListener('click', () => {
   if (darkMode) {
@@ -19,6 +11,9 @@ dmButton.addEventListener('click', () => {
     dark()
   }
 })
+
+// set light/dark mode and change icon
+darkMode ? dark() : light()
 
 function dark() {
   // set dark mode html class
