@@ -1,13 +1,13 @@
-// set darkMode to initially to browser preference
-let darkMode = window.matchMedia("(prefers-color-scheme: dark)").matches
 const html = document.querySelector('html')
 const dmButton = document.querySelector('#darkModeButton')
 
-// set returning preference if any
-window.onload = () => {
-  darkMode = JSON.parse( localStorage.getItem('darkMode') )
-  darkMode ? dark() : light()
-}
+
+// set darkMode to initially to browser preference
+// if dark/light mode button is used, use the stored value and not the browser setting
+let ls = localStorage.getItem('darkMode')
+let darkMode = ls !== null ? JSON.parse(ls) : window.matchMedia("(prefers-color-scheme: dark)").matches
+
+darkMode ? dark() : light()
 
 dmButton.addEventListener('click', () => {
   if (darkMode) {
