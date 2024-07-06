@@ -121,8 +121,7 @@
             </div>
 
             <!-- Error Messaging -->
-            <% if (locals.messages.errors) { %> <% messages.errors.forEach( el
-            => { %>
+            <% if (locals.messages.errors) { %> <% messages.errors.forEach( el => { %>
             <div class="text-gray-900 dark:text-slate-100 bg-red-500">
               <%= el.msg %>
             </div>
