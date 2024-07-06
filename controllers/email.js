@@ -24,14 +24,14 @@ const emailLoginSubmit = async (req, res, next) => {
   if (req.user === undefined) {
     res.redirect("/emailLoginCheck");
   } else if (req.user.isAdmin) {
-    res.redirect("/dashboard");
+    // res.redirect("/dashboard");
+    res.send({ status: 200, body: "email sent", ok: true });
   } else {
     res.redirect("/");
   }
 };
 
 const sendEmail = async (obj) => {
-
   const oAuth2Client = new google.auth.OAuth2(
     process.env.OAUTH_CLIENTID,
     process.env.OAUTH_CLIENT_SECRET,
@@ -67,7 +67,6 @@ const sendEmail = async (obj) => {
     });
     console.log(info);
     return info;
-
   } catch (err) {
     console.log(err);
     return err;

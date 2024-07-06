@@ -1,74 +1,74 @@
-
 <ul class="flex flex-row justify-center gap-5 sm:gap-5 px-6">
+  <li class="text-blue-700 hover:text-blue-400 cursor-pointer">
+    <!-- /emailLogin -->
+    <button
+      type="submit"
+      class="border-0 bg-transparent text-primary transititext-primary text-primary transition duration-150 ease-in-out hover:text-primary-600 focus:text-primary-600 active:text-primary-700 dark:text-primary-400 dark:hover:text-primary-500 dark:focus:text-primary-500 dark:active:text-primary-600"
+      data-te-toggle="tooltip"
+      title="Email user a login link"
+      id="sendEmailbutton"
+      data-ind="<%=ind%>"
+      data-email="<%= el.email %>"
+    >
+      <i class="text-xl fa-solid fa-paper-plane"></i>
+      <!-- <i class="text-xl fa-solid fa-rotate-right text-yellow-500 animate-spin"></i>
+                <i class="text-xl fa-solid fa-check text-green-500"></i>
+                <i class="text-xl fa-solid fa-xmark text-red-500"></i> -->
+    </button>
+  </li>
 
-    <li class="text-blue-700 hover:text-blue-400 cursor-pointer">
+  <% if(el._id.toString() === user._id.toString()) { %>
+  <li class="text-gray-600 cursor-default">
+    <button>
+      <i class="text-xl fa fa-trash-can"></i>
+    </button>
+  </li>
+  <% } else { %>
+  <li class="text-blue-700 hover:text-red-400 cursor-pointer">
+    <form
+      action="/profile/removeProfile/<%= el._id %>?_method=PUT"
+      method="POST"
+    >
+      <button
+        type="submit"
+        class="border-0 bg-transparent text-primary transititext-primary text-primary transition duration-150 ease-in-out hover:text-primary-600 focus:text-primary-600 active:text-primary-700 dark:text-primary-400 dark:hover:text-primary-500 dark:focus:text-primary-500 dark:active:text-primary-600"
+        data-te-toggle="tooltip"
+        title="Removes user from the church"
+      >
+        <i class="text-xl fa fa-trash-can"></i>
+      </button>
+    </form>
+  </li>
+  <% } %>
 
-        <form action="/emailLogin" method="POST">
-            <input type="hidden" name="email" value="<%= el.email %>">
-            <button 
-                type="submit" 
-                class="border-0 bg-transparent text-primary transititext-primary text-primary transition duration-150 ease-in-out hover:text-primary-600 focus:text-primary-600 active:text-primary-700 dark:text-primary-400 dark:hover:text-primary-500 dark:focus:text-primary-500 dark:active:text-primary-600"
-                data-te-toggle="tooltip"
-                title="Email user a login link"
-            >
-                <i class="text-xl fa-solid fa-paper-plane"></i>
-            </button>
-        </form>
-    </li>
+  <li class="text-blue-700 hover:text-blue-400 cursor-pointer">
+    <i
+      id="<%= el._id %>"
+      class="imgC text-xl fa fa-id-card border-0 bg-transparent text-primary transititext-primary text-primary transition duration-150 ease-in-out hover:text-primary-600 focus:text-primary-600 active:text-primary-700 dark:text-primary-400 dark:hover:text-primary-500 dark:focus:text-primary-500 dark:active:text-primary-600"
+      data-te-toggle="tooltip"
+      title="Show user profile card"
+    ></i>
+  </li>
 
-    <% if(el._id.toString() === user._id.toString()) { %>
-        <li class="text-gray-600 cursor-default">
-            <button>
-                <i class="text-xl fa fa-trash-can"></i>
-            </button>
-        </li>
-    <% } else { %>
-    <li class="text-blue-700 hover:text-red-400 cursor-pointer">
-        <form action="/profile/removeProfile/<%= el._id %>?_method=PUT" method="POST">
-            <button 
-                type="submit" 
-                class="border-0 bg-transparent text-primary transititext-primary text-primary transition duration-150 ease-in-out hover:text-primary-600 focus:text-primary-600 active:text-primary-700 dark:text-primary-400 dark:hover:text-primary-500 dark:focus:text-primary-500 dark:active:text-primary-600"
-                data-te-toggle="tooltip"
-                title="Removes user from the church"
-            >
-                <i class="text-xl fa fa-trash-can"></i>
-            </button>
-        </form>
-    </li>
-    <% } %>
+  <li class="text-blue-700 hover:text-blue-400 cursor-pointer">
+    <a
+      href="/profile/user/<%= el._id %>"
+      class="border-0 bg-transparent text-primary transititext-primary text-primary transition duration-150 ease-in-out hover:text-primary-600 focus:text-primary-600 active:text-primary-700 dark:text-primary-400 dark:hover:text-primary-500 dark:focus:text-primary-500 dark:active:text-primary-600"
+      data-te-toggle="tooltip"
+      title="Edit user profile"
+    >
+      <i class="text-xl fa fa-gear"></i
+    ></a>
+  </li>
 
-    <li class="text-blue-700 hover:text-blue-400 cursor-pointer">
-        <i 
-            id="<%= el._id %>"
-            class="imgC text-xl fa fa-id-card border-0 bg-transparent text-primary transititext-primary text-primary transition duration-150 ease-in-out hover:text-primary-600 focus:text-primary-600 active:text-primary-700 dark:text-primary-400 dark:hover:text-primary-500 dark:focus:text-primary-500 dark:active:text-primary-600"
-            data-te-toggle="tooltip"
-            title="Show user profile card"
-            
-        ></i>
-    </li>
-
-    <li class="text-blue-700 hover:text-blue-400 cursor-pointer">
-        <a 
-            href="/profile/user/<%= el._id %>"
-            class="border-0 bg-transparent text-primary transititext-primary text-primary transition duration-150 ease-in-out hover:text-primary-600 focus:text-primary-600 active:text-primary-700 dark:text-primary-400 dark:hover:text-primary-500 dark:focus:text-primary-500 dark:active:text-primary-600"
-            data-te-toggle="tooltip"
-            title="Edit user profile"
-
-        >
-            <i class=" text-xl fa fa-gear"></i></a>
-    </li>
-
-    
-    <li class="text-blue-700 hover:text-blue-400 cursor-pointer">
-        <a 
-            href="tel:<%= el.phoneNumber && el.phoneNumber.replace(/\s/g, '')%>"
-            class="border-0 bg-transparent text-primary transititext-primary text-primary transition duration-150 ease-in-out hover:text-primary-600 focus:text-primary-600 active:text-primary-700 dark:text-primary-400 dark:hover:text-primary-500 dark:focus:text-primary-500 dark:active:text-primary-600"
-            data-te-toggle="tooltip"
-            title="Call user" 
-        
-        >
-            <i class="text-xl fa fa-phone"></i></a>
-    </li>
-
-
+  <li class="text-blue-700 hover:text-blue-400 cursor-pointer">
+    <a
+      href="tel:<%= el.phoneNumber && el.phoneNumber.replace(/\s/g, '')%>"
+      class="border-0 bg-transparent text-primary transititext-primary text-primary transition duration-150 ease-in-out hover:text-primary-600 focus:text-primary-600 active:text-primary-700 dark:text-primary-400 dark:hover:text-primary-500 dark:focus:text-primary-500 dark:active:text-primary-600"
+      data-te-toggle="tooltip"
+      title="Call user"
+    >
+      <i class="text-xl fa fa-phone"></i
+    ></a>
+  </li>
 </ul>

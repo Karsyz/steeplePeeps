@@ -25,19 +25,23 @@ router.post("/login", authController.postLogin);
 
 // @desc    EmailLogin Page
 // @route   GET /emailLogin
-router.get("/emailLogin", authController.emailLoginPage)
+router.get("/emailLogin", authController.emailLoginPage);
 
 // @desc    EmailLogin Submit
 // @route   POST emailLogin
-router.post('/emailLogin', passport.authenticate('magiclink', {
-  action: 'requestToken',
-  failureRedirect: '/login',
-  failureMessage: true
-}), emailController.emailLoginSubmit);
+router.post(
+  "/emailLogin",
+  passport.authenticate("magiclink", {
+    action: "requestToken",
+    // failureRedirect: "/login",
+    // failureMessage: true,
+  }),
+  emailController.emailLoginSubmit
+);
 
 // @desc    EmailLogin Check Email Page
 // @route   GET /emailLoginCheck
-router.get("/emailLoginCheck", authController.emailLoginCheck)
+router.get("/emailLoginCheck", authController.emailLoginCheck);
 
 // Logout
 router.get("/logout", authController.logout);
@@ -49,11 +53,16 @@ router.get("/buildAChurch", authController.buildAChurchForm);
 router.post("/buildAChurch/createUser", authController.buildAChurch);
 
 // Create User
-router.post("/createUser", ensureAdmin, authController.createUser, passport.authenticate('magiclink', {
-    action: 'requestToken',
-    failureRedirect: '/login',
-    failureMessage: true
-  }), emailController.emailLoginSubmit
+router.post(
+  "/createUser",
+  ensureAdmin,
+  authController.createUser,
+  passport.authenticate("magiclink", {
+    action: "requestToken",
+    failureRedirect: "/login",
+    failureMessage: true,
+  }),
+  emailController.emailLoginSubmit
 );
 
 // Error Page
@@ -61,6 +70,5 @@ router.get("/errorPage", homeController.errorPage);
 
 // Demo Login
 router.get("/demo", homeController.demo);
-
 
 module.exports = router;
