@@ -784,10 +784,6 @@ select {
   top: -10rem;
 }
 
-.bottom-0 {
-  bottom: 0px;
-}
-
 .bottom-2 {
   bottom: 0.5rem;
 }
@@ -810,10 +806,6 @@ select {
 
 .left-\[calc\(50\%-11rem\)\] {
   left: calc(50% - 11rem);
-}
-
-.right-0 {
-  right: 0px;
 }
 
 .right-2 {
@@ -905,11 +897,6 @@ select {
 .mx-auto {
   margin-left: auto;
   margin-right: auto;
-}
-
-.my-8 {
-  margin-top: 2rem;
-  margin-bottom: 2rem;
 }
 
 .-mr-6 {
@@ -1141,12 +1128,12 @@ select {
   max-width: 500px;
 }
 
-.flex-1 {
-  flex: 1 1 0%;
+.max-w-\[1000px\] {
+  max-width: 1000px;
 }
 
-.flex-none {
-  flex: none;
+.flex-1 {
+  flex: 1 1 0%;
 }
 
 .flex-shrink-0 {
@@ -1178,11 +1165,6 @@ select {
 
 .translate-x-5 {
   --tw-translate-x: 1.25rem;
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-}
-
-.translate-x-full {
-  --tw-translate-x: 100%;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
@@ -2140,11 +2122,6 @@ select {
     margin-right: 0.5rem;
   }
 
-  .sm\:mx-8 {
-    margin-left: 2rem;
-    margin-right: 2rem;
-  }
-
   .sm\:mx-auto {
     margin-left: auto;
     margin-right: auto;
@@ -2164,10 +2141,6 @@ select {
 
   .sm\:mt-0 {
     margin-top: 0px;
-  }
-
-  .sm\:mt-10 {
-    margin-top: 2.5rem;
   }
 
   .sm\:mt-8 {
@@ -2192,10 +2165,6 @@ select {
 
   .sm\:w-1\/2 {
     width: 50%;
-  }
-
-  .sm\:w-8\/12 {
-    width: 66.666667%;
   }
 
   .sm\:w-\[500px\] {
@@ -2229,11 +2198,6 @@ select {
 
   .sm\:max-w-md {
     max-width: 28rem;
-  }
-
-  .sm\:translate-x-0 {
-    --tw-translate-x: 0px;
-    transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
   }
 
   .sm\:grid-cols-2 {
@@ -2272,6 +2236,10 @@ select {
     gap: 1.25rem;
   }
 
+  .sm\:gap-8 {
+    gap: 2rem;
+  }
+
   .sm\:overflow-hidden {
     overflow: hidden;
   }
@@ -2282,10 +2250,6 @@ select {
 
   .sm\:p-12 {
     padding: 3rem;
-  }
-
-  .sm\:p-6 {
-    padding: 1.5rem;
   }
 
   .sm\:p-8 {
@@ -2356,10 +2320,6 @@ select {
 }
 
 @media (min-width: 1280px) {
-  .xl\:w-7\/12 {
-    width: 58.333333%;
-  }
-
   .xl\:w-\[1000px\] {
     width: 1000px;
   }

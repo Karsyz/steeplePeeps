@@ -1,38 +1,41 @@
-<nav id="navCont" class="absolute w-full h-full right-0 ease duration-300 translate-x-full sm:translate-x-0 z-50 sm:pointer-events-none select-none overflow-hidden">
-  <div id="menuClose" class="absolute right-0 min-w-full h-full sm:pointer-events-none"></div>
-  <div class="absolute right-0 flex flex-col items-center justify-between bg-slate-200 h-full p-5 sm:pointer-events-auto">
-    <ul class="flex flex-col items-center gap-6 text-blue-700 sm:pointer-events-auto">
-        <% if (user.isAdmin) { %> 
-          <li>
-            <a  
-              href="/dashboard"
-              data-te-toggle="tooltip"
-              title="Admin Dashboard"
-              class=""
-            >
-              <i class="fa fa-cog fa-2x hover:text-blue-500"></i>
-            </a>
-          </li> 
-        <% } %>
+<nav class="h-full sm:pointer-events-none select-none">
+  <div
+    class="flex flex-col items-center justify-between bg-slate-200 h-full p-5 sm:pointer-events-auto"
+  >
+    <!-- Top Nav Items -->
+    <ul
+      class="flex flex-col items-center gap-6 text-blue-700 sm:pointer-events-auto"
+    >
+      <% if (user.isAdmin) { %>
+      <li>
+        <a
+          href="/dashboard"
+          data-te-toggle="tooltip"
+          title="Admin Dashboard"
+          class=""
+        >
+          <i class="fa fa-cog fa-2x hover:text-blue-500"></i>
+        </a>
+      </li>
+      <% } %>
 
-        <li>
-          <a 
-            href="/profile/user"
-            data-te-toggle="tooltip"
-            title="Edit User Profile"
-            class=""
-          >
-            <i class="fa-solid fa-user fa-2x hover:text-blue-500"></i>
-          </a>
-          
-        </li>
-        <li>
-          <a 
-            href="/directory"
-            data-te-toggle="tooltip"
-            title="Member Directory"
-            class=""
-          >
+      <li>
+        <a
+          href="/profile/user"
+          data-te-toggle="tooltip"
+          title="Edit User Profile"
+          class=""
+        >
+          <i class="fa-solid fa-user fa-2x hover:text-blue-500"></i>
+        </a>
+      </li>
+      <li>
+        <a
+          href="/directory"
+          data-te-toggle="tooltip"
+          title="Member Directory"
+          class=""
+        >
           <i class="fa-regular fa-address-book fa-2x hover:text-blue-500"></i>
         </a>
       </li>
@@ -40,25 +43,19 @@
 
     <!-- Bottom Right Darkmode Button -->
     <div class="flex flex-col items-center gap-6 text-blue-700">
-      <span 
-        id="darkModeButton" 
+      <span
+        id="darkModeButton"
         class="fa fa-2x"
         data-te-toggle="tooltip"
         title="Light Mode / Dark Mode"
-        >
-        
+      >
       </span>
 
-      <a
-      href="/logout"
-      data-te-toggle="tooltip"
-      title="Logout"
-      class=""
-      >
-        <i class="fa-solid fa-arrow-right-from-bracket fa-2x hover:text-blue-500"></i>
-      </a>    
+      <a href="/logout" data-te-toggle="tooltip" title="Logout" class="">
+        <i
+          class="fa-solid fa-arrow-right-from-bracket fa-2x hover:text-blue-500"
+        ></i>
+      </a>
     </div>
-
-
   </div>
 </nav>
