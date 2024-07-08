@@ -907,6 +907,11 @@ select {
   margin-right: auto;
 }
 
+.my-8 {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
 .-mr-6 {
   margin-right: -1.5rem;
 }

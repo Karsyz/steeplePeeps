@@ -1,103 +1,176 @@
 <%- include('partials/head') -%>
-  <body class="">
+<body class="">
 
-    <!-- Page Container -->
-    <main class="absolute w-full h-full z-10 overflow-hidden flex flex-col m-0 self-center bg-slate-20 dark:bg-slate-800">
-
-      
-      <!-- Page Heading -->
-      <div class="flex flex-row justify-between items-start mx-4 sm:mx-10 mt-4 sm:mt-8 sm:mr-28 ">
-
-          <div class="flex flex-col">
-              <h1 class="text-2xl font-semibold leading-6 text-gray-900 dark:text-slate-100 whitespace-nowrap"><%= user.name %></h1>
-              <p class="mt-2 text-sm text-gray-700 dark:text-slate-300 whitespace-nowrap">Member Directory</p>
-          </div>
-
-          <div class="z-50 hidden sm:block">
-            <%- include('partials/addUser', {demo: demo}) -%>
-          </div>
-
-          <div class="flex-row gap-8 block sm:hidden">
-            <span id="openAddUserButton" class="fa-solid fa-user-plus fa-2x text-blue-700 hover:text-blue-500"></span>
-  
-            <span id="menu" class="fa-solid fa-bars fa-2x text-blue-700 hover:text-blue-500"></span>
-          </div>
-          
+  <!-- Page Container -->
+  <main
+    class="absolute w-full h-full z-10 overflow-hidden flex flex-col m-0 self-center bg-slate-20 dark:bg-slate-800"
+  >
+    <!-- Page Heading -->
+    <div
+      class="flex flex-row justify-between items-center mx-4 sm:mx-10 my-8 sm:mr-28"
+    >
+      <div class="flex flex-col">
+        <h1
+          class="text-2xl font-semibold leading-6 text-gray-900 dark:text-slate-100 whitespace-nowrap"
+        >
+          <%= user.name %>
+        </h1>
+        <p
+          class="mt-2 text-sm text-gray-700 dark:text-slate-300 whitespace-nowrap"
+        >
+          Member Directory
+        </p>
       </div>
 
-      <!-- Add User Modal -->
-      <div id="addUserModalCont" class="-translate-y-full ease-in-out duration-150 sm:hidden absolute top-0 flex flex-col items-center bg-gray-900/70 w-full h-full z-50">
-        <div class="flex flex-row justify-end gap-5 mt-28 bg-slate-300 p-8 rounded-lg mx-5">
-          <%- include('partials/addUser', {demo: demo}) -%> 
-          <span id="closeAddUserButton" class="fa fa-close fa-2x text-blue-700 hover:text-blue-500 -mr-6 -mt-6"></span>
-        </div>
+      <div class="z-50 hidden sm:block">
+        <%- include('partials/addUser', {demo: demo}) -%>
       </div>
 
-      <!-- Scrollable Container -->
-      <section class="self-center h-full mx-4 sm:mx-8 mt-4 sm:mt-10 overflow-scroll no-scrollbar scroll-smooth sm:rounded-lg w-full sm:w-8/12 xl:w-7/12 sm:mr-28 drop-shadow-xl">
+      <div class="flex flex-row gap-8 sm:hidden">
+        <span
+          id="openAddUserButton"
+          class="fa-solid fa-user-plus fa-2x text-blue-700 hover:text-blue-500"
+        ></span>
 
-        <table class="min-w-full divide-y divide-gray-300 p-8">
-          <thead class="sticky top-0 bg-slate-300 h-0 sm:h-10">
-            <tr class="">
-              <th scope="col" class="whitespace-nowrap pl-4 text-center sm:text-left text-sm font-semibold text-gray-900 hidden sm:table-cell">Name</th>
-              <th scope="col" class="whitespace-nowrap py-2 text-sm font-semibold text-gray-900 hidden lg:table-cell">Txt Ok?</th>
-              <th scope="col" class="whitespace-nowrap py-2 text-sm font-semibold text-gray-900 hidden lg:table-cell">Updated?</th>
-              <th scope="col" class="whitespace-nowrap py-2 text-sm font-semibold text-gray-900 hidden lg:table-cell">Email Sent?</th>
-              <th scope="col" class="whitespace-nowrap py-2 text-sm font-semibold text-gray-900 hidden sm:table-cell">Controls</th>
-            </tr> 
-          </thead>
-          <tbody class="divide-y divide-gray-200 bg-white dark:bg-slate-700">
-          
+        <span
+          id="menu"
+          class="fa-solid fa-bars fa-2x text-blue-700 hover:text-blue-500"
+        ></span>
+      </div>
+    </div>
+
+    <!-- Add User Modal -->
+    <div
+      id="addUserModalCont"
+      class="-translate-y-full ease-in-out duration-150 sm:hidden absolute top-0 flex flex-col items-center bg-gray-900/70 w-full h-full z-50"
+    >
+      <div
+        class="flex flex-row justify-end gap-5 mt-28 bg-slate-300 p-8 rounded-lg mx-5"
+      >
+        <%- include('partials/addUser', {demo: demo}) -%>
+        <span
+          id="closeAddUserButton"
+          class="fa fa-close fa-2x text-blue-700 hover:text-blue-500 -mr-6 -mt-6"
+        ></span>
+      </div>
+    </div>
+
+    <!-- Scrollable Container -->
+    <section
+      class="self-center h-full mx-4 sm:mx-8 overflow-scroll no-scrollbar scroll-smooth sm:rounded-lg w-full sm:w-8/12 xl:w-7/12 sm:mr-28 drop-shadow-xl"
+    >
+      <table class="min-w-full divide-y divide-gray-300 p-8">
+        <thead class="sticky top-0 bg-slate-300 h-0 sm:h-10">
+          <tr class="">
+            <th
+              scope="col"
+              class="whitespace-nowrap pl-4 text-center sm:text-left text-sm font-semibold text-gray-900 hidden sm:table-cell"
+            >
+              Name
+            </th>
+            <th
+              scope="col"
+              class="whitespace-nowrap py-2 text-sm font-semibold text-gray-900 hidden lg:table-cell"
+            >
+              Txt Ok?
+            </th>
+            <th
+              scope="col"
+              class="whitespace-nowrap py-2 text-sm font-semibold text-gray-900 hidden lg:table-cell"
+            >
+              Updated?
+            </th>
+            <th
+              scope="col"
+              class="whitespace-nowrap py-2 text-sm font-semibold text-gray-900 hidden lg:table-cell"
+            >
+              Email Sent?
+            </th>
+            <th
+              scope="col"
+              class="whitespace-nowrap py-2 text-sm font-semibold text-gray-900 hidden sm:table-cell"
+            >
+              Controls
+            </th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-200 bg-white dark:bg-slate-700">
           <% if (allUsers) { allUsers.forEach( (el, ind) => { %>
-            <tr id="<%=el._id%>">
-              <td class="whitespace-nowrap py-5 pl-4 text-sm w-1/5">
-                <div class="flex items-center">
-                  <div class="h-11 w-11 flex-shrink-0">
-                    <img class="h-11 w-11 rounded-full" src="<%=el.image%>" alt="">
+          <tr id="<%=el._id%>">
+            <td class="whitespace-nowrap py-5 pl-4 text-sm w-1/5">
+              <div class="flex items-center">
+                <div class="h-11 w-11 flex-shrink-0">
+                  <img
+                    class="h-11 w-11 rounded-full"
+                    src="<%=el.image%>"
+                    alt=""
+                  />
+                </div>
+                <div class="ml-4">
+                  <div class="font-medium text-gray-900 dark:text-slate-100">
+                    <%=el.name%>
                   </div>
-                  <div class="ml-4">
-                      <div class="font-medium text-gray-900 dark:text-slate-100"><%=el.name%></div>
-                      <div class="mt-1 text-gray-500 dark:text-slate-300"><%=el.email%></div>
-                      <div class="mt-1 text-gray-500 dark:text-slate-300"><%=el.phoneNumber%></div>
-                      <div class="whitespace-nowrap mt-1 text-right text-sm font-medium sm:pr-0 flex sm:hidden">
-                          <%- include('partials/dashboardIcons', {el: el, ind:ind}) -%>
-                      </div>
+                  <div class="mt-1 text-gray-500 dark:text-slate-300">
+                    <%=el.email%>
+                  </div>
+                  <div class="mt-1 text-gray-500 dark:text-slate-300">
+                    <%=el.phoneNumber%>
+                  </div>
+                  <div
+                    class="whitespace-nowrap mt-1 text-right text-sm font-medium sm:pr-0 flex sm:hidden"
+                  >
+                    <%- include('partials/dashboardIcons', {el: el, ind:ind})
+                    -%>
                   </div>
                 </div>
-              </td>
-              <td class="whitespace-nowrap text-center py-5 text-sm text-gray-500 hidden lg:table-cell w-1/5">
-                <!-- <div class="text-gray-900">Front-end Developer</div> -->
-                  <div class="mt-1 text-gray-500">
-                      <% if (el.txtOk) { %><i class="fa fa-check"></i><% } %>
-                  </div>
-              </td>
-              <td class="whitespace-nowrap text-center py-5 text-sm text-gray-500 hidden lg:table-cell w-1/5">
-                  <span class="inline-flex items-center rounded-md px-2 py-1 text-xs font-medium">
-                      <% if (el.cloudinaryId !== "") { %><i class="fa fa-check"></i><% } %>
-                  </span>
-              </td>
+              </div>
+            </td>
+            <td
+              class="whitespace-nowrap text-center py-5 text-sm text-gray-500 hidden lg:table-cell w-1/5"
+            >
+              <!-- <div class="text-gray-900">Front-end Developer</div> -->
+              <div class="mt-1 text-gray-500">
+                <% if (el.txtOk) { %><i class="fa fa-check"></i><% } %>
+              </div>
+            </td>
+            <td
+              class="whitespace-nowrap text-center py-5 text-sm text-gray-500 hidden lg:table-cell w-1/5"
+            >
+              <span
+                class="inline-flex items-center rounded-md px-2 py-1 text-xs font-medium"
+              >
+                <% if (el.cloudinaryId !== "") { %><i class="fa fa-check"></i><%
+                } %>
+              </span>
+            </td>
 
-              <td class="whitespace-nowrap text-center py-5 text-sm text-gray-500 hidden lg:table-cell w-1/5">
-                  <span class="inline-flex items-center rounded-md px-2 py-1 text-xs font-medium">
-                      <% if (el.numOfEmailsSent !== 0) { %><i class="fa fa-check"></i><% } %>
-                  </span>
-              </td>
+            <td
+              class="whitespace-nowrap text-center py-5 text-sm text-gray-500 hidden lg:table-cell w-1/5"
+            >
+              <span
+                class="inline-flex items-center rounded-md px-2 py-1 text-xs font-medium"
+              >
+                <% if (el.numOfEmailsSent !== 0) { %><i class="fa fa-check"></i
+                ><% } %>
+              </span>
+            </td>
 
-              <td class="whitespace-nowrap text-center py-5 text-sm text-gray-500 hidden sm:table-cell w-1/5">
-                  <%- include('partials/dashboardIcons', {el: el, ind:ind}) -%>
-              </td>
-            </tr>
-            <% })} %>
-
-          </tbody>
-        </table>
-      </section>
-      <%- include('partials/btmLeftTxt') -%>
-      <%- include('partials/nav') -%>
-      <%- include('partials/profileCardModal') -%>
-</main>
-<script type="text/javascript" src="/js/menu.js"></script>
-<script type="text/javascript" src="/js/scrollToErr.js"></script>  
-<script type="text/javascript" src="/js/emailSendButton.js"></script>  
-<%- include('partials/footer') -%>
-
+            <td
+              class="whitespace-nowrap text-center py-5 text-sm text-gray-500 hidden sm:table-cell w-1/5"
+            >
+              <%- include('partials/dashboardIcons', {el: el, ind:ind}) -%>
+            </td>
+          </tr>
+          <% })} %>
+        </tbody>
+      </table>
+    </section>
+    <%- include('partials/btmLeftTxt') -%> 
+    <%- include('partials/nav') -%> 
+    <%- include('partials/profileCardModal') -%>
+  </main>
+  <script type="text/javascript" src="/js/menu.js"></script>
+  <script type="text/javascript" src="/js/scrollToErr.js"></script>
+  <script type="text/javascript" src="/js/emailSendButton.js"></script>
+  <%- include('partials/footer') -%>
+</body>
