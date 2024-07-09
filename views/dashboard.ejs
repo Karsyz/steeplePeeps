@@ -43,6 +43,7 @@
         </div>
 
         <div class="flex flex-col items-center grow min-h-0 w-full h-full">
+          
           <!-- Scrollable Container -->
           <section
             class="overflow-scroll no-scrollbar scroll-smooth w-full flex flex-col grow min-h-0 drop-shadow-xl max-w-[1000px]"
@@ -54,88 +55,31 @@
                 id="<%=el._id%>"
                 class="bg-white dark:bg-slate-700 rounded-xl p-4 w-full"
               >
-                <div class="flex flex-col md:flex-row gap-4 w-full">
-                  <div
-                    class="flex flex-col sm:flex-row w-full text-sm gap-4 grow"
-                  >
-                    <!-- Image and User Info -->
-                    <div
-                      class="flex flex-col xs:flex-row justify-center items-center gap-4"
-                    >
-                      <div class="h-24 w-24">
-                        <img
-                          class="border border-slate-300 rounded-lg"
-                          src="<%=el.image%>"
-                          alt=""
-                        />
-                      </div>
+                <div class="flex flex-col md:flex-row justify-between gap-4 w-full">
 
-                      <div class="flex flex-col gap-2 max-w-1/2">
-                        <div
-                          class="font-medium text-gray-900 dark:text-slate-100"
-                        >
-                          <%= el.name %>
-                          <!-- <%= el.name.length > 20 ? el.name.substring(0, 20) + '...' : el.name %> -->
-                        </div>
-                        <div class="text-gray-500 dark:text-slate-300">
-                          <%= el.email %>
-                          <!-- <%= el.email.length > 20 ? el.email.substring(0, 20) + '...' : el.email %> -->
-                        </div>
-                        <div class="text-gray-500 dark:text-slate-300">
-                          <%= el.phoneNumber %>
-                          <!-- <%= el.phoneNumber.length > 20 ? el.phoneNumber.substring(0, 20) + '...' : el.phoneNumber %> -->
-                        </div>
-                      </div>
+                  <!-- Image and User Info -->
+                  <div
+                    class="flex flex-col xs:flex-row justify-center items-center gap-4"
+                  >
+                    <div class="h-24 w-24">
+                      <img
+                        class="border border-slate-300 rounded-lg"
+                        src="<%=el.image%>"
+                        alt=""
+                      />
                     </div>
 
-                    <!-- Indicators -->
-                    <div
-                      class="flex flex-row w-full justify-center sm:justify-end md:justify-center items-center md:items-center grow"
-                    >
+                    <div class="flex flex-col gap-2 max-w-1/2">
                       <div
-                        class="flex flex-row sm:flex-col lg:flex-row justify-center items-center sm:items-end md:items-center gap-4 sm:gap-2 text-gray-500 whitespace-nowrap"
+                        class="font-medium text-gray-900 dark:text-slate-100"
                       >
-                        <div class="">
-                          <% if (el.txtOk) { %>
-                          <span
-                            class="block border border-slate-300 bg-green-600 text-gray-800 dark:text-slate-300 px-2 py-1 rounded-md"
-                            >Text</span
-                          >
-                          <% }else { %>
-                          <span
-                            class="block border border-slate-300 bg-transparent text-gray-800 dark:text-slate-300 px-2 py-1 rounded-md"
-                            >Text</span
-                          >
-                          <% }%>
-                        </div>
-
-                        <div class="">
-                          <% if (el.cloudinaryId !== "") { %>
-                          <span
-                            class="block border border-slate-300 bg-green-600 text-gray-800 dark:text-slate-300 px-2 py-1 rounded-md"
-                            >Photo</span
-                          >
-                          <% }else { %>
-                          <span
-                            class="block border border-slate-300 bg-transparent text-gray-800 dark:text-slate-300 px-2 py-1 rounded-md"
-                            >Photo</span
-                          >
-                          <% }%>
-                        </div>
-
-                        <div class="">
-                          <% if (el.numOfEmailsSent !== 0) { %>
-                          <span
-                            class="block border border-slate-300 bg-green-600 text-gray-800 dark:text-slate-300 px-2 py-1 rounded-md"
-                            >Email</span
-                          >
-                          <% }else { %>
-                          <span
-                            class="block border border-slate-300 bg-transparent text-gray-800 dark:text-slate-300 px-2 py-1 rounded-md"
-                            >Email</span
-                          >
-                          <% }%>
-                        </div>
+                        <%= el.name %>
+                      </div>
+                      <div class="text-gray-500 dark:text-slate-300">
+                        <%= el.email %>
+                      </div>
+                      <div class="text-gray-500 dark:text-slate-300">
+                        <%= el.phoneNumber %>
                       </div>
                     </div>
                   </div>
@@ -143,6 +87,54 @@
                   <!-- Controls -->
                   <div class="text-sm font-medium self-center">
                     <%- include('partials/dashboardIcons', {el: el, ind:ind})-%>
+                  </div>
+
+                  <!-- Indicators -->
+
+                  <div
+                    class="flex flex-row md:flex-col lg:flex-row justify-center items-center md:items-end lg:items-center gap-4 md:gap-2 text-gray-500 whitespace-nowrap select-none"
+                  >
+                    <div class="md:w-full lg:w-auto">
+                      <% if (el.txtOk) { %>
+                      <span
+                        class="block border border-slate-300 bg-green-600 text-gray-800 dark:text-slate-300 px-3 rounded-md"
+                        >Text</span
+                      >
+                      <% }else { %>
+                      <span
+                        class="block border border-slate-300 bg-transparent text-gray-800 dark:text-slate-300 px-3 rounded-md"
+                        >Text</span
+                      >
+                      <% }%>
+                    </div>
+
+                    <div class="md:w-full lg:w-auto">
+                      <% if (el.cloudinaryId !== "") { %>
+                      <span
+                        class="block border border-slate-300 bg-green-600 text-gray-800 dark:text-slate-300 px-3 rounded-md"
+                        >Photo</span
+                      >
+                      <% }else { %>
+                      <span
+                        class="block border border-slate-300 bg-transparent text-gray-800 dark:text-slate-300 px-3 rounded-md"
+                        >Photo</span
+                      >
+                      <% }%>
+                    </div>
+
+                    <div class="md:w-full lg:w-auto">
+                      <% if (el.numOfEmailsSent !== 0) { %>
+                      <span
+                        class="block border border-slate-300 bg-green-600 text-gray-800 dark:text-slate-300 px-3 rounded-md"
+                        >Email</span
+                      >
+                      <% }else { %>
+                      <span
+                        class="block border border-slate-300 bg-transparent text-gray-800 dark:text-slate-300 px-3 rounded-md"
+                        >Email</span
+                      >
+                      <% }%>
+                    </div>
                   </div>
                 </div>
               </li>
