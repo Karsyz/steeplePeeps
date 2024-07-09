@@ -1,183 +1,182 @@
 <%- include('partials/head') -%>
-<body class="w-full">
+<body class="">
   <!-- Page Main Container -->
-  <main
-    class="absolute flex flex-row w-full h-full bg-slate-20 dark:bg-slate-800"
-  >
+  <main class="absolute w-full h-full overflow-hidden">
+    <!-- Main Inner Container | width changes to show navbar -->
     <div
-      class="flex flex-col w-full h-full p-4 sm:p-8 gap-4 sm:gap-8 grow min-h-0 z-10"
-    >
-      <!-- Page Heading -->
-      <div class="flex flex-row w-full justify-between items-center">
-        <div class="flex flex-col">
-          <h1
-            class="text-2xl font-semibold leading-6 text-gray-900 dark:text-slate-100 whitespace-nowrap"
-          >
-            <%= user.name %>
-          </h1>
-          <p
-            class="mt-2 text-sm text-gray-700 dark:text-slate-300 whitespace-nowrap"
-          >
-            Member Directory
-          </p>
-        </div>
-
-        <div class="hidden sm:block">
-          <%- include('partials/addUser', {demo: demo}) -%>
-        </div>
-
-        <div class="flex flex-row gap-8 sm:hidden">
-          <span
-            id="openAddUserButton"
-            class="fa-solid fa-user-plus fa-2x text-blue-700 hover:text-blue-500"
-          ></span>
-
-          <span
-            id="menu"
-            class="fa-solid fa-bars fa-2x text-blue-700 hover:text-blue-500"
-          ></span>
-        </div>
-      </div>
-
-      <div class="flex flex-col items-center grow min-h-0 w-full h-full">
-      <!-- Scrollable Container -->
-      <section
-        class="overflow-scroll no-scrollbar scroll-smooth sm:rounded-lg w-full flex flex-col grow min-h-0 drop-shadow-xl max-w-[1000px]"
-      >
-        <table class="min-w-full divide-y divide-gray-300 p-8">
-          <thead class="sticky top-0 bg-slate-300 h-0 sm:h-10">
-            <tr class="">
-              <th
-                scope="col"
-                class="whitespace-nowrap pl-4 text-center sm:text-left text-sm font-semibold text-gray-900 hidden sm:table-cell"
-              >
-                Name
-              </th>
-              <th
-                scope="col"
-                class="whitespace-nowrap py-2 text-sm font-semibold text-gray-900 hidden lg:table-cell"
-              >
-                Txt Ok?
-              </th>
-              <th
-                scope="col"
-                class="whitespace-nowrap py-2 text-sm font-semibold text-gray-900 hidden lg:table-cell"
-              >
-                Updated?
-              </th>
-              <th
-                scope="col"
-                class="whitespace-nowrap py-2 text-sm font-semibold text-gray-900 hidden lg:table-cell"
-              >
-                Email Sent?
-              </th>
-              <th
-                scope="col"
-                class="whitespace-nowrap py-2 text-sm font-semibold text-gray-900 hidden sm:table-cell"
-              >
-                Controls
-              </th>
-            </tr>
-          </thead>
-          <tbody class="divide-y divide-gray-200 bg-white dark:bg-slate-700">
-            <% if (allUsers) { allUsers.forEach( (el, ind) => { %>
-            <tr id="<%=el._id%>">
-              <td class="whitespace-nowrap py-5 pl-4 text-sm w-1/5">
-                <div class="flex items-center">
-                  <div class="h-11 w-11 flex-shrink-0">
-                    <img
-                      class="h-11 w-11 rounded-full"
-                      src="<%=el.image%>"
-                      alt=""
-                    />
-                  </div>
-                  <div class="ml-4">
-                    <div class="font-medium text-gray-900 dark:text-slate-100">
-                      <%=el.name%>
-                    </div>
-                    <div class="mt-1 text-gray-500 dark:text-slate-300">
-                      <%=el.email%>
-                    </div>
-                    <div class="mt-1 text-gray-500 dark:text-slate-300">
-                      <%=el.phoneNumber%>
-                    </div>
-                    <div
-                      class="whitespace-nowrap mt-1 text-right text-sm font-medium sm:pr-0 flex sm:hidden"
-                    >
-                      <%- include('partials/dashboardIcons', {el: el, ind:ind})
-                      -%>
-                    </div>
-                  </div>
-                </div>
-              </td>
-              <td
-                class="whitespace-nowrap text-center py-5 text-sm text-gray-500 hidden lg:table-cell w-1/5"
-              >
-                <!-- <div class="text-gray-900">Front-end Developer</div> -->
-                <div class="mt-1 text-gray-500">
-                  <% if (el.txtOk) { %><i class="fa fa-check"></i><% } %>
-                </div>
-              </td>
-              <td
-                class="whitespace-nowrap text-center py-5 text-sm text-gray-500 hidden lg:table-cell w-1/5"
-              >
-                <span
-                  class="inline-flex items-center rounded-md px-2 py-1 text-xs font-medium"
-                >
-                  <% if (el.cloudinaryId !== "") { %><i class="fa fa-check"></i
-                  ><% } %>
-                </span>
-              </td>
-
-              <td
-                class="whitespace-nowrap text-center py-5 text-sm text-gray-500 hidden lg:table-cell w-1/5"
-              >
-                <span
-                  class="inline-flex items-center rounded-md px-2 py-1 text-xs font-medium"
-                >
-                  <% if (el.numOfEmailsSent !== 0) { %><i
-                    class="fa fa-check"
-                  ></i
-                  ><% } %>
-                </span>
-              </td>
-
-              <td
-                class="whitespace-nowrap text-center py-5 text-sm text-gray-500 hidden sm:table-cell w-1/5"
-              >
-                <%- include('partials/dashboardIcons', {el: el, ind:ind}) -%>
-              </td>
-            </tr>
-            <% })} %>
-          </tbody>
-        </table>
-      </section>
-    </div>
-    <%- include('partials/btmLeftTxt') -%>
-    </div>
-
-    <!-- Nav Container -->
-    <div id="navCont" class="h-full hidden sm:block ease duration-150">
-      <%- include('partials/nav') -%>
-    </div>
-
-    <!-- Add User Modal -->
-    <div
-      id="addUserModalCont"
-      class="-translate-y-full ease-in-out duration-150 sm:hidden absolute top-0 flex flex-col items-center bg-gray-900/70 w-full h-full z-50"
+      id="mainInner"
+      class="flex flex-row w-[calc(100%_+_72px)] sm:w-full h-full bg-slate-20 dark:bg-slate-800 ease duration-150"
     >
       <div
-        class="flex flex-row justify-end gap-5 mt-28 bg-slate-300 p-8 rounded-lg mx-5"
+        class="flex flex-col w-full h-full p-4 sm:p-8 gap-4 sm:gap-8 grow min-h-0 z-10"
       >
-        <%- include('partials/addUser', {demo: demo}) -%>
-        <span
-          id="closeAddUserButton"
-          class="fa fa-close fa-2x text-blue-700 hover:text-blue-500 -mr-6 -mt-6"
-        ></span>
-      </div>
-    </div>
+        <!-- Page Heading -->
+        <div class="flex flex-row w-full justify-between items-center">
+          <div class="flex flex-col">
+            <h1
+              class="text-2xl font-semibold leading-6 text-gray-900 dark:text-slate-100 whitespace-nowrap"
+            >
+              <%= user.name %>
+            </h1>
+            <p
+              class="mt-2 text-sm text-gray-700 dark:text-slate-300 whitespace-nowrap"
+            >
+              Member Directory
+            </p>
+          </div>
 
-    <%- include('partials/profileCardModal') -%>
+          <div class="hidden sm:block">
+            <%- include('partials/addUser', {demo: demo}) -%>
+          </div>
+
+          <div class="flex flex-row gap-4 sm:hidden">
+            <span
+              id="openAddUserButton"
+              class="fa-solid fa-user-plus fa-2x text-blue-700 hover:text-blue-500"
+            ></span>
+
+            <span
+              id="menu"
+              class="fa-solid fa-bars fa-2x text-blue-700 hover:text-blue-500"
+            ></span>
+          </div>
+        </div>
+
+        <div class="flex flex-col items-center grow min-h-0 w-full h-full">
+          <!-- Scrollable Container -->
+          <section
+            class="overflow-scroll no-scrollbar scroll-smooth w-full flex flex-col grow min-h-0 drop-shadow-xl max-w-[1000px]"
+          >
+            <ul class="flex flex-col gap-4 w-full">
+              <% if (allUsers) { allUsers.forEach( (el, ind) => { %>
+
+              <li
+                id="<%=el._id%>"
+                class="bg-white dark:bg-slate-700 rounded-xl p-4 w-full"
+              >
+                <div class="flex flex-col md:flex-row gap-4 w-full">
+                  <div
+                    class="flex flex-col sm:flex-row w-full text-sm gap-4 grow"
+                  >
+                    <!-- Image and User Info -->
+                    <div
+                      class="flex flex-col xs:flex-row justify-center items-center gap-4"
+                    >
+                      <div class="h-24 w-24">
+                        <img
+                          class="border border-slate-300 rounded-lg"
+                          src="<%=el.image%>"
+                          alt=""
+                        />
+                      </div>
+
+                      <div class="flex flex-col gap-2 max-w-1/2">
+                        <div
+                          class="font-medium text-gray-900 dark:text-slate-100"
+                        >
+                          <%= el.name %>
+                          <!-- <%= el.name.length > 20 ? el.name.substring(0, 20) + '...' : el.name %> -->
+                        </div>
+                        <div class="text-gray-500 dark:text-slate-300">
+                          <%= el.email %>
+                          <!-- <%= el.email.length > 20 ? el.email.substring(0, 20) + '...' : el.email %> -->
+                        </div>
+                        <div class="text-gray-500 dark:text-slate-300">
+                          <%= el.phoneNumber %>
+                          <!-- <%= el.phoneNumber.length > 20 ? el.phoneNumber.substring(0, 20) + '...' : el.phoneNumber %> -->
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Indicators -->
+                    <div
+                      class="flex flex-row w-full justify-center sm:justify-end md:justify-center items-center md:items-center grow"
+                    >
+                      <div
+                        class="flex flex-row sm:flex-col lg:flex-row justify-center items-center sm:items-end md:items-center gap-4 sm:gap-2 text-gray-500 whitespace-nowrap"
+                      >
+                        <div class="">
+                          <% if (el.txtOk) { %>
+                          <span
+                            class="block border border-slate-300 bg-green-600 text-gray-800 dark:text-slate-300 px-2 py-1 rounded-md"
+                            >Text</span
+                          >
+                          <% }else { %>
+                          <span
+                            class="block border border-slate-300 bg-transparent text-gray-800 dark:text-slate-300 px-2 py-1 rounded-md"
+                            >Text</span
+                          >
+                          <% }%>
+                        </div>
+
+                        <div class="">
+                          <% if (el.cloudinaryId !== "") { %>
+                          <span
+                            class="block border border-slate-300 bg-green-600 text-gray-800 dark:text-slate-300 px-2 py-1 rounded-md"
+                            >Photo</span
+                          >
+                          <% }else { %>
+                          <span
+                            class="block border border-slate-300 bg-transparent text-gray-800 dark:text-slate-300 px-2 py-1 rounded-md"
+                            >Photo</span
+                          >
+                          <% }%>
+                        </div>
+
+                        <div class="">
+                          <% if (el.numOfEmailsSent !== 0) { %>
+                          <span
+                            class="block border border-slate-300 bg-green-600 text-gray-800 dark:text-slate-300 px-2 py-1 rounded-md"
+                            >Email</span
+                          >
+                          <% }else { %>
+                          <span
+                            class="block border border-slate-300 bg-transparent text-gray-800 dark:text-slate-300 px-2 py-1 rounded-md"
+                            >Email</span
+                          >
+                          <% }%>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Controls -->
+                  <div class="text-sm font-medium self-center">
+                    <%- include('partials/dashboardIcons', {el: el, ind:ind})-%>
+                  </div>
+                </div>
+              </li>
+
+              <% })} %>
+            </ul>
+          </section>
+        </div>
+        <%- include('partials/btmLeftTxt') -%>
+      </div>
+
+      <!-- Nav Container -->
+      <div id="navCont" class="h-full sm:block ease duration-150 min-w-[72px]">
+        <%- include('partials/nav') -%>
+      </div>
+
+      <!-- Add User Modal -->
+      <div
+        id="addUserModalCont"
+        class="-translate-y-full ease-in-out duration-150 sm:hidden absolute top-0 flex flex-col items-center bg-gray-900/70 w-full h-full z-50"
+      >
+        <div
+          class="flex flex-row justify-end gap-5 mt-28 bg-slate-300 p-8 rounded-lg mx-5"
+        >
+          <%- include('partials/addUser', {demo: demo}) -%>
+          <span
+            id="closeAddUserButton"
+            class="fa fa-close fa-2x text-blue-700 hover:text-blue-500 -mr-6 -mt-6"
+          ></span>
+        </div>
+      </div>
+
+      <%- include('partials/profileCardModal') -%>
+    </div>
   </main>
   <script type="text/javascript" src="/js/menu.js"></script>
   <script type="text/javascript" src="/js/scrollToErr.js"></script>

@@ -3,6 +3,10 @@ module.exports = {
   content: ["./views/**/*.ejs"],
   theme: {
     extend: {
+      screens: {
+        'xs': '400px', 
+        // => @media (min-width: 400px) { ... }
+      },
       animation: {
         pCardModalEnter: {
           
