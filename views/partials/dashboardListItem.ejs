@@ -1,0 +1,97 @@
+<li id="<%=el._id%>" 
+    class="bg-white dark:bg-slate-700 rounded-xl p-4 w-full"
+    data-name="<%= el.name %>"
+    >
+  <div class="flex flex-col md:flex-row flex-wrap justify-between gap-4 w-full">
+    <!-- Image and User Info -->
+    <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
+      <div class="h-24 w-24">
+        <img
+          class="border border-slate-300 rounded-lg"
+          src="<%=el.image%>"
+          alt=""
+        />
+      </div>
+
+      <div class="flex flex-col items-center sm:items-start gap-2 max-w-1/2">
+        <div id="userName" class="font-medium text-gray-900 dark:text-slate-100">
+          <%= el.name %>
+        </div>
+
+        <div
+          id="emailCopy"
+          class="text-gray-500 dark:text-slate-300 cursor-pointer"
+          data-te-toggle="tooltip"
+          title="Copy email address"
+          data-dataCopy="<%=el.email%>"
+        >
+          <%= el.email.length > 25 ? el.email.substring(0, 22) + '...' :
+          el.email %>
+        </div>
+
+        <div
+          id="phoneCopy"
+          class="text-gray-500 dark:text-slate-300 cursor-pointer"
+          data-te-toggle="tooltip"
+          title="Copy phone number"
+          data-dataCopy="<%=el.phoneNumber%>"
+        >
+          <%= el.phoneNumber %>
+        </div>
+      </div>
+    </div>
+
+    <!-- Controls -->
+    <div class="text-sm font-medium self-center">
+      <%- include('dashboardIcons', {el: el, ind:ind})-%>
+    </div>
+
+    <!-- Indicators -->
+
+    <div
+      class="flex flex-row md:flex-col lg:flex-row justify-center items-center md:items-end lg:items-center gap-4 md:gap-2 text-gray-500 whitespace-nowrap select-none"
+    >
+      <div class="md:w-full lg:w-auto">
+        <% if (el.txtOk) { %>
+        <span
+          class="block border border-slate-300 bg-green-600 text-gray-800 dark:text-slate-300 px-3 rounded-md"
+          >Text</span
+        >
+        <% }else { %>
+        <span
+          class="block border border-slate-300 bg-transparent text-gray-800 dark:text-slate-300 px-3 rounded-md"
+          >Text</span
+        >
+        <% }%>
+      </div>
+
+      <div class="md:w-full lg:w-auto">
+        <% if (el.cloudinaryId !== "") { %>
+        <span
+          class="block border border-slate-300 bg-green-600 text-gray-800 dark:text-slate-300 px-3 rounded-md"
+          >Photo</span
+        >
+        <% }else { %>
+        <span
+          class="block border border-slate-300 bg-transparent text-gray-800 dark:text-slate-300 px-3 rounded-md"
+          >Photo</span
+        >
+        <% }%>
+      </div>
+
+      <div class="md:w-full lg:w-auto">
+        <% if (el.numOfEmailsSent !== 0) { %>
+        <span
+          class="block border border-slate-300 bg-green-600 text-gray-800 dark:text-slate-300 px-3 rounded-md"
+          >Email</span
+        >
+        <% }else { %>
+        <span
+          class="block border border-slate-300 bg-transparent text-gray-800 dark:text-slate-300 px-3 rounded-md"
+          >Email</span
+        >
+        <% }%>
+      </div>
+    </div>
+  </div>
+</li>

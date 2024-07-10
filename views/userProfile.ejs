@@ -1,307 +1,467 @@
 <%- include('partials/head') -%>
-  <body class="">
+<body class="">
+  <!-- Page Main Container -->
+  <main class="absolute w-full h-full overflow-hidden">
+    <!-- Main Inner Container | width changes to show navbar -->
+    <div
+      id="mainInner"
+      class="flex flex-row w-[calc(100%_+_72px)] sm:w-full h-full bg-slate-20 dark:bg-slate-800 ease duration-150"
+    >
+      <div
+        class="flex flex-col w-full h-full p-4 sm:p-8 gap-4 sm:gap-8 grow min-h-0 z-10"
+      >
+        <!-- Page Heading -->
+        <div class="flex flex-row w-full justify-between items-center">
+          <div class="flex flex-col">
+            <h1
+              class="text-2xl font-semibold leading-6 text-gray-900 dark:text-slate-100 whitespace-nowrap"
+            >
+              User Profile
+            </h1>
+            <p
+              class="mt-2 text-sm text-gray-700 dark:text-slate-300 whitespace-nowrap"
+            >
+              <%= user.name %>
+            </p>
+          </div>
 
-    <main class="absolute w-full h-full flex flex-col overflow-hidden bg-slate-20 dark:bg-slate-800 z-10"> 
-
-    <!-- Page Heading -->
-    <div class="pl-4 pr-4 mb-4 flex flex-row justify-between items-center">
-
-      <div class="flex flex-col mt-4">
-          <h1 class="inline text-3xl font-bold text-gray-900 dark:text-slate-100">User Profile</h1>
-          <span class="text-xl font-semibold text-gray-900 dark:text-slate-100"><%= user.name %></span>
+          <div class="flex flex-row gap-4 sm:hidden">
+            <span id="menu" class="fa-solid fa-bars fa-2x text-blue-700"></span>
+          </div>
+        </div>
+        
       </div>
 
-      <span id="menu" class="fa-solid fa-bars fa-2x text-blue-700 hover:text-blue-500"></span>
-    </div>
-
-    <!-- Scrollable Container -->
-    <section class="mr-4 mt-3 overflow-scroll no-scrollbar rounded-lg">
-    
-    <!-- Page Container -->
-    <div class="flex flex-col items-center m-0 min-h-0">
-
-      <form class="items-center w-9/12" action="/update/userProfile/<%= displayedUser._id %>?_method=PUT" method="POST">
-
-        <div class="space-y-12">
-
-            <div class="mt-10 grid grid-cols-1 sm:grid-cols-6 gap-x-6 gap-y-8 ">
-              <div class="col-span-full sm:col-span-3">
-                <label for="name" class="block text-sm font-medium leading-6 text-gray-900 dark:text-slate-100">Name</label>
-                <div class="mt-2">
-                  <div class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-blue-700 sm:max-w-md">
-                    <input 
-                      type="text" 
-                      name="name" 
-                      id="name" 
-                      autocomplete="name" 
-                      class="block flex-1 border-0 bg-transparent py-1.5 pl-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 dark:bg-blue-200 rounded-lg"
-                      value="<%= displayedUser.name %>"
-                    >
-                    <% if (locals.messages.errors) { %>
-                      <% messages.errors.forEach( el => { %>
-                        <% if (el.type === 'exUserName') { %>
-                          <div class="mt-2 self-end">
-                            <span class="text-sm text-red-500 font-semibold w-1/2 self-end"><%= el.msg %></span>
-                            <a href="/profile/user/<%= el.id %>" class="inline text-sm text-blue-400 font-base w-1/2 self-end">Existing Profile</a>
-                          </div>
-                          <% } %>
-                      <% }) %>    
-                    <% } %>
-                  </div>
-                </div>
-              </div>
-
-              <div class="col-span-full sm:col-span-4 col-start-1">
-                <label for="photo" class="block text-sm font-medium leading-6 text-gray-900 dark:text-slate-100 ">Photo</label>
-                <div class="relative mt-2 flex items-center gap-x-3 bg-gray-100 aspect-square rounded-xl max-w-[500px]">
-                  <img class="img-fluid rounded-xl object-cover aspect-square w-full" src="<%= displayedUser.image %>" alt="Picture Of <%= displayedUser.name %>">
-                  <button id="imgCog" type="button" class="fa fa-gear absolute bottom-2 right-2 fa-2x text-blue-700 bg-white p-1 rounded-md">
-                </div>
-              </div>
-            </div>
-
-            <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-              <div class="col-span-full sm:col-span-3">
-                <label for="phoneNumber" class="block text-sm font-medium leading-6 text-gray-900 dark:text-slate-100">Phone Number</label>
-                <div class="mt-2">
-                  <input 
-                    id="phoneNumber" 
-                    name="phoneNumber" 
-                    type="text" 
-                    autocomplete="tel" 
-                    class="block w-full border-0 py-1.5 pl-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6 dark:bg-blue-200 rounded-lg"
-                    value="<%= displayedUser.phoneNumber %>"
-                  >
-                </div>
-              </div>
-
-              <div class="flex flex-row items-center col-span-full sm:col-span-2 self-end mb-2">
-                <input 
-                  id="txtOk" 
-                  name="txtOk" 
-                  type="checkbox" 
-                  class="hidden form-check-input" 
-                  <% if(displayedUser.txtOk == true) { %>checked<% } %>
+      <div class="flex flex-col items-center grow min-h-0 w-full h-full">
+        <!-- Scrollable Container -->
+        <section class="mr-4 mt-3 overflow-scroll no-scrollbar rounded-lg">
+          <!-- Page Container -->
+          <div class="flex flex-col items-center m-0 min-h-0">
+            <form
+              class="items-center w-9/12"
+              action="/update/userProfile/<%= displayedUser._id %>?_method=PUT"
+              method="POST"
+            >
+              <div class="space-y-12">
+                <div
+                  class="mt-10 grid grid-cols-1 sm:grid-cols-6 gap-x-6 gap-y-8"
                 >
-                <span class="text-sm h-2" id="annual-billing-label">
-                  <span class="font-medium text-base text-gray-900 whitespace-nowrap dark:text-slate-100">Text Message Ok?</span>
-                </span>
-                <!-- Enabled: "bg-blue-700", Not Enabled: "bg-gray-200" -->
-                <button type="button" id="txtOkToggle" class="bg-gray-200 relative inline-flex h-6 w-11 ml-3 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-700 focus:ring-offset-2" role="switch" aria-checked="false">
-                  <span class="sr-only">Text Message Ok?</span>
-                  <!-- Enabled: "translate-x-5", Not Enabled: "translate-x-0" -->
-                  <span id="togbtn" class="translate-x-0 pointer-events-none relative inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out">
-                    <!-- Enabled: "opacity-0 duration-100 ease-out", Not Enabled: "opacity-100 duration-200 ease-in" -->
-                    <span id="togbtnX" id="togbtn" class="opacity-100 duration-200 ease-in absolute inset-0 flex h-full w-full items-center justify-center transition-opacity" aria-hidden="true">
-                      <svg class="h-3 w-3 text-gray-400" fill="none" viewBox="0 0 12 12">
-                        <path d="M4 8l2-2m0 0l2-2M6 6L4 4m2 2l2 2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                      </svg>
-                    </span>
-                    <!-- Enabled: "opacity-100 duration-200 ease-in", Not Enabled: "opacity-0 duration-100 ease-out" -->
-                    <span id="togbtnChk" class="opacity-0 duration-100 ease-out absolute inset-0 flex h-full w-full items-center justify-center transition-opacity" aria-hidden="true">
-                      <svg class="h-3 w-3 text-blue-700" fill="currentColor" viewBox="0 0 12 12">
-                        <path d="M3.707 5.293a1 1 0 00-1.414 1.414l1.414-1.414zM5 8l-.707.707a1 1 0 001.414 0L5 8zm4.707-3.293a1 1 0 00-1.414-1.414l1.414 1.414zm-7.414 2l2 2 1.414-1.414-2-2-1.414 1.414zm3.414 2l4-4-1.414-1.414-4 4 1.414 1.414z" />
-                      </svg>
-                    </span>
-                  </span>
-                </button>
-              </div> 
-
-              <div class="col-span-full sm:col-span-4 col-start-1">
-                <label for="email" class="block text-sm font-medium leading-6 text-gray-900 dark:text-slate-100">Email address</label>
-                <div class="mt-2">
-                  <input 
-                    id="email" 
-                    name="email" 
-                    type="text" 
-                    autocomplete="email" 
-                    class="block w-full border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6 dark:bg-blue-200 rounded-lg"
-                    value="<%= displayedUser.email %>"
-                  >
-                  <% if (locals.messages.errors) { %>
-                    <% messages.errors.forEach( el => { %>
-                      <% if (el.type === 'exUserEmail') { %>
+                  <div class="col-span-full sm:col-span-3">
+                    <label
+                      for="name"
+                      class="block text-sm font-medium leading-6 text-gray-900 dark:text-slate-100"
+                      >Name</label
+                    >
+                    <div class="mt-2">
+                      <div
+                        class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-blue-700 sm:max-w-md"
+                      >
+                        <input
+                          type="text"
+                          name="name"
+                          id="name"
+                          autocomplete="name"
+                          class="block flex-1 border-0 bg-transparent py-1.5 pl-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 dark:bg-blue-200 rounded-lg"
+                          value="<%= displayedUser.name %>"
+                        />
+                        <% if (locals.messages.errors) { %> <%
+                        messages.errors.forEach( el => { %> <% if (el.type ===
+                        'exUserName') { %>
                         <div class="mt-2 self-end">
-                          <span class="text-sm text-red-500 font-semibold w-1/2 self-end"><%= el.msg %></span>
+                          <span
+                            class="text-sm text-red-500 font-semibold w-1/2 self-end"
+                            ><%= el.msg %></span
+                          >
+                          <a
+                            href="/profile/user/<%= el.id %>"
+                            class="inline text-sm text-blue-400 font-base w-1/2 self-end"
+                            >Existing Profile</a
+                          >
                         </div>
-                        <% } %>
-                    <% }) %>    
-                  <% } %>
-                </div>
-              </div>
+                        <% } %> <% }) %> <% } %>
+                      </div>
+                    </div>
+                  </div>
 
-              <div class="col-span-full sm:col-span-3">
-                <label for="address1" class="block text-sm font-medium leading-6 text-gray-900 dark:text-slate-100">Street Address 1</label>
-                <div class="mt-2">
-                  <input 
-                    type="text" 
-                    name="address1" 
-                    id="address1" 
-                    autocomplete="address-line1" 
-                    class="block w-full border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6 dark:bg-blue-200 rounded-lg"
-                    value="<%= displayedUser.address1 %>"
-                  >
-                </div>
-              </div>
-
-              <div class="col-span-full sm:col-span-3">
-                <label for="address2" class="block text-sm font-medium leading-6 text-gray-900 dark:text-slate-100">Street Address 2</label>
-                <div class="mt-2">
-                  <input 
-                    type="text" 
-                    name="address2" 
-                    id="address2" 
-                    autocomplete="address-line2" 
-                    class="block w-full border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6 dark:bg-blue-200 rounded-lg"
-                    value="<%= displayedUser.address2 %>"
-                  >
-                </div>
-              </div>
-
-              <div class="col-span-full sm:col-span-3">
-                <label for="city" class="block text-sm font-medium leading-6 text-gray-900 dark:text-slate-100">City</label>
-                <div class="mt-2">
-                  <input 
-                    type="text" 
-                    name="city" 
-                    id="city" 
-                    autocomplete="address-level2" 
-                    class="block w-full border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6 dark:bg-blue-200 rounded-lg"
-                    value="<%= displayedUser.city %>"
-                  >
-                </div>
-              </div>
-
-              <div class="col-span-full sm:col-span-3 col-start-1">
-                <label for="province" class="block text-sm font-medium leading-6 text-gray-900 dark:text-slate-100">State / Province</label>
-                <div class="mt-2">
-                  <input 
-                    type="text" 
-                    name="province" 
-                    id="province" 
-                    autocomplete="address-level1" 
-                    class="block w-full border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6 dark:bg-blue-200 rounded-lg"
-                    value="<%= displayedUser.province %>"
-                  >
-                </div>
-              </div>
-
-              <div class="col-span-full sm:col-span-3 col-start-1">
-                <label for="postCode" class="block text-sm font-medium leading-6 text-gray-900 dark:text-slate-100">ZIP / Postal code</label>
-                <div class="mt-2">
-                  <input 
-                      type="text" 
-                      name="postCode" 
-                      id="postCode" 
-                      autocomplete="postal-code" 
-                      class="block w-full border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6 dark:bg-blue-200 rounded-lg"
-                      value="<%= displayedUser.postCode %>"
+                  <div class="col-span-full sm:col-span-4 col-start-1">
+                    <label
+                      for="photo"
+                      class="block text-sm font-medium leading-6 text-gray-900 dark:text-slate-100"
+                      >Photo</label
                     >
+                    <div
+                      class="relative mt-2 flex items-center gap-x-3 bg-gray-100 aspect-square rounded-xl max-w-[500px]"
+                    >
+                      <img
+                        class="img-fluid rounded-xl object-cover aspect-square w-full"
+                        src="<%= displayedUser.image %>"
+                        alt="Picture Of <%= displayedUser.name %>"
+                      />
+                      <button
+                        id="imgCog"
+                        type="button"
+                        class="fa fa-gear absolute bottom-2 right-2 fa-2x text-blue-700 bg-white p-1 rounded-md"
+                      ></button>
+                    </div>
+                  </div>
                 </div>
-              </div>
 
-              <div class="col-span-full sm:col-span-3 col-start-1">
-                <label for="country" class="block text-sm font-medium leading-6 text-gray-900 dark:text-slate-100">Country</label>
-                <div class="mt-2">
-                  <input 
-                    type="text" 
-                    name="country" 
-                    id="country" 
-                    autocomplete="country" 
-                    class="block w-full border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6 dark:bg-blue-200 rounded-lg"
-                    value="<%= displayedUser.country %>"
+                <div
+                  class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6"
+                >
+                  <div class="col-span-full sm:col-span-3">
+                    <label
+                      for="phoneNumber"
+                      class="block text-sm font-medium leading-6 text-gray-900 dark:text-slate-100"
+                      >Phone Number</label
+                    >
+                    <div class="mt-2">
+                      <input
+                        id="phoneNumber"
+                        name="phoneNumber"
+                        type="text"
+                        autocomplete="tel"
+                        class="block w-full border-0 py-1.5 pl-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6 dark:bg-blue-200 rounded-lg"
+                        value="<%= displayedUser.phoneNumber %>"
+                      />
+                    </div>
+                  </div>
+
+                  <div
+                    class="flex flex-row items-center col-span-full sm:col-span-2 self-end mb-2"
                   >
-                </div>
-              </div>
-
-            
-              <div class="col-span-full">
-                <label for="about" class="block text-sm font-medium leading-6 text-gray-900 dark:text-slate-100">Bio</label>
-                <div class="mt-2">
-                  <textarea 
-                    id="bioForm" 
-                    name="bioForm" 
-                    rows="3" 
-                    class="block w-full border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6 dark:bg-blue-200 rounded-lg"
-                    ><%= displayedUser.bio %></textarea>
-                </div>
-                <p class="mt-3 text-sm leading-6 text-gray-600 dark:text-gray-300">Write a few sentences about yourself.</p>
-              </div>
-
-            </div>   
-
-            <!-- Help Tags -->
-            <div class="mt-6 grid grid-cols-1 sm:grid-cols-4 gap-x-4 gap-y-4 ">
-              
-              
-              <div class="col-span-2">
-                <label for="name" class="grid-cols-full block text-sm font-medium leading-6 text-gray-900 whitespace-nowrap dark:text-slate-100">How would you like to help others?</label>
-                <div class="mt-2">
-
-                  <div class="flex gap-3 rounded-md shadow-sm">
-                    <input 
-                      type="text" 
-                      name="helpTagInput" 
-                      id="helpTagInput" 
-                      class="block w-full border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6 dark:bg-blue-200 rounded-lg" 
+                    <input id="txtOk" name="txtOk" type="checkbox" class="hidden
+                    form-check-input" <% if(displayedUser.txtOk == true) {
+                    %>checked<% } %> >
+                    <span class="text-sm h-2" id="annual-billing-label">
+                      <span
+                        class="font-medium text-base text-gray-900 whitespace-nowrap dark:text-slate-100"
+                        >Text Message Ok?</span
+                      >
+                    </span>
+                    <!-- Enabled: "bg-blue-700", Not Enabled: "bg-gray-200" -->
+                    <button
+                      type="button"
+                      id="txtOkToggle"
+                      class="bg-gray-200 relative inline-flex h-6 w-11 ml-3 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-700 focus:ring-offset-2"
+                      role="switch"
+                      aria-checked="false"
                     >
-                    <input 
-                    type="hidden" 
-                    name="iCanHelpWith" 
-                    id="iCanHelpWith" 
-                    value="<%= displayedUser.iCanHelpWith %>"
+                      <span class="sr-only">Text Message Ok?</span>
+                      <!-- Enabled: "translate-x-5", Not Enabled: "translate-x-0" -->
+                      <span
+                        id="togbtn"
+                        class="translate-x-0 pointer-events-none relative inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out"
+                      >
+                        <!-- Enabled: "opacity-0 duration-100 ease-out", Not Enabled: "opacity-100 duration-200 ease-in" -->
+                        <span
+                          id="togbtnX"
+                          id="togbtn"
+                          class="opacity-100 duration-200 ease-in absolute inset-0 flex h-full w-full items-center justify-center transition-opacity"
+                          aria-hidden="true"
+                        >
+                          <svg
+                            class="h-3 w-3 text-gray-400"
+                            fill="none"
+                            viewBox="0 0 12 12"
+                          >
+                            <path
+                              d="M4 8l2-2m0 0l2-2M6 6L4 4m2 2l2 2"
+                              stroke="currentColor"
+                              stroke-width="2"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                            />
+                          </svg>
+                        </span>
+                        <!-- Enabled: "opacity-100 duration-200 ease-in", Not Enabled: "opacity-0 duration-100 ease-out" -->
+                        <span
+                          id="togbtnChk"
+                          class="opacity-0 duration-100 ease-out absolute inset-0 flex h-full w-full items-center justify-center transition-opacity"
+                          aria-hidden="true"
+                        >
+                          <svg
+                            class="h-3 w-3 text-blue-700"
+                            fill="currentColor"
+                            viewBox="0 0 12 12"
+                          >
+                            <path
+                              d="M3.707 5.293a1 1 0 00-1.414 1.414l1.414-1.414zM5 8l-.707.707a1 1 0 001.414 0L5 8zm4.707-3.293a1 1 0 00-1.414-1.414l1.414 1.414zm-7.414 2l2 2 1.414-1.414-2-2-1.414 1.414zm3.414 2l4-4-1.414-1.414-4 4 1.414 1.414z"
+                            />
+                          </svg>
+                        </span>
+                      </span>
+                    </button>
+                  </div>
+
+                  <div class="col-span-full sm:col-span-4 col-start-1">
+                    <label
+                      for="email"
+                      class="block text-sm font-medium leading-6 text-gray-900 dark:text-slate-100"
+                      >Email address</label
                     >
-                    <button type="button" id="helpButton" class="rounded-md bg-blue-300 py-2 px-3 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 self-end h-full">Add</button>
+                    <div class="mt-2">
+                      <input
+                        id="email"
+                        name="email"
+                        type="text"
+                        autocomplete="email"
+                        class="block w-full border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6 dark:bg-blue-200 rounded-lg"
+                        value="<%= displayedUser.email %>"
+                      />
+                      <% if (locals.messages.errors) { %> <%
+                      messages.errors.forEach( el => { %> <% if (el.type ===
+                      'exUserEmail') { %>
+                      <div class="mt-2 self-end">
+                        <span
+                          class="text-sm text-red-500 font-semibold w-1/2 self-end"
+                          ><%= el.msg %></span
+                        >
+                      </div>
+                      <% } %> <% }) %> <% } %>
+                    </div>
+                  </div>
+
+                  <div class="col-span-full sm:col-span-3">
+                    <label
+                      for="address1"
+                      class="block text-sm font-medium leading-6 text-gray-900 dark:text-slate-100"
+                      >Street Address 1</label
+                    >
+                    <div class="mt-2">
+                      <input
+                        type="text"
+                        name="address1"
+                        id="address1"
+                        autocomplete="address-line1"
+                        class="block w-full border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6 dark:bg-blue-200 rounded-lg"
+                        value="<%= displayedUser.address1 %>"
+                      />
+                    </div>
+                  </div>
+
+                  <div class="col-span-full sm:col-span-3">
+                    <label
+                      for="address2"
+                      class="block text-sm font-medium leading-6 text-gray-900 dark:text-slate-100"
+                      >Street Address 2</label
+                    >
+                    <div class="mt-2">
+                      <input
+                        type="text"
+                        name="address2"
+                        id="address2"
+                        autocomplete="address-line2"
+                        class="block w-full border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6 dark:bg-blue-200 rounded-lg"
+                        value="<%= displayedUser.address2 %>"
+                      />
+                    </div>
+                  </div>
+
+                  <div class="col-span-full sm:col-span-3">
+                    <label
+                      for="city"
+                      class="block text-sm font-medium leading-6 text-gray-900 dark:text-slate-100"
+                      >City</label
+                    >
+                    <div class="mt-2">
+                      <input
+                        type="text"
+                        name="city"
+                        id="city"
+                        autocomplete="address-level2"
+                        class="block w-full border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6 dark:bg-blue-200 rounded-lg"
+                        value="<%= displayedUser.city %>"
+                      />
+                    </div>
+                  </div>
+
+                  <div class="col-span-full sm:col-span-3 col-start-1">
+                    <label
+                      for="province"
+                      class="block text-sm font-medium leading-6 text-gray-900 dark:text-slate-100"
+                      >State / Province</label
+                    >
+                    <div class="mt-2">
+                      <input
+                        type="text"
+                        name="province"
+                        id="province"
+                        autocomplete="address-level1"
+                        class="block w-full border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6 dark:bg-blue-200 rounded-lg"
+                        value="<%= displayedUser.province %>"
+                      />
+                    </div>
+                  </div>
+
+                  <div class="col-span-full sm:col-span-3 col-start-1">
+                    <label
+                      for="postCode"
+                      class="block text-sm font-medium leading-6 text-gray-900 dark:text-slate-100"
+                      >ZIP / Postal code</label
+                    >
+                    <div class="mt-2">
+                      <input
+                        type="text"
+                        name="postCode"
+                        id="postCode"
+                        autocomplete="postal-code"
+                        class="block w-full border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6 dark:bg-blue-200 rounded-lg"
+                        value="<%= displayedUser.postCode %>"
+                      />
+                    </div>
+                  </div>
+
+                  <div class="col-span-full sm:col-span-3 col-start-1">
+                    <label
+                      for="country"
+                      class="block text-sm font-medium leading-6 text-gray-900 dark:text-slate-100"
+                      >Country</label
+                    >
+                    <div class="mt-2">
+                      <input
+                        type="text"
+                        name="country"
+                        id="country"
+                        autocomplete="country"
+                        class="block w-full border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6 dark:bg-blue-200 rounded-lg"
+                        value="<%= displayedUser.country %>"
+                      />
+                    </div>
+                  </div>
+
+                  <div class="col-span-full">
+                    <label
+                      for="about"
+                      class="block text-sm font-medium leading-6 text-gray-900 dark:text-slate-100"
+                      >Bio</label
+                    >
+                    <div class="mt-2">
+                      <textarea
+                        id="bioForm"
+                        name="bioForm"
+                        rows="3"
+                        class="block w-full border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6 dark:bg-blue-200 rounded-lg"
+                      >
+<%= displayedUser.bio %></textarea
+                      >
+                    </div>
+                    <p
+                      class="mt-3 text-sm leading-6 text-gray-600 dark:text-gray-300"
+                    >
+                      Write a few sentences about yourself.
+                    </p>
+                  </div>
+                </div>
+
+                <!-- Help Tags -->
+                <div
+                  class="mt-6 grid grid-cols-1 sm:grid-cols-4 gap-x-4 gap-y-4"
+                >
+                  <div class="col-span-2">
+                    <label
+                      for="name"
+                      class="grid-cols-full block text-sm font-medium leading-6 text-gray-900 whitespace-nowrap dark:text-slate-100"
+                      >How would you like to help others?</label
+                    >
+                    <div class="mt-2">
+                      <div class="flex gap-3 rounded-md shadow-sm">
+                        <input
+                          type="text"
+                          name="helpTagInput"
+                          id="helpTagInput"
+                          class="block w-full border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6 dark:bg-blue-200 rounded-lg"
+                        />
+                        <input
+                          type="hidden"
+                          name="iCanHelpWith"
+                          id="iCanHelpWith"
+                          value="<%= displayedUser.iCanHelpWith %>"
+                        />
+                        <button
+                          type="button"
+                          id="helpButton"
+                          class="rounded-md bg-blue-300 py-2 px-3 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 self-end h-full"
+                        >
+                          Add
+                        </button>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
-              
-              
 
-            </div>
-        </div>
+              <ul
+                id="iCanHelpWithCont"
+                class="flex flex-row gap-4 flex-wrap mt-4 mb-8"
+              >
+                <% if(displayedUser.iCanHelpWith.length > 0) {
+                displayedUser.iCanHelpWith.forEach(el => { %>
+                <li
+                  id="<%- el -%>"
+                  class="inline-block bg-orange-200 px-3 py-2 text-base text-gray-900 rounded-lg hover:bg-red-500 cursor-pointer transition opacity-100"
+                >
+                  <%- el -%>
+                </li>
+                <%})}%>
+              </ul>
 
-          <ul id="iCanHelpWithCont" class="flex flex-row gap-4 flex-wrap mt-4 mb-8">
-            
-            <% if(displayedUser.iCanHelpWith.length > 0) { displayedUser.iCanHelpWith.forEach(el => { %>
-              <li id="<%- el -%>" class="inline-block bg-orange-200 px-3 py-2 text-base text-gray-900 rounded-lg hover:bg-red-500 cursor-pointer transition opacity-100">
-                <%- el -%>
-              </li>
-            <%})}%>
-          </ul>
+              <!-- Update Password -->
+              <% if(user.isAdmin) { %>
+              <a
+                type="button"
+                href="/update/<%= displayedUser._id %>"
+                class="rounded-md bg-blue-300 px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+                >Update Password</a
+              >
+              <% }else{ %>
+              <a
+                type="button"
+                href="/update"
+                class="rounded-md bg-blue-300 px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+                >Update Password</a
+              >
+              <% } %>
 
+              <!-- Submit button -->
+              <div class="mt-6 flex items-center justify-end gap-x-6">
+                <% if(user.isAdmin) { %>
+                <a
+                  href="/dashboard"
+                  class="text-sm font-semibold leading-6 text-gray-900 dark:text-gray-300"
+                  >Cancel</a
+                >
+                <% }else{ %>
+                <a
+                  href="/directory"
+                  class="text-sm font-semibold leading-6 text-gray-900 dark:text-gray-300"
+                  >Cancel</a
+                >
+                <% } %>
 
-
-            <!-- Update Password -->
-            <% if(user.isAdmin) { %>
-              <a type="button" href="/update/<%= displayedUser._id %>" class="rounded-md bg-blue-300 px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">Update Password</a>
-            <% }else{ %>
-              <a type="button" href="/update" class="rounded-md bg-blue-300 px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">Update Password</a>
-            <% } %>
-
-        <div class="mt-6 flex items-center justify-end gap-x-6">
-
-            <% if(user.isAdmin) { %>
-              <a href="/dashboard" class="text-sm font-semibold leading-6 text-gray-900 dark:text-gray-300">Cancel</a>
-            <% }else{ %>
-              <a href="/directory" class="text-sm font-semibold leading-6 text-gray-900 dark:text-gray-300">Cancel</a>
-            <% } %>
-
-          <button type="submit" class="rounded-md bg-blue-700 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700">Save</button>
-        </div>
-      </form>
-
+                <button
+                  type="submit"
+                  class="rounded-md bg-blue-700 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700"
+                >
+                  Save
+                </button>
+              </div>
+            </form>
+          </div>
         </section>
+
+        <%- include('partials/btmLeftTxt') -%>
       </div>
-  </div>
-
-<%- include('partials/btmLeftTxt') -%>
-<%- include('partials/nav') -%>
-</main>
-<script type="text/javascript" src="/js/txtOkToggle.js"></script>
-<script type="text/javascript" src="/js/iCanHelpWithTags.js"></script>
-<%- include('partials/imageUploadModal') -%>
-<script type="text/javascript" src="/js/imageUpload.js"></script>
-<script type="text/javascript" src="/js/menu.js"></script>
-<%- include('partials/footer') -%>
-
+      <!-- Nav Container -->
+      <div id="navCont" class="h-full sm:block ease duration-150 min-w-[72px]">
+        <%- include('partials/nav') -%>
+      </div>
+    </div>
+  </main>
+  <script type="text/javascript" src="/js/txtOkToggle.js"></script>
+  <script type="text/javascript" src="/js/iCanHelpWithTags.js"></script>
+  <%- include('partials/imageUploadModal') -%>
+  <script type="text/javascript" src="/js/imageUpload.js"></script>
+  <script type="text/javascript" src="/js/menu.js"></script>
+  <%- include('partials/footer') -%>
+</body>
