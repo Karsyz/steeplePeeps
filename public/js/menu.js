@@ -6,9 +6,10 @@ const openAddUserButton = document.querySelector("#openAddUserButton");
 const closeAddUserButton = document.querySelector("#closeAddUserButton");
 const mainInner = document.querySelector("#mainInner");
 
+// activate
 menu.addEventListener("click", () => {
-  mainInner.classList.remove("w-[calc(100%_+_72px)]");
-  mainInner.classList.add("w-full");
+  mainInner.classList.toggle("w-[calc(100%_+_72px)]");
+  mainInner.classList.toggle("w-full");
 });
 
 function deactivateMenu() {

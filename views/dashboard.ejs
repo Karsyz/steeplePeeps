@@ -32,18 +32,17 @@
           <div class="flex flex-row gap-4 sm:hidden">
             <span
               id="openAddUserButton"
-              class="fa-solid fa-user-plus fa-2x text-blue-700 hover:text-blue-500"
+              class="fa-solid fa-user-plus fa-2x text-blue-700"
             ></span>
 
             <span
               id="menu"
-              class="fa-solid fa-bars fa-2x text-blue-700 hover:text-blue-500"
+              class="fa-solid fa-bars fa-2x text-blue-700"
             ></span>
           </div>
         </div>
 
         <div class="flex flex-col items-center grow min-h-0 w-full h-full">
-          
           <!-- Scrollable Container -->
           <section
             class="overflow-scroll no-scrollbar scroll-smooth w-full flex flex-col grow min-h-0 drop-shadow-xl max-w-[1000px]"
@@ -55,11 +54,12 @@
                 id="<%=el._id%>"
                 class="bg-white dark:bg-slate-700 rounded-xl p-4 w-full"
               >
-                <div class="flex flex-col md:flex-row justify-between gap-4 w-full">
-
+                <div
+                  class="flex flex-col md:flex-row flex-wrap justify-between gap-4 w-full"
+                >
                   <!-- Image and User Info -->
                   <div
-                    class="flex flex-col xs:flex-row justify-center items-center gap-4"
+                    class="flex flex-col sm:flex-row justify-center items-center gap-4"
                   >
                     <div class="h-24 w-24">
                       <img
@@ -69,16 +69,30 @@
                       />
                     </div>
 
-                    <div class="flex flex-col gap-2 max-w-1/2">
+                    <div class="flex flex-col items-center sm:items-start gap-2 max-w-1/2">
                       <div
                         class="font-medium text-gray-900 dark:text-slate-100"
                       >
                         <%= el.name %>
                       </div>
-                      <div class="text-gray-500 dark:text-slate-300">
-                        <%= el.email %>
+
+                      <div
+                        id="emailCopy"
+                        class="text-gray-500 dark:text-slate-300 cursor-pointer"
+                        data-te-toggle="tooltip"
+                        title="Copy email address"
+                        data-dataCopy="<%=el.email%>"
+                      >
+                        <%= el.email.length > 25 ? el.email.substring(0, 22) + '...' : el.email %>
                       </div>
-                      <div class="text-gray-500 dark:text-slate-300">
+
+                      <div
+                        id="phoneCopy"
+                        class="text-gray-500 dark:text-slate-300 cursor-pointer"
+                        data-te-toggle="tooltip"
+                        title="Copy phone number"
+                        data-dataCopy="<%=el.phoneNumber%>"
+                      >
                         <%= el.phoneNumber %>
                       </div>
                     </div>
@@ -136,6 +150,7 @@
                       <% }%>
                     </div>
                   </div>
+
                 </div>
               </li>
 
@@ -173,5 +188,6 @@
   <script type="text/javascript" src="/js/menu.js"></script>
   <script type="text/javascript" src="/js/scrollToErr.js"></script>
   <script type="text/javascript" src="/js/emailSendButton.js"></script>
+  <script type="text/javascript" src="/js/copyToClipboard.js"></script>
   <%- include('partials/footer') -%>
 </body>
