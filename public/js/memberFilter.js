@@ -5,6 +5,7 @@ memberFilterInput.addEventListener("input", filterMembers);
 
 // add hidden class to li that doesn't contain the input string
 function filterMembers(evt) {
+  console.log(evt.target.value)
   allUsers.forEach((user) => {
     if (!user.dataset.name.toLowerCase().includes(evt.target.value.toLowerCase())) {
       user.classList.add("hidden");
