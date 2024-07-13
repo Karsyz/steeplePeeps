@@ -7,12 +7,14 @@ module.exports = {
       Math.random() * 12345
     )}@${await getRandomName()}.net`;
 
+    const randName = (await getRandomName()) + " " + (await getRandomName());
+
     if (req.user.isAdmin) {
       allUsers = await User.find({ church: req.user.id }).lean();
       res.render("dashboard.ejs", {
         user: req.user,
         allUsers: allUsers,
-        demo: { email: randEmail },
+        demo: { email: randEmail, name: randName },
       });
     } else {
       res.redirect("/directory");

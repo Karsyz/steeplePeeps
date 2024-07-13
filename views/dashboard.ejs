@@ -11,7 +11,7 @@
         class="flex flex-col w-full h-full p-4 sm:p-8 gap-4 sm:gap-8 grow min-h-0 z-10"
       >
         <!-- Page Heading -->
-        <div class="flex flex-row w-full justify-between items-center">
+        <div class="flex flex-row w-full justify-between">
           <div class="flex flex-col">
             <h1
               class="text-2xl font-semibold leading-6 text-gray-900 dark:text-slate-100 whitespace-nowrap"
@@ -39,13 +39,11 @@
           </div>
         </div>
 
-        <div class="flex flex-col items-center grow min-h-0 w-full h-full">
+        <div class="flex flex-col items-center gap-6 grow min-h-0 w-full h-full">
 
           <!-- Member Filter Input -->
-          <div class="flex flex-col sm:flex-row gap-2 justify-center sm:items-center mb-4 w-full">
-            <label for="memberFilter" class="text-md dark:text-slate-100 text-slate-900">Member Filter</label>
-            <input id="memberFilter" type="text" class="rounded-md w-full sm:w-[35ch] text-slate-900 bg-slate-100"/>
-          </div>
+          <input id="memberFilter" type="text" class="rounded-md w-full sm:w-[35ch] text-slate-900 bg-slate-100" placeholder="Name Search"/>
+
 
           <!-- Scrollable Container -->
           <section

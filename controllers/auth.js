@@ -261,7 +261,7 @@ exports.createUser = async (req, res, next) => {
     if (req.user.isAdmin && req.user.email === 'demo@user.com') {
 
       user = new User({
-        name: await getRandomName() + ' ' + await getRandomName(),
+        name: req.body.name,
         email: req.body.email,
         password: rand.toString(),
         isAdmin: false,
@@ -271,7 +271,7 @@ exports.createUser = async (req, res, next) => {
         address1: "123 Any Street",
         address2: "Rue 22",
         city: "Anytown",
-        province: "OH",
+        province: "CO",
         country: "USA",
         postCode: "12345",
         image: `https://robohash.org/${rand}`,
@@ -289,7 +289,7 @@ exports.createUser = async (req, res, next) => {
     } else {
 
       user = new User({
-        name: 'user' + rand.toString(),
+        name: req.body.name || 'user' + rand.toString(),
         email: req.body.email,
         password: "asdfasdf",
         isAdmin: false,
@@ -317,17 +317,19 @@ exports.createUser = async (req, res, next) => {
     }
     
     const isSaved =  await user.save()
+
     if (isSaved) {
+      console.log(isSaved)
       console.log('new is saved into database, send email')
       req.body.email = isSaved.email
 
-      if (req.user.isAdmin && req.user.email === 'demo@user.com') {
-        return res.redirect("/dashboard")
-      } else {
-        return next()
-      }
-    }
-    if (existingUser) {
+      req.flash("success", { 
+        type: 'userCreated',
+        msg: 'User created',
+        id: isSaved.id
+      });
+      return res.redirect("/dashboard")
+    }else {
       req.flash("errors", {
         msg: "Account was not created",
       });
@@ -335,9 +337,3 @@ exports.createUser = async (req, res, next) => {
     }
   }
 };
-
-
-
-// module.exports = {
-//   getRandomName,
-// }

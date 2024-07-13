@@ -54,9 +54,7 @@ router.post("/buildAChurch/createUser", authController.buildAChurch);
 
 // Create User
 router.post(
-  "/createUser",
-  ensureAdmin,
-  authController.createUser,
+  "/createUser", ensureAdmin, authController.createUser
   // Send login email to use when new account is made
   // passport.authenticate("magiclink", {
   //   action: "requestToken",

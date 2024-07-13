@@ -4,34 +4,54 @@
   class=""
   >
     <div class="flex flex-col items-center sm:items-end">
-      <div class="flex flex-col sm:flex-row gap-6 sm:gap-0 sm:items-end">
-      <!-- <label for="email" class="block text-sm font-medium leading-6 text-gray-900 dark:text-slate-100 mt-2">Quick Add User</label>  -->
-        <input 
-            id="email" 
-            name="email" 
-            type="email" 
-            placeholder="email@address.com"
-            class="block w-full rounded-md border-0 py-1.5 px-3 dark:bg-slate-200 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6"
-            <% if(user.email === 'demo@user.com') {%>value="<%= demo.email %>" <% } %>
-            required 
-        >
-        <button type="submit" class="block rounded-md bg-blue-700 w-full sm:w-fit ml-0 px-3 py-2 sm:ml-4 text-center text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 whitespace-nowrap">
-          Add User
-        </button>
+      
+      <div class="grid grid-cols-3 grid-rows-2 gap-2">
+          <input 
+            id="name" 
+            name="name" 
+            type="name" 
+            placeholder="name (optional)"
+            class="col-span-2 block w-full rounded-md border-0 py-1.5 px-3 bg-slate-100 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6"
+            <% if(user.email === 'demo@user.com') {%>value="<%= demo.name %>" <% } %>
+          >
+          <div class="text-slate-800 dark:text-white font-semibold self-center text-center">
+            Add User
+          </div>
+
+          <input 
+              id="email" 
+              name="email" 
+              type="email" 
+              placeholder="email@address.com"
+              class="col-span-2 lock w-full rounded-md border-0 py-1.5 px-3 bg-slate-100 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6"
+              <% if(user.email === 'demo@user.com') {%>value="<%= demo.email %>" <% } %>
+              required 
+          >
+    
+          <button type="submit" class="block rounded-md bg-blue-700 w-full text-md font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 whitespace-nowrap">
+            Submit
+          </button>
       </div>
-      <!-- <div class="mt-2">
-        <span class="text-sm text-red-500 font-semibold w-1/2">User exists</span>
-        <a id="scrollToUser" href="#" class="inline text-sm text-blue-400 font-base w-1/2">Go to User</a>
-      </div>   -->
-    <% if (locals.messages.errors) { %>
-      <% messages.errors.forEach( el => { %>
-        <% if (el.type === 'emailExists') { %>
-          <div class="mt-2">
-            <span class="text-sm text-red-500 font-semibold w-1/2">User exists</span>
-            <a href="#<%= el.id %>" class="scrollToUser inline text-sm text-blue-400 font-base w-1/2">Go to User</a>
-          </div>                   
-          <% } %>
-      <% }) %>    
-    <% } %>
-  </div>
+
+      <% if (locals.messages.errors) { %>
+        <% messages.errors.forEach( el => { %>
+          <% if (el.type === 'emailExists') { %>
+            <div class="mt-2">
+              <span class="text-sm text-red-500 font-semibold w-1/2">User exists</span>
+              <a href="#<%= el.id %>" class="scrollToUser inline text-sm text-blue-400 font-base w-1/2">Go to User</a>
+            </div>                   
+            <% } %>
+        <% }) %>    
+      <% } %>
+
+      <% if (locals.messages.success) { %>
+        <% messages.success.forEach( el => { %>
+            <div class="mt-2">
+              <span class="text-sm text-green-500 font-semibold w-1/2">User Created</span>
+              <a href="#<%= el.id %>" class="scrollToUser inline text-sm text-blue-400 font-base w-1/2">Go to User</a>
+            </div>                   
+        <% }) %>    
+      <% } %>
+
+    </div>
 </form>
