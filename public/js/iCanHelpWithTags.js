@@ -56,7 +56,8 @@ function addTag() {
 
 
 function removeTag(evt) {
- document.getElementById(evt.target.id).remove()
+  const modal = document.getElementById(evt.target.id)
+  modal.parentElement.remove()
   getPageTags()
 }
 

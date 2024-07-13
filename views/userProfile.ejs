@@ -16,7 +16,7 @@
             <h1
               class="text-2xl font-semibold leading-6 text-gray-900 dark:text-slate-100 whitespace-nowrap"
             >
-              User Profile
+              Edit User Profile
             </h1>
             <p
               class="mt-2 text-sm text-gray-700 dark:text-slate-300 whitespace-nowrap"
@@ -394,10 +394,11 @@
                   <% if(displayedUser.iCanHelpWith.length > 0) {
                   displayedUser.iCanHelpWith.forEach(el => { %>
                   <li
-                    id="<%- el -%>"
-                    class="inline-block bg-orange-200 px-3 py-2 text-base text-gray-900 rounded-lg hover:bg-red-500 cursor-pointer transition opacity-100"
+                    class="relative inline-block bg-orange-200 px-3 py-2 text-base text-gray-900 rounded-lg cursor-pointer transition opacity-100"
                   >
                     <%- el -%>
+                    <!-- Hover Modal -->
+                    <div id="<%- el -%>" class="absolute left-0 top-0 w-full h-full bg-red-600/80 flex flex-row justify-center items-center fa fa-solid fa-xmark text-slate-100 opacity-0 hover:opacity-100 rounded-lg"></div>
                   </li>
                   <%})}%>
                 </ul>

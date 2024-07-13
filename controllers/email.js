@@ -24,8 +24,8 @@ const emailLoginSubmit = async (req, res, next) => {
   if (req.user === undefined) {
     res.redirect("/emailLoginCheck");
   } else if (req.user.isAdmin) {
-    // res.redirect("/dashboard");
-    res.send({ status: 200, body: "email sent", ok: true });
+    res.redirect("/dashboard");
+    // res.send({ status: 200, body: "email sent", ok: true });
   } else {
     res.redirect("/");
   }

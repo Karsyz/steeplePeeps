@@ -12,7 +12,7 @@ module.exports = function (passport) {
   passport.use(
     new MagicLinkStrategy(
       {
-        secret: "keyboard catzzz",
+        secret: process.env.SESSION_SECRET,
         userFields: ["email"],
         tokenField: "token",
         verifyUserAfterToken: false,

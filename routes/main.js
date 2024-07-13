@@ -57,12 +57,13 @@ router.post(
   "/createUser",
   ensureAdmin,
   authController.createUser,
-  passport.authenticate("magiclink", {
-    action: "requestToken",
-    failureRedirect: "/login",
-    failureMessage: true,
-  }),
-  emailController.emailLoginSubmit
+  // Send login email to use when new account is made
+  // passport.authenticate("magiclink", {
+  //   action: "requestToken",
+  //   failureRedirect: "/login",
+  //   failureMessage: true,
+  // }),
+  // emailController.emailLoginSubmit
 );
 
 // Error Page
