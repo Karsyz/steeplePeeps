@@ -46,12 +46,15 @@
 
       <% if (locals.messages.success) { %>
         <% messages.success.forEach( el => { %>
+          <% if (el.type === 'userCreated') { %>
             <div class="mt-2">
               <span class="text-sm text-green-500 font-semibold w-1/2">User Created</span>
               <a href="#<%= el.id %>" class="scrollToUser inline text-sm text-blue-400 font-base w-1/2">Go to User</a>
-            </div>                   
+            </div>   
+          <% } %>                
         <% }) %>    
       <% } %>
 
     </div>
 </form>
+
