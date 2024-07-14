@@ -8,7 +8,7 @@ module.exports = {
     )}@${await getRandomName()}.net`;
 
     const randName = (await getRandomName()) + " " + (await getRandomName());
-    console.log(req)
+    
     if (req.user.isAdmin) {
       allUsers = await User.find({ church: req.user.id }).lean();
       res.render("dashboard.ejs", {
