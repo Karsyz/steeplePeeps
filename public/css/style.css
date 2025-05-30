@@ -969,6 +969,10 @@ select {
   margin-top: 2rem;
 }
 
+.mb-24 {
+  margin-bottom: 6rem;
+}
+
 .block {
   display: block;
 }
@@ -1033,6 +1037,10 @@ select {
   height: 100vh;
 }
 
+.h-40 {
+  height: 10rem;
+}
+
 .min-h-0 {
   min-height: 0px;
 }
@@ -1083,6 +1091,22 @@ select {
 
 .w-screen {
   width: 100vw;
+}
+
+.w-40 {
+  width: 10rem;
+}
+
+.w-8 {
+  width: 2rem;
+}
+
+.w-12 {
+  width: 3rem;
+}
+
+.w-16 {
+  width: 4rem;
 }
 
 .min-w-\[72px\] {
@@ -1486,6 +1510,10 @@ select {
   --tw-gradient-to: #5a4eff var(--tw-gradient-to-position);
 }
 
+.fill-current {
+  fill: currentColor;
+}
+
 .object-cover {
   -o-object-fit: cover;
      object-fit: cover;
@@ -1877,6 +1905,14 @@ select {
   /* Firefox */
 }
 
+.marker\:fill-current *::marker {
+  fill: currentColor;
+}
+
+.marker\:fill-current::marker {
+  fill: currentColor;
+}
+
 .placeholder\:text-gray-400::-moz-placeholder {
   --tw-text-opacity: 1;
   color: rgb(156 163 175 / var(--tw-text-opacity));
@@ -2097,6 +2133,10 @@ select {
     margin-right: auto;
   }
 
+  .sm\:mt-6 {
+    margin-top: 1.5rem;
+  }
+
   .sm\:block {
     display: block;
   }
@@ -2215,6 +2255,11 @@ select {
 
   .sm\:text-xl {
     font-size: 1.25rem;
+    line-height: 1.75rem;
+  }
+
+  .sm\:text-lg {
+    font-size: 1.125rem;
     line-height: 1.75rem;
   }
 
